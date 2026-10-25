@@ -7,7 +7,7 @@ test('German study and graduate routes expose staged claims, unknown totals and 
   const response=await request.post('/api/v1/match',{data:{profile:{...sample,goal:'study'},includeAlternatives:true,limit:100}});
   expect(response.ok()).toBe(true);
   const {data}=await response.json();
-  expect(data.engineVersion).toBe('3.4.0');
+  expect(data.engineVersion).toBe('3.5.0');
   expect(data.results.some(result=>result.program.id==='de-masters-study')).toBe(true);
   expect(data.results.some(result=>result.program.id==='de-graduate-jobsearch')).toBe(true);
   expect(data.plans).toEqual([]);

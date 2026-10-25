@@ -139,6 +139,7 @@ export interface Profile {
   englishLevel: 0 | 1 | 2 | 3; // none / basic / conversational / fluent
   turkish: boolean;
   russian: boolean;
+  german?: boolean;
   goal: Goal;
   timeline: "asap" | "6m" | "1y" | "flexible";
   risk: "low" | "medium" | "high";

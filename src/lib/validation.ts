@@ -20,6 +20,7 @@ export const profileSchema: z.ZodType<Profile> = z.object({
   field: z.enum(["it", "medicine", "engineering", "finance", "business", "creative", "trades", "other"]),
   englishLevel: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
   turkish: z.boolean(), russian: z.boolean(),
+  german: z.boolean().optional(),
   goal: z.enum(["citizenship", "pr-fast", "lowest-cost", "top-qol", "remote", "business", "study", "family-safe"]),
   timeline: z.enum(["asap", "6m", "1y", "flexible"]), risk: z.enum(["low", "medium", "high"]),
   regions: z.array(regionSchema).max(9), remoteWork: z.boolean(),

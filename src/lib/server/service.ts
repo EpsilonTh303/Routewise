@@ -9,7 +9,7 @@ import { REQUIREMENT_VERSION } from "../route-requirements";
 import { buildSourceReviewQueue } from "../source-freshness";
 import { sourceReview } from "../source-review";
 
-export const ENGINE_VERSION = "3.4.0";
+export const ENGINE_VERSION = "3.5.0";
 export const CALIBRATION = {citizenship:"AZ",verifiedRules:false,notice:"Scores are heuristic profile-fit estimates, not approval probabilities. Passport ease/access is calibrated for Azerbaijan. Consult each program's source review status."};
 
 export class RouteWiseService {

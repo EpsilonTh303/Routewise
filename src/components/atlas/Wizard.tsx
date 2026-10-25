@@ -107,7 +107,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
     citizenship: "AZ", age: 30, familyStatus: "single", dependents: 0,
     budget: 50000, monthlyIncome: 3000, expectedSalary: 0, hasJobOffer: false,
     education: "bachelor", experience: 5, field: "it", englishLevel: 2,
-    turkish: false, russian: true, goal: "citizenship", timeline: "1y",
+    turkish: false, russian: true, german: false, goal: "citizenship", timeline: "1y",
     risk: "medium", regions: [], remoteWork: false,
   });
 
@@ -304,6 +304,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
                   ))}
                   <button onClick={() => set("turkish", !p.turkish)} className={chip(p.turkish)}>🇹🇷 Turkish</button>
                   <button onClick={() => set("russian", !p.russian)} className={chip(p.russian)}>🇷🇺 Russian</button>
+                  <button aria-pressed={!!p.german} onClick={() => set("german", !p.german)} className={chip(!!p.german)}>🇩🇪 German</button>
                 </div>
               </div>
             </div>

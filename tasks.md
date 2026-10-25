@@ -1,8 +1,11 @@
 # RouteWise next tasks
 
-Updated 2026-10-25 for engine 3.4.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.md and research/PRIMARY_REVIEW.md. Primary agent owns commits; Luna agents do not stage/commit in the shared checkout.
+Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.md and research/PRIMARY_REVIEW.md. Primary agent owns commits; Luna agents do not stage/commit in the shared checkout.
 
 ## Latest requested delivery
+
+- [x] Add German to setup/profile and apply relevant language overlap to fit for every citizenship. Keep documented legal language checks independent and legacy profiles compatible.
+- [x] Simplify route drawer: remove radar, archive lineage, score arithmetic and unverified passport/family/tax summary boxes; retain conditions, roadmap, cautions and source audit last.
 
 - [x] What-if region cards, filters in normal page flow, source audits last in the country drawer and below Explorer cards.
 - [x] Separate profile overview/direct editor, local photo and identity fields, explicit save/cancel and legacy profile migration. Commit a73312f; layout commit 0f2c0e6.

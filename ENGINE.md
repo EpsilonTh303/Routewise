@@ -1,6 +1,8 @@
-# Recommendation engine 3.4.0
+# Recommendation engine 3.5.0
 
-## Current catalog extension
+Language overlap now contributes to profile fit for every citizenship, rather than being folded into AZ-only passport access. German joins English, Turkish and Russian; every matching useful route language contributes six fit points, capped at fourteen before the existing fit limits and category risk adjustments. Existing profiles may omit the optional German boolean. Language preferences do not satisfy documented legal language requirements or alter route eligibility checks. The detail panel now omits score machinery, radar, archive lineage and unsupported country/family/tax summary boxes while preserving requirements, cautions, roadmap and final source audit.
+
+## Prior 3.4 catalog extension
 
 The live catalog now has 79 active routes (78 partial audits and one unresolved), including four study/post-study records. Engine scoring policy is unchanged. The pilot adds route-scoped admission/completion/history/window/livelihood facts and six conditional roadmap stages with no predicted dates. Generic profile education never establishes German graduation, an eligible Dutch institution or Finnish permit history. Attached pilot evidence must match the reviewed snapshot for automatic checks and the pilot roadmap; custom source edits disable stale projections. Missing costs keep these routes out of primary strategies. Portugal/Vanuatu evidence is updated through a new immutable follow-up, not a changed original audit. See STUDY_PATHWAYS.md and SOURCE_REVIEW.md.
 

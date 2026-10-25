@@ -38,6 +38,7 @@ function languageFit(p: Program, u: Profile): number {
   if (u.englishLevel >= 2) knows.add("English");
   if (u.turkish) knows.add("Turkish");
   if (u.russian) knows.add("Russian");
+  if (u.german) knows.add("German");
   for (const l of p.languageBonus ?? []) if (knows.has(l)) bonus += 6;
   return Math.min(bonus, 14);
 }
@@ -179,8 +180,8 @@ export function scoreProgram(p: Program, u: Profile): MatchResult {
   const hasFamily = u.familyStatus !== "single" || u.dependents > 0;
   const qolScore = clamp(p.devScore * 10 - (hasFamily || u.goal === "family-safe" ? (1 - p.familyFriendly) * 12 : 0));
   // The dataset has AZ-specific entry data only. An unknown passport gets a neutral value.
-  const accessScore = u.citizenship === "AZ" ? clamp(ACCESS_BASE[p.passportAccess] * 0.72 + p.azEase * 20 * 0.28 + languageFit(p, u)) : 50;
-  let fit = fitScore(p, u);
+  const accessScore = u.citizenship === "AZ" ? clamp(ACCESS_BASE[p.passportAccess] * 0.72 + p.azEase * 20 * 0.28) : 50;
+  let fit = clamp(fitScore(p, u) + languageFit(p, u));
   if (u.risk === "low" && p.category === "cbi") fit *= 0.72;
   if (u.risk === "high" && p.category === "cbi") fit = Math.min(100, fit * 1.12);
   const breakdown: ScoreBreakdown = {
@@ -195,6 +196,7 @@ export function scoreProgram(p: Program, u: Profile): MatchResult {
   const wsum = dimensions.reduce((sum,key)=>sum+w[key],0);
   const baseScore = dimensions.reduce((sum,key)=>sum+(breakdown[key]??0)*w[key],0)/wsum;
   const strengths:string[]=[],tradeoffs:string[]=[],warnings:string[]=[],nextSteps:string[]=[];
+  if(languageFit(p,u)>0) strengths.push("Your language skills overlap with languages useful for this route.");
   if(requirements) {
     warnings.push("Structured checks cover selected dated claims only. Applicant-reported evidence is not authority verification or full legal eligibility.");
     for(const check of flattenRequirements(requirements.result).filter(check=>!check.children&&check.status!=="met")) nextSteps.push(`${check.label}: ${check.reason}`);

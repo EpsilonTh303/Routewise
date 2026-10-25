@@ -2,13 +2,15 @@
 
 A database-backed immigration-program explorer with a web GUI, JSON API, command-line tools, and a local MCP server. All interfaces use the same live SQLite catalog and scoring functions. The live catalog has 79 active routes across 51 countries, including four study/post-study pilot records; all have source-audit outcomes (78 partial, one unresolved). Complete-record verification remains pending; scores describe heuristic profile fit, not approval probability.
 
-The current suggestion engine is version **3.4.0**. It prioritizes modeled readiness and direct goal alignment, diversifies comparable backups, and explains its scores, gaps and next checks. See [ENGINE.md](ENGINE.md) for the audit findings, policy, planning assumptions and remaining evidence gaps. Goals absent from the catalog produce an empty direct strategy. The study pilot is exploratory: missing costs and application evidence exclude it from primary strategies.
+The current suggestion engine is version **3.5.0**. It prioritizes modeled readiness and direct goal alignment, diversifies comparable backups, and explains its scores, gaps and next checks. See [ENGINE.md](ENGINE.md) for the audit findings, policy, planning assumptions and remaining evidence gaps. Goals absent from the catalog produce an empty direct strategy. The study pilot is exploratory: missing costs and application evidence exclude it from primary strategies.
 
 ## Start locally
 
 The immutable original 75-route v2 audit is retained. A separate follow-up adds Portugal own-income service/current wage evidence and Vanuatu published fees, with remaining applicability limits. An append-only pilot adds German master's study, German graduate search, Dutch orientation year and Finnish post-study search. Unsupported all-in costs and calendar predictions remain null. See [SOURCE_REVIEW.md](SOURCE_REVIEW.md) and [STUDY_PATHWAYS.md](STUDY_PATHWAYS.md).
 
 After initial setup, use **Profile** to view your overview or edit settings directly. Name, headline, location, biography and a cropped photo are saved explicitly on this browser/device; identity/photo are separate from assessment requests. Cancel discards drafts, and a storage error preserves the previously saved profile.
+
+English, German, Turkish and Russian skills influence profile fit where listed as useful for a route, for every citizenship. German is optional in older saved profiles. These planning answers do not satisfy official language-document requirements. Route details focus on requirements, costs, next steps and sources rather than scoring internals.
 
 Engine 3.3.0 adds partial AND/OR requirement checks for 12 reviewed pathways, optional route-scoped applicant evidence, matching-currency financial comparisons and temporary what-if scenarios. Unknown evidence remains unknown; full legal eligibility is unassessed. See [ELIGIBILITY.md](ELIGIBILITY.md), [FINANCIAL.md](FINANCIAL.md), and [RECOVERY.md](RECOVERY.md). The Explorer includes a read-only source freshness/conflict queue. Browser profiles use a version 2 envelope and still read complete legacy profiles.
 

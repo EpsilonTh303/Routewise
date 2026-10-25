@@ -1,18 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import {
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
-} from "recharts";
-import {
-  Banknote, CalendarClock, CheckCircle2, ExternalLink, Flag, Globe2,
-  Landmark, ShieldCheck, TriangleAlert, Users, X, Percent,
+  Banknote, CalendarClock, CheckCircle2, ExternalLink, Flag,
+  ShieldCheck, TriangleAlert, X,
 } from "lucide-react";
 import type { MatchResult, Profile } from "@/lib/types";
 import { CATEGORY_META } from "@/lib/types";
-import { buildRoadmap, passportInfo, requiredBudget } from "@/lib/scoring";
+import { buildRoadmap, requiredBudget } from "@/lib/scoring";
 import { ELIGIBILITY_META } from "@/lib/eligibility";
 import { EligibilityBadge } from "./EligibilityBadge";
 import { formatMoney, formatDecision, formatCitizenship } from "@/lib/format";
@@ -34,19 +31,9 @@ export function ProgramDrawer({ result, profile, onClose }: {
   const p = result.program;
   const review = p.audit ?? p.pathway?.review;
   const returnFocus = useRef<HTMLElement | null>(null);
-  const reducedMotion=useReducedMotion();
   const meta = CATEGORY_META[p.category];
-  const passport = passportInfo(profile.citizenship);
   const roadmap = buildRoadmap(p, profile);
   const funds=requiredBudget(p,profile);
-  const radarData = [
-    { dim: "Cost", v: result.breakdown.cost },
-    { dim: "Speed", v: result.breakdown.speed },
-    { dim: "Citizenship", v: result.breakdown.citizenship },
-    { dim: "Quality of life", v: result.breakdown.qol },
-    { dim: "Passport ease", v: result.breakdown.access },
-    { dim: "Profile fit", v: result.breakdown.fit },
-  ].filter(item=>item.v!==null);
 
   return (
     <Dialog.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
@@ -93,59 +80,35 @@ export function ProgramDrawer({ result, profile, onClose }: {
 
         <ScrollArea className="min-h-0 flex-1 overflow-hidden">
           <div className="space-y-7 p-4 sm:p-6">
-            <p className="text-xs text-muted-foreground">Eligible / Conditional / Ineligible describe the modeled checks. Full legal eligibility and authority approval remain unassessed.</p>
             {result.explanation.requirements&&<section aria-label="Structured requirement checks" className="space-y-3">
               <h3 className="text-sm font-bold text-emerald-300">Documented requirement checks · partial coverage</h3>
               <p className="text-xs text-muted-foreground">Missing evidence stays unknown. Alternatives are evaluated with OR; all required checks use AND. Applicant assertions do not verify documents. Comparison uses matching currency and income basis; no exchange rate is applied.</p>
               <RequirementChecklist result={result.explanation.requirements.result}/>
-              <p className="text-xs text-muted-foreground">Rule snapshot: {result.explanation.requirements.version}. Effective date is unknown unless explicitly stated by the source; this is not a complete application checklist.</p>
             </section>}
             {/* key numbers */}
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+            {(result.adjustedCost!==null||p.processingWeeks!==null||p.yearsToCitizenship!==null)&&<div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
               {[
-                { icon: Banknote, label: "Year 1 all-in", value: formatMoney(result.adjustedCost) },
-                { icon: CalendarClock, label: "Decision", value: formatDecision(p.processingWeeks) },
-                { icon: Flag, label: "Citizenship", value: formatCitizenship(p) },
-                { icon: Percent, label: "QoL score", value: `${p.devScore}/10` },
-              ].map((s) => (
+                { icon: Banknote, label: "Year 1 all-in", value: formatMoney(result.adjustedCost), known:result.adjustedCost!==null },
+                { icon: CalendarClock, label: "Decision", value: formatDecision(p.processingWeeks), known:p.processingWeeks!==null },
+                { icon: Flag, label: "Citizenship", value: formatCitizenship(p), known:p.yearsToCitizenship!==null },
+              ].filter(s=>s.known).map((s) => (
                 <div key={s.label} className="rounded-xl border border-white/8 bg-white/[0.03] p-3">
                   <s.icon className="h-4 w-4 text-emerald-400" />
                   <p className="mt-2 text-sm font-bold leading-tight">{s.value}</p>
                   <p className="text-[10px] uppercase tracking-wide text-muted-foreground">{s.label}</p>
                 </div>
               ))}
-            </div>
+            </div>}
+            {result.adjustedCost===null&&p.processingWeeks===null&&p.yearsToCitizenship===null&&<p className="text-xs text-muted-foreground">Costs and timelines are still under review. See the source notes below.</p>}
 
-            {p.pathway && <section aria-label="Pathway provenance" className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-100"><h3 className="font-bold">Separate archived pathway</h3><p className="mt-1">Original family: {p.pathway.parentId}. Branch-specific costs and timelines must be reviewed; missing figures are not zero.</p><p className="mt-2">Unknown fields: {p.pathway.unknownFields.join(", ") || "None recorded"}</p></section>}
 
             {result.explanation && <section aria-label="Recommendation explanation" className="space-y-4 rounded-2xl border border-white/10 p-4">
               <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-300">Why this match</h3>
-              <p className="text-xs text-muted-foreground">A fit score, not an approval probability. Available funds: {formatMoney(result.explanation.requiredBudget)} · budget buffer: {formatMoney(result.explanation.budgetHeadroom)}.</p>
+              <p className="text-xs text-muted-foreground">A fit score, not an approval probability.{result.explanation.requiredBudget!==null&&<> Available funds: {formatMoney(result.explanation.requiredBudget)}.</>}{result.explanation.budgetHeadroom!==null&&<> Budget buffer: {formatMoney(result.explanation.budgetHeadroom)}.</>}</p>
               <ul className="space-y-1 text-xs text-emerald-200">{result.explanation.strengths.map(item=><li key={item}>＋ {item}</li>)}</ul>
               {result.explanation.tradeoffs.length>0 && <div><h4 className="text-xs font-bold text-amber-200">Trade-offs</h4><ul className="mt-1 space-y-1 text-xs text-muted-foreground">{result.explanation.tradeoffs.map(item=><li key={item}>• {item}</li>)}</ul></div>}
               <div><h4 className="text-xs font-bold">Next checks</h4><ol className="mt-1 list-inside list-decimal space-y-1 text-xs text-muted-foreground">{result.explanation.nextSteps.map(item=><li key={item}>{item}</li>)}</ol></div>
-              <details className="text-xs text-muted-foreground"><summary className="cursor-pointer py-2 font-semibold">Assumptions and score calculation</summary>
-                <ul className="space-y-1">{result.explanation.warnings.map(item=><li key={item}>• {item}</li>)}</ul>
-                <p className="mt-2">Weighted dimensions: {result.explanation.baseScore.toFixed(1)}</p>
-                <ul>{result.explanation.adjustments.map(item=><li key={item.reason}>{item.points.toFixed(1)}: {item.reason}</li>)}</ul>
-              </details>
             </section>}
-
-            {/* radar */}
-            <div>
-              <h3 className="mb-1 text-sm font-bold uppercase tracking-wider text-emerald-300">Match anatomy</h3>
-              {radarData.length<6 && <p className="mb-2 text-xs text-amber-200">Unknown dimensions are omitted from the chart and score, not treated as zero or free.</p>}
-              <div className="h-64 rounded-2xl border border-white/8 bg-white/[0.02] p-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart data={radarData} outerRadius="72%">
-                    <PolarGrid stroke="oklch(0.35 0.01 100)" />
-                    <PolarAngleAxis dataKey="dim" tick={{ fill: "oklch(0.7 0.01 100)", fontSize: 11 }} />
-                    <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-                    <Radar dataKey="v" stroke="#34d399" fill="#34d399" fillOpacity={0.32} isAnimationActive={!reducedMotion} animationDuration={800} />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
 
             {/* roadmap */}
             <div>
@@ -210,28 +173,6 @@ export function ProgramDrawer({ result, profile, onClose }: {
               </div>
             </div>
 
-            {/* passport & family & tax */}
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
-                <Globe2 className="h-4 w-4 text-amber-300" />
-                <p className="mt-2 text-xs font-bold">{passport.flag} {passport.name}</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                  {profile.citizenship==="AZ"?`Recorded AZ entry: ${p.passportAccess}.` : "Entry access for your citizenship is not modeled."} Passport figures are archived estimates.
-                </p>
-              </div>
-              <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
-                <Users className="h-4 w-4 text-emerald-300" />
-                <p className="mt-2 text-xs font-bold">Family</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                  {p.pathway || p.audit ? "Family rules need separate source review" : p.familyFriendly >= 0.9 ? "Spouse + children (often parents) included" : p.familyFriendly >= 0.75 ? "Spouse & children join" : "Dependents limited"}
-                </p>
-              </div>
-              <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
-                <Landmark className="h-4 w-4 text-amber-300" />
-                <p className="mt-2 text-xs font-bold">Tax snapshot</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{p.taxNote ?? "Tax treatment not reviewed"}</p>
-              </div>
-            </div>
             {review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
               <h3 className="font-bold text-emerald-200">Source audit · {review.status}</h3>
               <p className="text-muted-foreground">Reviewed {review.reviewedAt.slice(0,10)}. {review.status==="unresolved"?"Evidence retrieval remains unresolved; no route requirements were verified by this attempt.":"These citations support selected claims; the complete route and your eligibility remain under review."}</p>

@@ -7,7 +7,7 @@ test('GUI strategy readiness agrees with the API and explains source gaps',async
   const response=await request.post('/api/v1/match',{data:{profile:sample,limit:100}});
   expect(response.ok()).toBe(true);
   const {data}=await response.json();
-  expect(data.engineVersion).toBe('3.4.0');
+  expect(data.engineVersion).toBe('3.5.0');
   await page.addInitScript(profile=>localStorage.setItem('routewise-profile-v1',JSON.stringify(profile)),sample);
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
@@ -21,7 +21,7 @@ test('GUI strategy readiness agrees with the API and explains source gaps',async
     await page.getByRole('button',{name:/EU Blue Card/}).click();
     const explanation=page.getByRole('dialog').getByRole('region',{name:'Recommendation explanation'});
     await expect(explanation).toContainText('A fit score, not an approval probability');
-    await expect(explanation).toContainText('Unknown branch fields');
+    await expect(explanation).toContainText('Establish the missing branch costs');
     return;
   }
   const expected=data.plans[0].result;
@@ -73,8 +73,9 @@ test('separated remote pathway displays unknown costs and timing honestly',async
   await expect(card).toContainText('Needs review');
   await card.click();
   const dialog=page.getByRole('dialog');
-  await expect(dialog.getByRole('region',{name:'Pathway provenance'})).toContainText('id-secondhome');
-  await expect(dialog).toContainText('Needs review');
+  await expect(dialog.getByRole('region',{name:'Pathway provenance'})).toHaveCount(0);
+  await expect(dialog.getByRole('heading',{name:'Match anatomy'})).toHaveCount(0);
+  await expect(dialog).toContainText('Costs and timelines are still under review');
   const review=dialog.getByRole('region',{name:'Official source review'});
   await expect(review).toContainText('Source audit · partial');
   await expect(review).toContainText('60,000');

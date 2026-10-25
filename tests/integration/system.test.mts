@@ -111,7 +111,7 @@ test("stateless matching uses the live catalog and stores no private profiles",a
   assert.deepEqual(result.results,matchPrograms(snapshot.programs,profile).filter(r=>r.explanation.goalAligned));
   assert.equal(await database.savedProfile.count(),0);assert.equal(await database.strategyRun.count(),0);
   assert.equal(result.catalogVersion,snapshot.version);
-  assert.equal(result.engineVersion,"3.4.0");
+  assert.equal(result.engineVersion,"3.5.0");
   const response=await handleApi(new Request("http://localhost/api/v1/match",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({profile,includeIneligible:true,limit:100})}),["match"],service);
   assert.equal(response.status,200);
   assert.deepEqual((await response.json()).data,result);

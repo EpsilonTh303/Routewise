@@ -15,6 +15,7 @@ test('profile is directly editable with a local photo after initial setup',async
   await page.getByLabel('Location',{exact:true}).fill('Baku');
   await page.getByLabel('About you',{exact:true}).fill('Exploring study and career options.');
   await page.getByLabel('Available savings (USD)',{exact:true}).fill('73000');
+  await page.getByLabel('German language',{exact:true}).check();
   await page.getByRole('group',{name:'Profile preferred regions'}).getByRole('checkbox',{name:/Western Europe/}).check();
   const photo=Buffer.from(await page.evaluate(()=>{const canvas=document.createElement('canvas');canvas.width=32;canvas.height=32;const context=canvas.getContext('2d');context.fillStyle='#10b981';context.fillRect(0,0,32,32);return canvas.toDataURL('image/png').split(',')[1];}),'base64');
   await page.getByLabel('Profile photo',{exact:true}).setInputFiles({name:'portrait.png',mimeType:'image/png',buffer:photo});
@@ -27,6 +28,7 @@ test('profile is directly editable with a local photo after initial setup',async
   await expect(avatar).toHaveCSS('height','96px');
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
   expect(saved.version).toBe(3);expect(saved.profile.budget).toBe(73000);
+  expect(saved.profile.german).toBe(true);
   expect(saved.persona.photo).toMatch(/^data:image\/jpeg;base64,/);
   expect(saved.profile.photo).toBeUndefined();expect(saved.profile.regions).toContain('Western Europe');
   expect(posts).toEqual([]);

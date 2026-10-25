@@ -60,12 +60,15 @@ test('wizard creates and restores a strategy', async ({page}) => {
   await page.getByRole('button',{name:'My strategy',exact:true}).click();
   await page.getByRole('button',{name:'Next',exact:true}).click();
   await expect(page.getByRole('spinbutton',{name:'Offered monthly salary'})).toBeVisible();
+  await page.getByRole('button',{name:'🇩🇪 German',exact:true}).click();
+  await expect(page.getByRole('button',{name:'🇩🇪 German',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.getByRole('button',{name:'Next',exact:true}).click();
   await page.getByRole('button',{name:'Generate strategy'}).click();
   await expect(page.getByRole('heading',{name:'Your relocation strategy'})).toBeVisible();
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
   expect(saved.version).toBe(3);
   expect(saved.profile.citizenship).toBe('AZ');
+  expect(saved.profile.german).toBe(true);
   await page.reload();
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await page.getByRole('button',{name:'My strategy',exact:true}).click();
