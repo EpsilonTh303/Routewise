@@ -118,15 +118,6 @@ export function ProgramDrawer({ result, profile, onClose }: {
 
             {p.pathway && <section aria-label="Pathway provenance" className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-100"><h3 className="font-bold">Separate archived pathway</h3><p className="mt-1">Original family: {p.pathway.parentId}. Branch-specific costs and timelines must be reviewed; missing figures are not zero.</p><p className="mt-2">Unknown fields: {p.pathway.unknownFields.join(", ") || "None recorded"}</p></section>}
 
-            {review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
-              <h3 className="font-bold text-emerald-200">Source audit · {review.status}</h3>
-              <p className="text-muted-foreground">Reviewed {review.reviewedAt.slice(0,10)}. {review.status==="unresolved"?"Evidence retrieval remains unresolved; no route requirements were verified by this attempt.":"These citations support selected claims; the complete route and your eligibility remain under review."}</p>
-              {p.audit&&<p className="font-semibold text-amber-100">Intake status in reviewed sources: {p.audit.routeStatus}. This does not establish individual eligibility.</p>}
-              <ul className="space-y-3">{review.claims.map((claim,index)=><li key={`${claim.sourceUrl}-${index}`}><p>{claim.summary}</p><a className="mt-1 inline-block break-all text-emerald-300 underline" href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">{new URL(claim.sourceUrl).hostname} · {claim.topic}{claim.retrieval==="official-index"?" · indexed evidence; direct access blocked":""}</a></li>)}</ul>
-              {review.financialRequirements.length>0 && <div><h4 className="font-bold">Amounts in source currency</h4><ul className="mt-2 space-y-2">{review.financialRequirements.map((item,index)=><li key={index}>{item.currency} {item.amount.toLocaleString("en-US")} · {item.period}: {item.description}</li>)}</ul><p className="mt-2 text-muted-foreground">Non-USD amounts are not converted or compared against your USD budget. Fees, investments, assets and income are separate requirements.</p></div>}
-              <details><summary className="cursor-pointer py-2 font-semibold">Unresolved evidence</summary><ul className="space-y-2 text-muted-foreground">{review.limitations.map(item=><li key={item}>{item}</li>)}</ul></details>
-            </section>}
-
             {result.explanation && <section aria-label="Recommendation explanation" className="space-y-4 rounded-2xl border border-white/10 p-4">
               <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-300">Why this match</h3>
               <p className="text-xs text-muted-foreground">A fit score, not an approval probability. Available funds: {formatMoney(result.explanation.requiredBudget)} · budget buffer: {formatMoney(result.explanation.budgetHeadroom)}.</p>
@@ -241,6 +232,15 @@ export function ProgramDrawer({ result, profile, onClose }: {
                 <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{p.taxNote ?? "Tax treatment not reviewed"}</p>
               </div>
             </div>
+            {review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
+              <h3 className="font-bold text-emerald-200">Source audit · {review.status}</h3>
+              <p className="text-muted-foreground">Reviewed {review.reviewedAt.slice(0,10)}. {review.status==="unresolved"?"Evidence retrieval remains unresolved; no route requirements were verified by this attempt.":"These citations support selected claims; the complete route and your eligibility remain under review."}</p>
+              {p.audit&&<p className="font-semibold text-amber-100">Intake status in reviewed sources: {p.audit.routeStatus}. This does not establish individual eligibility.</p>}
+              <ul className="space-y-3">{review.claims.map((claim,index)=><li key={`${claim.sourceUrl}-${index}`}><p>{claim.summary}</p><a className="mt-1 inline-block break-all text-emerald-300 underline" href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">{new URL(claim.sourceUrl).hostname} · {claim.topic}{claim.retrieval==="official-index"?" · indexed evidence; direct access blocked":""}</a></li>)}</ul>
+              {review.financialRequirements.length>0 && <div><h4 className="font-bold">Amounts in source currency</h4><ul className="mt-2 space-y-2">{review.financialRequirements.map((item,index)=><li key={index}>{item.currency} {item.amount.toLocaleString("en-US")} · {item.period}: {item.description}</li>)}</ul><p className="mt-2 text-muted-foreground">Non-USD amounts are not converted or compared against your USD budget. Fees, investments, assets and income are separate requirements.</p></div>}
+              <details><summary className="cursor-pointer py-2 font-semibold">Unresolved evidence</summary><ul className="space-y-2 text-muted-foreground">{review.limitations.map(item=><li key={item}>{item}</li>)}</ul></details>
+            </section>}
+
           </div>
         </ScrollArea>
 

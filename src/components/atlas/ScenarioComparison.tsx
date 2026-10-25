@@ -3,12 +3,11 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import type { MatchResult, Program, Profile, Region } from "@/lib/types";
-import { REGION_META } from "@/lib/types";
+import { RegionPicker } from "./RegionPicker";
 import { compareScenarios } from "@/lib/scenarios";
 import type { Plan } from "@/lib/scoring";
 import { REQUIREMENT_VERSION } from "@/lib/route-requirements";
 
-const regions = Object.keys(REGION_META) as Region[];
 const timelines: {value:Profile["timeline"];label:string}[] = [
   {value:"asap",label:"As soon as possible"},{value:"6m",label:"Within 6 months"},
   {value:"1y",label:"Within 1 year"},{value:"flexible",label:"Flexible"},
@@ -76,10 +75,10 @@ export function ScenarioComparison({profile,programs}:{profile:Profile;programs:
           <label className={field}>Offered monthly salary (USD)<input required className={input} aria-label="Scenario offered monthly salary" type="number" min="0" max={Number.MAX_SAFE_INTEGER} step="any" value={salary} onChange={e=>setSalary(e.target.value)} /></label>
           <label className={field}>Dependents<input required className={input} aria-label="Scenario dependents" type="number" min="0" max="100" step="1" value={dependents} onChange={e=>setDependents(e.target.value)} /></label>
           <label className={field}>Timeline<select className={input} aria-label="Scenario timeline" value={timeline} onChange={e=>setTimeline(e.target.value as Profile["timeline"])}>{timelines.map(item=><option key={item.value} value={item.value}>{item.label}</option>)}</select></label>
-          <label className={field}>Preferred regions<select multiple className={`${input} min-h-28`} aria-label="Scenario preferred regions" value={selectedRegions} onChange={e=>setSelectedRegions(Array.from(e.target.selectedOptions,option=>option.value as Region))}>{regions.map(item=><option key={item} value={item}>{item}</option>)}</select></label>
           <label className="flex min-h-11 items-center gap-3 rounded-lg border border-white/10 px-3 text-sm"><input type="checkbox" checked={offer} onChange={e=>setOffer(e.target.checked)} />I have a job offer</label>
           <label className="flex min-h-11 items-center gap-3 rounded-lg border border-white/10 px-3 text-sm"><input type="checkbox" checked={remoteWork} onChange={e=>setRemoteWork(e.target.checked)} />I work remotely</label>
         </div>
+        <div className="mt-5"><RegionPicker label="Scenario preferred regions" value={selectedRegions} onChange={setSelectedRegions}/></div>
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <button type="submit" className="rounded-xl bg-emerald-400 px-5 py-3 text-sm font-extrabold text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300">Evaluate scenario</button>
           <button type="button" className="rounded-xl border border-white/15 px-5 py-3 text-sm font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" onClick={()=>{setBudget(String(profile.budget));setIncome(String(profile.monthlyIncome));setSalary(String(profile.expectedSalary));setOffer(profile.hasJobOffer);setDependents(String(profile.dependents));setRemoteWork(profile.remoteWork);setTimeline(profile.timeline);setSelectedRegions([...profile.regions]);setComparison(null);setError(null);}}>Reset</button>

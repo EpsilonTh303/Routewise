@@ -35,6 +35,7 @@ test('invalid numeric scenario edit is blocked without crashing the comparison U
   await page.getByRole('button',{name:'Evaluate scenario'}).click();
   await expect(page.getByRole('heading',{name:'What if?'})).toBeVisible();
   await expect(page.getByRole('region',{name:'Current profile'})).toHaveCount(0);
-  const selected=await page.getByRole('listbox',{name:'Scenario preferred regions'}).locator('option:checked').allTextContents();
-  expect(selected).toEqual(['Western Europe','Nordics & Baltics']);
+  const regions=page.getByRole('group',{name:'Scenario preferred regions'});
+  await expect(regions.getByRole('checkbox',{name:/Western Europe/})).toBeChecked();
+  await expect(regions.getByRole('checkbox',{name:/Nordics & Baltics/})).toBeChecked();
 });

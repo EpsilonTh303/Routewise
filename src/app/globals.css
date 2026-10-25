@@ -189,7 +189,7 @@
 .scroll-slim::-webkit-scrollbar { width: 6px; }
 
 .safe-nav { padding-top: env(safe-area-inset-top, 0px); }
-.catalog-filters { top: var(--app-nav-height); }
+.catalog-filters { position: static; }
 .safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px)); }
 .category-strip { scrollbar-width: thin; overscroll-behavior-x: contain; }
 

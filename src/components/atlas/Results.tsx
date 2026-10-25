@@ -137,7 +137,7 @@ export function Results({ profile, results, onEdit }: {
       <ScenarioComparison profile={profile} programs={results.map(result=>result.program)} />
 
       {/* filters */}
-      <div className="catalog-filters sticky z-30 mt-12 min-w-0 rounded-2xl glass-strong p-3">
+      <div className="catalog-filters mt-12 min-w-0 rounded-2xl glass-strong p-3" aria-label="Catalog filters">
         <div aria-label="Program categories" className="category-strip flex min-w-0 items-center gap-2 overflow-x-auto pb-2">
           <span className="flex shrink-0 items-center gap-1.5 pr-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
             <Filter className="h-3.5 w-3.5" /> Filter

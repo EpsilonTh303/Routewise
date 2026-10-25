@@ -61,9 +61,7 @@ export function Explorer({ savedProfile, programs }: { savedProfile: Profile | n
         </p>
       </div>
 
-      <div className="mb-6"><SourceReviewQueue programs={programs} asOf={new Date().toISOString().slice(0,10)}/></div>
-
-      <div className="catalog-filters sticky z-30 min-w-0 rounded-2xl glass-strong p-3">
+      <div className="catalog-filters min-w-0 rounded-2xl glass-strong p-3" aria-label="Catalog filters">
         <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
           <div className="relative min-w-0">
             <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -107,6 +105,8 @@ export function Explorer({ savedProfile, programs }: { savedProfile: Profile | n
           <p className="mt-3 text-sm">Nothing found — try another search.</p>
         </div>
       )}
+
+      {filtered.length>0&&<div className="mt-10"><SourceReviewQueue programs={filtered.map(result=>result.program)} asOf={new Date().toISOString().slice(0,10)}/></div>}
 
       <AnimatePresence>
         {drawerResult && (

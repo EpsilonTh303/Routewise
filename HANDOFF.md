@@ -48,3 +48,13 @@ The user requires commits for completed working versions/coherent fixes. AGENTS.
 Local commits include 0c5cf1c (tested3.3 baseline and commit policy) and b544bf6 (75-route research and future study design). The final validated integration commit is visible in git log after this handoff update. Numerous unrelated preexisting environment/archive/scaffold modifications remain unstaged intentionally; do not reset/clean them.
 
 Next: reduce indexed evidence and unresolved availability/contradictions; then implement a small source-backed study/post-study pilot with independent transition conditions. See tasks.md. Existing 12 structured checks, evidence profiles, matching-currency policy and stateless scenarios remain; richer rule coverage and defensible cost scenarios must be driven by evidence.
+
+## Current user-requested stages (in progress)
+
+1. Layout: non-sticky filters, touch-friendly What-if regions, source audit after route content.
+2. Separate profile view/edit with local photo and direct editing after first setup.
+3. Source-backed German master's and other post-study routes; retry existing evidence gaps. Never invent values to remove review labels.
+
+Luna researchers own only scoped research files; primary agent implements, checks and commits each stage.
+
+Stage 1 completed: region cards, non-sticky filters and bottom source audits. 69 unit + 30 browser cases passed (four desktop skips), lint/typecheck/build passed; LAN restored. Next implementation is separate browser profile view/edit/photo. Research for Germany/NL/FI and source-gap retries is in new research files pending primary acceptance; not yet applied.
