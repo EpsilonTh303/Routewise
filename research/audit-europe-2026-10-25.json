@@ -1,0 +1,806 @@
+[
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 threshold €3,465 gross monthly; offer, labor-market test and 55 points. Other route categories have distinct rules.",
+        "retrieval": "page",
+        "sourceUrl": "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/other-key-workers/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 3465,
+        "sourceUrl": "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/other-key-workers/",
+        "period": "monthly",
+        "currency": "EUR",
+        "description": "2026 Other Key Worker gross minimum; other categories differ"
+      }
+    ],
+    "id": "at-rwr",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "€300,000 qualifying investment across property/company/fund options, plus personal secure income €50,000 annual, +€15,000 spouse and +€10,000 per minor child. Permit unlimited validity subject to conditions; card 10 years.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.gov.cy/mip-md/en/documents/companies-investors-permanent-residence-3/immigration-permits-for-investors/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 300000,
+        "sourceUrl": "https://www.gov.cy/mip-md/en/documents/companies-investors-permanent-residence-3/immigration-permits-for-investors/",
+        "period": "one-time",
+        "currency": "EUR",
+        "description": "Qualifying investment; alternatives apply"
+      },
+      {
+        "amount": 50000,
+        "sourceUrl": "https://www.gov.cy/mip-md/en/documents/companies-investors-permanent-residence-3/immigration-permits-for-investors/",
+        "period": "annual",
+        "currency": "EUR",
+        "description": "Secure income; family additions apply"
+      }
+    ],
+    "id": "cy-property",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Startup founders are exempt from ordinary €65,000 investment requirement; permit up to five years. Startup Committee approval criteria should be checked.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://startupestonia.ee/frequently-asked-questions/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "ee-startup",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "fixed national salary",
+      "all-in costs",
+      "citizenship"
+    ],
+    "claims": [
+      {
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "sourceUrl": "https://migri.fi/internal-transfer-within-a-company",
+        "topic": "ICT eligibility",
+        "retrieval": "page",
+        "summary": "Transfer within group as manager, specialist or trainee; posting entity outside EU; qualification and competence required. Pay meets applicable collective agreement. Manager/specialist up to 3 years; trainee up to 1 year."
+      }
+    ],
+    "financialRequirements": [],
+    "id": "fi-eu-ict-permit",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "No single fixed salary floor; applicable collective agreement controls.",
+      "Partial review; PR and citizenship unresolved."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 salary €3,937 gross monthly; job and special expertise required; degree usually, or equivalent acquired expertise.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://migri.fi/en/specialist",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 3937,
+        "sourceUrl": "https://migri.fi/en/specialist",
+        "period": "monthly",
+        "currency": "EUR",
+        "description": "Gross salary 2026"
+      }
+    ],
+    "id": "fi-specialist-permit",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "EUR 300,000 direct investment with personal direction or 30% ownership and employment commitments.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F16922",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "period": "one-time",
+        "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F16922",
+        "description": "Direct qualifying investment; ownership, active direction and employment commitments apply",
+        "amount": 300000,
+        "currency": "EUR"
+      }
+    ],
+    "id": "fr-talent-investor",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "EUR 39,582 gross annual for specified salaried tracks; qualifications and contract conditions vary.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F16922",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "period": "annual",
+        "sourceUrl": "https://www.service-public.fr/particuliers/vosdroits/F16922",
+        "description": "Gross salary floor for specified salaried route; tracks differ",
+        "amount": 39582,
+        "currency": "EUR"
+      }
+    ],
+    "id": "fr-talent-salaried",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 salary €50,700 regular; €45,934.20 shortage/new entrant; qualifying employment and qualification; exceptions for experienced IT.",
+        "retrieval": "page",
+        "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 50700,
+        "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+        "period": "annual",
+        "currency": "EUR",
+        "description": "Regular 2026 salary"
+      },
+      {
+        "amount": 45934.2,
+        "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+        "period": "annual",
+        "currency": "EUR",
+        "description": "Shortage/new entrant 2026"
+      }
+    ],
+    "id": "de-bluecard",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "PR/citizenship",
+      "processing duration",
+      "all-in cost"
+    ],
+    "claims": [
+      {
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/opportunity-card/questions-answers",
+        "topic": "Opportunity Card",
+        "retrieval": "official-index",
+        "summary": "2026 funds proof €1,091 net per month; part-time income and shortfall blocked funds alternatives. Search residence title up to one year. Points system applies only to one eligibility track."
+      }
+    ],
+    "financialRequirements": [
+      {
+        "period": "monthly",
+        "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/opportunity-card/questions-answers",
+        "amount": 1091,
+        "description": "2026 net means-of-subsistence figure",
+        "currency": "EUR"
+      }
+    ],
+    "id": "de-chancenkarte",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Job offer not required to seek work; after qualified offer, apply for appropriate residence permit.",
+      "2025 print page is stale; 2026 FAQ gives current amount."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "No fixed income floor stated; prove project financing and living means, professional permission where required; initial permit max 3 years; settlement possible after 5 years.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.make-it-in-germany.com/en/working-in-germany/setting-up-business/visa/freelance",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "de-freelance",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Official ministry page lists property-based investor residence and application requirements. Current regional thresholds not established by retrieved page; €250k legacy figure must not be generalized.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://migration.gov.gr/en/golden-visa/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "gr-golden-visa",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified.",
+      "Current regional thresholds not established by retrieved ministry page; legacy €250,000 cannot represent all locations."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Official immigration portal shows €250,000 registered real-estate fund certificate or €1m educational donation.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://enterhungary.gov.hu/eh/tajekoztato/en/okmanyvendegbef",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 250000,
+        "sourceUrl": "https://enterhungary.gov.hu/eh/tajekoztato/en/okmanyvendegbef",
+        "period": "one-time",
+        "currency": "EUR",
+        "description": "Fund route; education donation €1m"
+      }
+    ],
+    "id": "hu-golden-visa",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 CSEP annual remuneration schedule: €40,909 relevant degree; €68,911 no relevant degree; recent graduate €36,849. Occupation and job offer conditions apply.",
+        "retrieval": "page",
+        "sourceUrl": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/economic-migration-policy/minimum-annual-remuneration/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "period": "annual",
+        "sourceUrl": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/economic-migration-policy/minimum-annual-remuneration/",
+        "description": "2026 qualifying occupation with relevant degree",
+        "amount": 40909,
+        "currency": "EUR"
+      },
+      {
+        "period": "annual",
+        "sourceUrl": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/economic-migration-policy/minimum-annual-remuneration/",
+        "description": "2026 route without relevant degree",
+        "amount": 68911,
+        "currency": "EUR"
+      },
+      {
+        "period": "annual",
+        "sourceUrl": "https://enterprise.gov.ie/en/what-we-do/workplace-and-skills/economic-migration-policy/minimum-annual-remuneration/",
+        "description": "2026 recent graduate CSEP threshold",
+        "amount": 36849,
+        "currency": "EUR"
+      }
+    ],
+    "id": "ie-csep",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Investor visa valid two years; €2m government bonds, €500k Italian company, €250k innovative startup, or €1m philanthropy.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://investorvisa.mise.gov.it/index.php/en/home-en/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 250000,
+        "sourceUrl": "https://investorvisa.mise.gov.it/index.php/en/home-en/",
+        "period": "one-time",
+        "currency": "EUR",
+        "description": "Innovative startup alternative; other alternatives apply"
+      }
+    ],
+    "id": "it-investor",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Current agency page: €60,000 admin fee, €37,000 government contribution, €2,000 NGO donation; rent ≥€14,000 annual or purchase ≥€375,000; assets €500k incl €150k financial or €650k incl €75k.",
+        "retrieval": "page",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "period": "one-time",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "Non-refundable administrative fee",
+        "amount": 60000,
+        "currency": "EUR"
+      },
+      {
+        "period": "one-time",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "Government contribution",
+        "amount": 37000,
+        "currency": "EUR"
+      },
+      {
+        "period": "one-time",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "NGO donation",
+        "amount": 2000,
+        "currency": "EUR"
+      },
+      {
+        "period": "annual",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "Minimum qualifying rent alternative to purchase",
+        "amount": 14000,
+        "currency": "EUR"
+      },
+      {
+        "period": "one-time",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "Minimum qualifying property purchase alternative",
+        "amount": 375000,
+        "currency": "EUR"
+      },
+      {
+        "period": "assets",
+        "sourceUrl": "https://residencymalta.gov.mt/legal-framework-mprp-2/",
+        "description": "Capital assets incl. at least €150,000 financial assets; alternative €650,000 incl. €75,000 financial",
+        "amount": 500000,
+        "currency": "EUR"
+      }
+    ],
+    "id": "mt-mprp",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 gross monthly thresholds: €5,942 age 30+, €4,357 under 30, €3,122 reduced. Recognized IND sponsor and market-rate job required.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://ind.nl/en/required-amounts-income-requirements",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 5942,
+        "sourceUrl": "https://ind.nl/en/required-amounts-income-requirements",
+        "period": "monthly",
+        "currency": "EUR",
+        "description": "30+ 2026"
+      },
+      {
+        "amount": 4357,
+        "sourceUrl": "https://ind.nl/en/required-amounts-income-requirements",
+        "period": "monthly",
+        "currency": "EUR",
+        "description": "Under 30 2026"
+      }
+    ],
+    "id": "nl-hsm",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Concrete employer job offer, relevant skilled qualification; normal pay/conditions. University role permit usually up to 3 years; PR application after 3 years.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.udi.no/en/want-to-apply/work-immigration/skilled-workers/?c=per",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "no-skilled",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "exact current euro floor",
+      "family uplift",
+      "mandatory bank account/balance",
+      "processing/PR/citizenship"
+    ],
+    "claims": [
+      {
+        "topic": "D7 means of subsistence",
+        "retrieval": "official-index",
+        "summary": "MNE portal direct access returned 403. Official-source consular checklist links means-of-subsistence page and asks for resources for at least 12 months; it does not expose the exact threshold. Statutory percentage/euro figure was not independently verified from issuing authority.",
+        "sourceUrl": "https://vistos.mne.gov.pt/en/national-visas/necessary-documentation/means-of-subsistence",
+        "checkedAt": "2026-10-25T13:39:21Z"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "pt-d7",
+    "routeStatus": "unclear",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "MNE official page returned 403; current threshold and 12-month interpretation remain partially supported by consular application checklist.",
+      "Archived bank balance and accommodation claims need competent post specific confirmation."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "ARI options include 10 jobs; €500k non-real-estate investment funds or research; €250k cultural; qualifying company capital/jobs. Real estate investment excluded.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://aima.gov.pt/en/viver/autorizacao-de-residencia-para-investimento-art-90-o-a",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 500000,
+        "sourceUrl": "https://aima.gov.pt/en/viver/autorizacao-de-residencia-para-investimento-art-90-o-a",
+        "period": "one-time",
+        "currency": "EUR",
+        "description": "Research/fund options; cultural route €250k"
+      }
+    ],
+    "id": "pt-golden-visa",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "2026 SMI €1,221 monthly; applicant 200%=€2,442, first dependent +€916, each additional +€306; remote work conditions and 20% Spanish-company limit for professional activity.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.exteriores.gob.es/Consulados/washington/en/ServiciosConsulares/Paginas/Consular/Telework-Visa.aspx",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 2442,
+        "sourceUrl": "https://www.exteriores.gob.es/Consulados/washington/en/ServiciosConsulares/Paginas/Consular/Telework-Visa.aspx",
+        "period": "monthly",
+        "currency": "EUR",
+        "description": "Consular formula is 200% of stated €1,221 monthly SMI. SMI is legally 14 payments/year; the consular page does not state annualization method."
+      }
+    ],
+    "id": "es-dn",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Consular page gives 2026 €2,442/month based on monthly SMI €1,221. Spain SMI is paid in 14 annual installments; official consular page does not spell out annual evidence treatment. Preserve the monthly formula and clarify annualization with consulate.",
+      "Partial review only."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Official guidance updated May 2025: 400% IPREM applicant monthly, 100% IPREM each dependent; no work, insurance. 2026 IPREM amount not verified.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.inclusion.gob.es/en/web/migraciones/w/autorizacion-inicial-de-residencia-temporal-no-lucrativa",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "es-nlv",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "From June 2026 salary at least 90% median = SEK 34,470/month, with collective/common conditions; exceptions apply.",
+        "retrieval": "page",
+        "sourceUrl": "https://www.migrationsverket.se/en/word-explanations/salary-requirements-for-a-work-permit.html",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 34470,
+        "sourceUrl": "https://www.migrationsverket.se/en/word-explanations/salary-requirements-for-a-work-permit.html",
+        "period": "monthly",
+        "currency": "SEK",
+        "description": "90% median; current June 2026"
+      }
+    ],
+    "id": "se-work",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "fixed CHF income/capital",
+      "universal tax amount",
+      "processing/citizenship"
+    ],
+    "claims": [
+      {
+        "topic": "Cantonal permit and tax distinction",
+        "retrieval": "page",
+        "summary": "Geneva canton requires non-EU applicant to apply before entry, transfer center of interests and spend majority of year in Switzerland, perform no gainful activity except managing own assets, and obtain cantonal tax administration certificate of significant fiscal interest. No universal CHF threshold is listed; permit is cantonal and individualized.",
+        "sourceUrl": "https://www.ge.ch/en/applying-residence-permit-without-gainful-activity/lump-sum-taxation-permit-third-country-national",
+        "checkedAt": "2026-10-25T13:39:21Z"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "ch-lumpsum",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [
+      {
+        "field": "minMonthlyIncome",
+        "reason": "No universal income floor found; cantonal tax and permit decisions are individualized.",
+        "sourceUrl": "https://www.ge.ch/en/applying-residence-permit-without-gainful-activity/lump-sum-taxation-permit-third-country-national",
+        "value": null
+      }
+    ],
+    "limitations": [
+      "Geneva example is canton-specific and cannot establish a Switzerland-wide route.",
+      "Archive CHF 150k–500k annual estimate is unsupported by current source."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Endorsement or eligible prestigious prize; stay up to 5 years at a time; settlement after 3 or 5 years by field/case; overseas decisions usually 3 weeks.",
+        "retrieval": "official-index",
+        "sourceUrl": "https://www.gov.uk/global-talent/overview",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "uk-global-talent",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  },
+  {
+    "unsupportedFields": [
+      "total relocation cost",
+      "general processing time",
+      "dependent cost"
+    ],
+    "claims": [
+      {
+        "summary": "Approved sponsor, eligible occupation, salary generally at least £41,700 or going rate whichever higher; exceptions vary.",
+        "retrieval": "page",
+        "sourceUrl": "https://www.gov.uk/skilled-worker-visa/your-job",
+        "checkedAt": "2026-10-25T13:39:21Z",
+        "topic": "Current route requirements"
+      }
+    ],
+    "financialRequirements": [],
+    "id": "uk-skilled",
+    "routeStatus": "open",
+    "checkedAt": "2026-10-25T13:39:21Z",
+    "suggestedCorrections": [],
+    "limitations": [
+      "Partial selected-claim review only; pathway remains unverified."
+    ]
+  }
+]

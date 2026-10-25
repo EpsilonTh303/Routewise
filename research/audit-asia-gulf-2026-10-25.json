@@ -1,0 +1,956 @@
+[
+  {
+    "id": "au-subclass-189",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Eligibility and status",
+        "summary": "Subclass 189 points-tested stream is permanent; invitation requires eligible occupation, skills assessment, age under 45, English and at least 65 points, but minimum points do not guarantee invitation.",
+        "sourceUrl": "https://immi.homeaffairs.gov.au/Visa-subsite/Pages/work/189-skilled-independent-points-tested.aspx",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Official page only indexed in this pass; application fee, current processing, citizenship/residence details not established."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "au-subclass-190",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Eligibility and status",
+        "summary": "Subclass 190 is permanent and needs state/territory nomination, eligible occupation, skills assessment, invitation and at least 65 points; invitation threshold may be higher.",
+        "sourceUrl": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Nomination criteria vary; processing and citizenship timelines not established."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "ge-business-residence",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "retrieval": "page",
+        "topic": "Entrepreneurial/work residence",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "summary": "The Georgian Agency states a work residence permit may issue to an alien carrying out entrepreneurial activities in Georgia or a registered labour immigrant. Evidence must show legal monthly income/remuneration of at least five times the average-consumer subsistence level; an alien-founded enterprise must show annual turnover of at least GEL 50,000 per applicant (GEL 35,000 for education/medical enterprises), plus the stated registration and staffing evidence.",
+        "sourceUrl": "https://sda.gov.ge/en/products/migration-residence-permits/"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "sourceUrl": "https://sda.gov.ge/en/products/migration-residence-permits/",
+        "currency": "GEL",
+        "period": "annual",
+        "amount": 50000,
+        "description": "Annual employer/alien-founded enterprise turnover per work-residence applicant; not personal income. Educational or medical enterprises: GEL 35,000 per applicant."
+      }
+    ],
+    "limitations": [
+      "Applicant must meet separate legal monthly-income formula (fivefold average-consumer subsistence minimum; no amount encoded because it varies), labour-immigrant registration where applicable, and other requirements. This is entrepreneurial/work residence, not investment residence."
+    ],
+    "unsupportedFields": [
+      "personal monthly income numeric amount",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "value": null,
+        "reason": "USD 300,000 investment threshold belongs to a different investment-residence product, not this entrepreneurial/work-residence route.",
+        "field": "minBudget",
+        "sourceUrl": "https://sda.gov.ge/en/products/migration-residence-permits/"
+      },
+      {
+        "value": null,
+        "reason": "The applicable work-residence income test is formula-based (fivefold current average-consumer subsistence minimum), not a fixed USD floor.",
+        "field": "minMonthlyIncome",
+        "sourceUrl": "https://sda.gov.ge/en/products/migration-residence-permits/"
+      }
+    ],
+    "routeStatus": "open"
+  },
+  {
+    "id": "hk-ttps",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Eligibility",
+        "summary": "Hong Kong TTPS allows eligible Category A high-income applicants (HKD 2.5m prior-year annual income), Category B graduates of eligible universities with 3 years' experience, or Category C recent eligible graduates subject to quota; job offer is not required at application. Initial stay is 36 months for A and 24 months for B/C.",
+        "sourceUrl": "https://www.immd.gov.hk/eng/services/visas/TTPS.html",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 2500000,
+        "currency": "HKD",
+        "period": "annual",
+        "description": "Prior-year income qualification for Category A only",
+        "sourceUrl": "https://www.immd.gov.hk/eng/services/visas/TTPS.html"
+      }
+    ],
+    "limitations": [
+      "Category B/C depend on current eligible university list; further stay requires employment/business evidence. PR/citizenship not verified."
+    ],
+    "unsupportedFields": [
+      "general minimum income",
+      "processingWeeks",
+      "totalYearOneCost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "id-e33g-remote-worker",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "retrieval": "page",
+        "topic": "E33G employment and income",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "summary": "The retrievable official Bontang immigration office listing states the special E33G criteria: bank evidence of salary/income of at least USD 60,000 per year and an employment agreement with a company established outside Indonesia. The national E33G page itself returned 403 in this audit.",
+        "sourceUrl": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia"
+      },
+      {
+        "retrieval": "page",
+        "topic": "E33G living-funds evidence",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "summary": "The same official local immigration listing separately requires a recent three-month bank statement showing at least USD 2,000 for living costs; this is not the USD 60,000 annual-income criterion.",
+        "sourceUrl": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "sourceUrl": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia",
+        "currency": "USD",
+        "period": "annual",
+        "amount": 60000,
+        "description": "Salary/income qualification, separate from living-cost funds"
+      },
+      {
+        "sourceUrl": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia",
+        "currency": "USD",
+        "period": "balance",
+        "amount": 2000,
+        "description": "Living-cost proof on a three-month bank statement; distinct from annual income"
+      }
+    ],
+    "limitations": [
+      "National Directorate E33G page returned 403; the current retrievable detail is from the official Bontang immigration office listing. No contractor/self-employed eligibility or PR/citizenship entitlement established. Published fee/current checkout amount not verified."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "current visa fee",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Direct open returned HTTP 403; search did not retrieve the target page.",
+        "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G"
+      },
+      {
+        "outcome": "Retrieved today; official local immigration page includes E33G annual income, foreign-employer agreement and separate USD 2,000 three-month living-funds evidence.",
+        "url": "https://bontang.imigrasi.go.id/layanan-publik/kategori/wna/sub/informasi-visa-republik-indonesia"
+      }
+    ]
+  },
+  {
+    "id": "id-second-home",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "retrieval": "page",
+        "topic": "Second Home proof of funds",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "summary": "Official Jakarta Barat Immigration page says Second Home ITAS proof-of-funds may be either at least USD 130,000 equivalent in savings held at a state-owned bank or Indonesian apartment/property title with minimum value USD 1,000,000 equivalent. Evidence is due within 90 days under the page checklist.",
+        "sourceUrl": "https://jakartabarat.imigrasi.go.id/pelaporan-proof-of-fund-2/"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "sourceUrl": "https://jakartabarat.imigrasi.go.id/pelaporan-proof-of-fund-2/",
+        "currency": "USD",
+        "period": "balance",
+        "amount": 130000,
+        "description": "State-owned bank savings alternative for Second Home proof of funds"
+      },
+      {
+        "sourceUrl": "https://jakartabarat.imigrasi.go.id/pelaporan-proof-of-fund-2/",
+        "currency": "USD",
+        "period": "assets",
+        "amount": 1000000,
+        "description": "Indonesian apartment/property title alternative for Second Home proof of funds"
+      }
+    ],
+    "limitations": [
+      "Evidence retrieved from an official local immigration office checklist; verify national eVisa category and current filing interpretation before applying. Remote-work permission, PR, citizenship and processing time not established."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Retrieved today; lines 14-16 list USD 130,000 state-bank savings or USD 1,000,000 Indonesian property.",
+        "url": "https://jakartabarat.imigrasi.go.id/pelaporan-proof-of-fund-2/"
+      },
+      {
+        "outcome": "Retrieved today; 2022 official immigration news confirms proof-of-fund and 90-day reporting but gives no numeric property threshold; property amount sourced only to Jakarta Barat checklist.",
+        "url": "https://jogja.imigrasi.go.id/warga-negara-asing-bisa-ajukan-second-home-visa-tanpa-penjamin/"
+      }
+    ]
+  },
+  {
+    "id": "jp-bizmanager",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "2025 rule change",
+        "summary": "Japan's Business Manager criteria were amended effective 16 October 2025. Official guidance describes JPY 30 million in business assets; for individual businesses this means deployed resources such as office, staff salary for a year and equipment, not simply required share capital. Residence periods include 3 months to 5 years.",
+        "sourceUrl": "https://www.moj.go.jp/isa/applications/resources/10_00237.html",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 30000000,
+        "currency": "JPY",
+        "period": "assets",
+        "description": "Business assets invested in the business; corporate capital for corporations, qualifying deployed costs for sole proprietors",
+        "sourceUrl": "https://www.moj.go.jp/isa/applications/resources/10_00237.html"
+      }
+    ],
+    "limitations": [
+      "New criteria include other business/qualification/staff requirements not fully audited here; existing holders have transition provisions. Processing and citizenship not established."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "totalYearOneCost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "jp-hsp",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Points and PR",
+        "summary": "Highly-skilled professional status requires 70 points in a qualifying work activity; PR may be sought after three years maintaining qualifying 70 points or one year at 80 points, subject to general PR conditions.",
+        "sourceUrl": "https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "This is employment activity-linked status rather than a standalone income-independent visa; category-specific salary, employer and points evidence not modeled. PR is discretionary."
+    ],
+    "unsupportedFields": [
+      "minimum salary",
+      "processingWeeks",
+      "totalYearOneCost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "my-mm2h",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Silver category",
+        "summary": "Official MM2H Silver terms require USD 150,000 fixed deposit, compulsory Malaysian residence purchase of at least RM600,000, age 25+, 5-year renewable term, 90 days annual stay for under-50 participants, and RM1,000 one-off participation fee.",
+        "sourceUrl": "https://www.mm2h.gov.my/category/silver",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 150000,
+        "currency": "USD",
+        "period": "balance",
+        "description": "Required fixed deposit; up to 50% withdrawal for specified purposes after approval",
+        "sourceUrl": "https://www.mm2h.gov.my/category/silver"
+      },
+      {
+        "amount": 600000,
+        "currency": "MYR",
+        "period": "assets",
+        "description": "Minimum required residence purchase",
+        "sourceUrl": "https://www.mm2h.gov.my/category/silver"
+      },
+      {
+        "amount": 1000,
+        "currency": "MYR",
+        "period": "one-time",
+        "description": "Silver one-off participation fee",
+        "sourceUrl": "https://www.mm2h.gov.my/category/silver"
+      }
+    ],
+    "limitations": [
+      "Application via licensed MM2H tour operator/One Stop Centre; it is not permanent residence; processing/citizenship not established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "me-property",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Property residence",
+        "summary": "Montenegro government states temporary residence may be granted for having disposal of immovable property; permits generally do not exceed one year and require means of subsistence, accommodation and health insurance. A 2025 government announcement described a proposed EUR 200,000 property threshold in draft amendments; enactment/current applicability was not confirmed.",
+        "sourceUrl": "https://www.gov.me/en/article/temporary-residence",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Current threshold must be confirmed in enacted law and local MUP practice; draft announcement is not treated as in-force rule. Permit generally tied to grounds; PR/citizenship not established."
+    ],
+    "unsupportedFields": [
+      "property minimum",
+      "income threshold",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "unclear",
+    "auditAttempts": [
+      {
+        "url": "https://www.gov.me/en/article/temporary-residence",
+        "outcome": "Retrieved; confirms property as basis and validity, but no numeric property minimum."
+      },
+      {
+        "url": "https://www.gov.me/en/article/government-adopts-amendments-to-the-law-on-foreigners-new-measures-to-regulate-residence",
+        "outcome": "Retrieved; EUR 200,000 appeared in draft amendment notice; current enactment not established."
+      }
+    ]
+  },
+  {
+    "id": "nz-smc",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Six-point residence pathway",
+        "summary": "SMC points pathway needs six skilled resident points from qualification, occupational registration or income, with up to three additional points from skilled NZ work; all applicants generally need a NZ job/offer, wage threshold, health, character and English. Official page also lists separate skilled work experience and trades/technician routes.",
+        "sourceUrl": "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "The archived six-point framing omits job/offer and NZ work requirements. Rules scheduled to change; verify applicable date at filing."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "totalYearOneCost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "sa-premium-annual",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Product fee",
+        "summary": "Official Premium Residency Center official-domain index states limited-duration residency is one to five years renewable and costs SAR 100,000 per year. Direct pages opened today redirected to JavaScript/logout; search index is current observation.",
+        "sourceUrl": "https://pr.gov.sa/product-details-limited-unlimited",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 100000,
+        "currency": "SAR",
+        "period": "annual",
+        "description": "Limited-duration product fee, not income floor",
+        "sourceUrl": "https://pr.gov.sa/product-details-limited-unlimited"
+      }
+    ],
+    "limitations": [
+      "Direct platform source blocked; product eligibility and renewal specifics need platform confirmation; no citizenship entitlement stated."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Direct open redirected to JavaScript/logout shell; official-domain search index returned fee and duration.",
+        "url": "https://pr.gov.sa/product-details-limited-unlimited"
+      },
+      {
+        "outcome": "Direct open redirected to JavaScript/logout shell; official-domain search index returned fee table.",
+        "url": "https://pr.gov.sa/premium-residency-regulations"
+      }
+    ]
+  },
+  {
+    "id": "sa-premium-one-time",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Product fee",
+        "summary": "Official Premium Residency Center official-domain index states unlimited/permanent residency costs SAR 800,000. Direct pages opened today redirected to JavaScript/logout; search index is current observation.",
+        "sourceUrl": "https://pr.gov.sa/product-details-limited-unlimited",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 800000,
+        "currency": "SAR",
+        "period": "one-time",
+        "description": "Permanent/unlimited product fee, not investment amount",
+        "sourceUrl": "https://pr.gov.sa/product-details-limited-unlimited"
+      }
+    ],
+    "limitations": [
+      "Direct platform source blocked; fee alone does not establish eligibility; no citizenship entitlement stated."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Direct open redirected to JavaScript/logout shell; official-domain search index returned fee and duration.",
+        "url": "https://pr.gov.sa/product-details-limited-unlimited"
+      },
+      {
+        "outcome": "Direct open redirected to JavaScript/logout shell; official-domain search index returned fee table.",
+        "url": "https://pr.gov.sa/premium-residency-regulations"
+      }
+    ]
+  },
+  {
+    "id": "rs-company-residence",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Business-owner residence",
+        "summary": "Freshly retrieved official Serbia portal: running a business is a recognized residence purpose through self-employment; longer stays require D visa or temporary residence/work single permit. Company incorporation is a valid purpose but does not guarantee visa/permit.",
+        "sourceUrl": "https://welcometoserbia.gov.rs/visa-for-foreign-business-owners",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "No minimum capital/income stated in the reviewed article; visa/permit still subject to applicable conditions. PR/citizenship not established."
+    ],
+    "unsupportedFields": [
+      "capital",
+      "personal income",
+      "processingWeeks",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Retrieved; lines 143-148 describe self-employment residence basis and warn incorporation alone does not guarantee approval.",
+        "url": "https://welcometoserbia.gov.rs/visa-for-foreign-business-owners"
+      }
+    ]
+  },
+  {
+    "id": "rs-property-residence",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Property residence",
+        "summary": "Freshly retrieved official Serbia portal lists real estate owner as a statutory basis for temporary residence. Temporary residence can be issued up to three years depending on the basis; page does not state minimum property value.",
+        "sourceUrl": "https://welcometoserbia.gov.rs/temporary-residence-international-agreements",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Exact documents and any property proof conditions should be checked in linked eApplication guidance; no numeric property threshold or citizenship claim established."
+    ],
+    "unsupportedFields": [
+      "capital",
+      "personal income",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "outcome": "Retrieved; lines 143-163 and 192-200 identify legal residence bases including real estate owner; general term up to 3 years.",
+        "url": "https://welcometoserbia.gov.rs/temporary-residence-international-agreements"
+      }
+    ]
+  },
+  {
+    "id": "sg-ep",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Employment Pass",
+        "summary": "Singapore EP needs a qualifying salary starting SGD 5,600/month outside financial services (age adjusted; SGD 6,200 in financial services) and generally 40 COMPASS points; employer/agent applies. First pass up to two years, renewals up to three years.",
+        "sourceUrl": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 5600,
+        "currency": "SGD",
+        "period": "monthly",
+        "description": "Base qualifying monthly salary outside financial services; rises with age",
+        "sourceUrl": "https://www.mom.gov.sg/passes-and-permits/employment-pass/eligibility"
+      }
+    ],
+    "limitations": [
+      "Salary and COMPASS rules are age, sector and employer dependent; a pass requires job offer and employer application. 2027 salary updates published."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "processingWeeks",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "kr-f27",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "auditAttempt": {
+      "queries": [
+        "site:visa.go.kr F-2-7 points based residence visa"
+      ],
+      "outcome": "Immigration Service homepage retrieved; Visa Portal interactive navigator returned no F-2-7 detail without selecting UI criteria. Route-specific current evidence unavailable.",
+      "urls": [
+        "https://immigration.go.kr/immigration_eng/index.do",
+        "https://www.visa.go.kr/openPage.do?MENU_ID=10101"
+      ]
+    },
+    "claims": [],
+    "financialRequirements": [],
+    "limitations": [
+      "Official Korea Immigration Service homepage and Visa Portal were retrieved, but route-specific F-2-7 eligibility detail was not; no eligibility, score, income or duration claim asserted."
+    ],
+    "unsupportedFields": [
+      "eligibility",
+      "income",
+      "capital",
+      "employment",
+      "duration",
+      "processingWeeks",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "unclear",
+    "auditAttempts": [
+      {
+        "url": "https://immigration.go.kr/immigration_eng/index.do",
+        "outcome": "Retrieved KIS homepage; no F-2-7 specifics."
+      },
+      {
+        "url": "https://www.visa.go.kr/openPage.do?MENU_ID=10101",
+        "outcome": "Retrieved interactive navigator shell; route-specific requirements not available in page text."
+      },
+      {
+        "query": "site:visa.go.kr F-2-7 points based residence visa",
+        "outcome": "Search returned no authoritative route-specific result."
+      }
+    ]
+  },
+  {
+    "id": "tw-goldcard",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Card rights and duration",
+        "summary": "Official Taiwan Gold Card portal says card combines resident visa, work permit, ARC and re-entry permit, valid 1-3 years; no sponsor/job offer is required, and it permits open employment. Official overview states eligibility depends on professional assessment and application fees USD 100-310; perfect application described as 30 days, more documents 50-60 days. Portal lists PR eligibility after three years, subject to rules.",
+        "sourceUrl": "https://goldcard.nat.gov.tw/en/about/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Eligibility is profession/sector specific; fee depends on nationality and validity. Portal summary last changed 2020, so PR detail requires current law confirmation."
+    ],
+    "unsupportedFields": [
+      "income floor",
+      "capital",
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "th-dtv",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "DTV workcation",
+        "summary": "Thai official information lists DTV for remote workers/freelancers, Thai soft-power activities and dependants, valid five years with up to 180 days per entry. Current embassy checklist requires at least THB 500,000 funds and proof matching category; Thai-source employment/freelance work is not authorized.",
+        "sourceUrl": "https://washingtondc.thaiembassy.org/en/page/dtv-visa",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 500000,
+        "currency": "THB",
+        "period": "balance",
+        "description": "Financial evidence; some posts require statements for multiple months",
+        "sourceUrl": "https://washingtondc.thaiembassy.org/en/page/dtv-visa"
+      }
+    ],
+    "limitations": [
+      "Consular document details and fees vary by application post; DTV is a multiple-entry tourist visa, not permanent residence. PR/citizenship not established."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "all-in cost",
+      "PR",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "th-ltr-remote-degree",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Remote professional alternative",
+        "summary": "BOI 2025 criteria allow USD 40,000 annual income over the past two years plus qualifying master's degree, IP ownership or Series A funding; qualifying overseas employer conditions also apply. Not a degree-only independent route. This claim was freshly retrieved in the official BOI search index; direct PDF page content was not opened in the browser.",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 40000,
+        "currency": "USD",
+        "period": "annual",
+        "description": "Annual income alternative averaged over prior two years",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf"
+      }
+    ],
+    "limitations": [
+      "Employer conditions and no Thai work permit for this class; BOI endorsement time is 20 working days after complete submission, not total visa processing. No PR/citizenship established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "th-ltr-remote-standard",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Remote professional requirements",
+        "summary": "BOI 2025 criteria require USD 80,000 annual personal income over the past two years, or USD 40,000 plus specified master's/IP/Series A alternative; employer must meet listed-public-company or qualifying private-company criteria. This claim was freshly retrieved in the official BOI search index; direct PDF page content was not opened in the browser.",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf",
+        "checkedAt": "2026-10-25T13:50:00Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 80000,
+        "currency": "USD",
+        "period": "annual",
+        "description": "Annual personal income over the past two years, standard track",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf"
+      }
+    ],
+    "limitations": [
+      "Overseas employer and no Thai work permit for this category; 20 working days is endorsement review only. No PR/citizenship established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "th-ltr-wealthy",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Wealth requirements",
+        "summary": "BOI 2025 material states no personal income floor for Wealthy Global Citizens; USD 1m personal assets including Thailand investments plus USD 500,000 qualifying Thai investment required. Health coverage has alternatives. This claim was freshly retrieved in the official BOI search index; direct PDF page content was not opened in the browser.",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 1000000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Personal assets, including Thai investments",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf"
+      },
+      {
+        "amount": 500000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Qualifying investment in Thailand",
+        "sourceUrl": "https://ltr.boi.go.th/documents/BOI-brochure%202025-LTR.pdf"
+      }
+    ],
+    "limitations": [
+      "Annual income is not required for this category. Visa renewable up to 10 years; no PR/citizenship established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "tr-cbi",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Citizenship by investment options",
+        "summary": "Official Turkish citizenship FAQ lists fixed capital investment USD 500,000, real estate USD 400,000 with three-year no-sale annotation, or bank deposit USD 500,000 held three years, among qualifying options; employment creation alternative is 50 jobs.",
+        "sourceUrl": "https://www.nvi.gov.tr/sss-vatandaslik-hizmetleri",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 400000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Minimum real estate value with three-year no-sale annotation",
+        "sourceUrl": "https://www.nvi.gov.tr/sss-vatandaslik-hizmetleri"
+      },
+      {
+        "amount": 500000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Alternative fixed capital investment or bank deposit held three years",
+        "sourceUrl": "https://www.nvi.gov.tr/sss-vatandaslik-hizmetleri"
+      }
+    ],
+    "limitations": [
+      "Multiple alternative routes; not all have same capital requirement. Citizenship discretionary and processing duration not stated in reviewed source."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "all-in costs",
+      "dependant costs"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "ae-golden-professional",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Professional eligibility",
+        "summary": "ICP guide requires approved employment contract, valid UAE work permit, bachelor's degree and AED 30,000/month salary for professional category; describes 10-year renewable residency. Evidence inherited from existing official-source research; not independently page-retrieved in this audit pass.",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-golden-residency/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 30000,
+        "currency": "AED",
+        "period": "monthly",
+        "description": "Salary threshold",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-golden-residency/"
+      }
+    ],
+    "limitations": [
+      "Occupation category/employer conditions matter; remote foreign work alone not shown to qualify. PR/citizenship and processing not established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "ae-golden-property",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Property qualification",
+        "summary": "ICP guide states UAE property ownership totaling AED 2m qualifies, with current guide describing 10-year residency; government portal lists five years for property investors. Official duration conflict retained unresolved. Evidence inherited from existing official-source research; not independently page-retrieved in this audit pass.",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-golden-residency/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      },
+      {
+        "topic": "Conflicting duration",
+        "summary": "UAE government portal describes a five-year property-investor visa, inconsistent with ICP's 10-year guide.",
+        "sourceUrl": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 2000000,
+        "currency": "AED",
+        "period": "assets",
+        "description": "Aggregate UAE real estate value",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-golden-residency/"
+      }
+    ],
+    "limitations": [
+      "ICP/u.ae duration discrepancy unresolved; no PR/citizenship or processing time evidence."
+    ],
+    "unsupportedFields": [
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "ae-green-freelance",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Freelancer eligibility",
+        "summary": "ICP requires MOHRE freelance/self-employment permit, bachelor's degree or specialized diploma, solvency and AED 360,000 annual freelance income over prior two years; Green Residence renewable for five years. Evidence inherited from existing official-source research; not independently page-retrieved in this audit pass.",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-green-residency/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 360000,
+        "currency": "AED",
+        "period": "annual",
+        "description": "Freelance income evidence across prior two years",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-green-residency/"
+      }
+    ],
+    "limitations": [
+      "Permit type and prior-year evidence interpretation need application confirmation; no PR/citizenship established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  },
+  {
+    "id": "ae-green-skilled",
+    "checkedAt": "2026-10-25T13:40:26Z",
+    "claims": [
+      {
+        "topic": "Skilled employee eligibility",
+        "summary": "ICP requires valid UAE employment contract, occupational level 1-3, bachelor's degree or higher, and AED 15,000 minimum monthly salary; Green Residence is renewable for five years. Evidence inherited from existing official-source research; not independently page-retrieved in this audit pass.",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-green-residency/",
+        "checkedAt": "2026-10-25T13:40:26Z",
+        "retrieval": "official-index"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 15000,
+        "currency": "AED",
+        "period": "monthly",
+        "description": "Employee salary floor",
+        "sourceUrl": "https://icp.gov.ae/en/services/uae-green-residency/"
+      }
+    ],
+    "limitations": [
+      "Not a general foreign remote-work route; no PR/citizenship or processing time established."
+    ],
+    "unsupportedFields": [
+      "all-in cost",
+      "processingWeeks",
+      "citizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open"
+  }
+]

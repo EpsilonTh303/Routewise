@@ -1,0 +1,1480 @@
+[
+  {
+    "id": "ag-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "NDF contribution",
+        "summary": "Official NDF page states USD 230,000 one-time contribution per application; family members can be included without additional NDF contribution, with per-person government and due diligence fees.",
+        "sourceUrl": "https://cip.gov.ag/investment-options/ndf/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 230000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "NDF contribution per application; other fees apply",
+        "sourceUrl": "https://cip.gov.ag/investment-options/ndf/"
+      }
+    ],
+    "limitations": [
+      "Application fees, dependants' fees, current processing time, visit obligations, and passport-access claims were not established by this page.",
+      "Archive year-one total, dependent cost and processing clock are unsupported by reviewed evidence."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "passportAccess",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://cip.gov.ag/investment-options/ndf/",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "NDF contribution",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "ar-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Rentista threshold and permit",
+        "summary": "DNM requires income from assets in applicant patrimony (not personal-work wages), at least five current SMVM, and proof funds enter through authorized financial institutions. Service page lists one-year renewable temporary residence; statute permits up to three years by category.",
+        "sourceUrl": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-rentista",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "SMVM changes; no static USD floor. Rentista excludes personal-work remuneration; local work rights not established by checklist.",
+      "Permit validity is not processing time or citizenship clock."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "citizenshipLanguage",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Rentista: at least five current SMVM in stable foreign-source rents from assets in applicant patrimony, excluding personal-work wages; show transfer through authorized financial institution. One-year renewable temporary permit.",
+        "reason": "Current DNM checklist supersedes ~$2,200 monthly archive shorthand; rentista is asset income.",
+        "sourceUrl": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-rentista"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-rentista",
+        "outcome": "Official DNM service page retrieved; five SMVM, asset rents, bank transfer proof and one-year renewable permit."
+      },
+      {
+        "url": "https://www.argentina.gob.ar/migraciones/residencias",
+        "outcome": "Official category overview retrieved; temporary categories up to three years depending on category."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Qualifying income",
+        "locator": "DNM page, Requisitos para acreditar condición de rentista"
+      },
+      {
+        "topic": "Permit validity",
+        "locator": "DNM page, Vigencia; Law 25.871 art. 23(b)"
+      }
+    ]
+  },
+  {
+    "id": "br-business-investor",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Individual business investment",
+        "summary": "RN 13/2017 as amended by RN 49/2024 requires external own funds invested in a Brazilian legal entity and project potential for jobs/income. General threshold is BRL 500,000; BRL 150,000–500,000 option is restricted to qualifying innovation/research/science/technology activity and criteria; investment plan required.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_NORMATIVA_N%C2%BA_13_DE_12_DE_DEZEMBRO_DE_2017.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 500000,
+        "currency": "BRL",
+        "period": "one-time",
+        "description": "General investment floor into Brazilian legal entity; external own funds, plan and job/income potential.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_NORMATIVA_N%C2%BA_13_DE_12_DE_DEZEMBRO_DE_2017.pdf"
+      },
+      {
+        "amount": 150000,
+        "currency": "BRL",
+        "period": "one-time",
+        "description": "Alternative lower floor only for qualifying innovation/research/science/technology investment and criteria.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_NORMATIVA_N%C2%BA_13_DE_12_DE_DEZEMBRO_DE_2017.pdf"
+      }
+    ],
+    "limitations": [
+      "Permit duration, renewal, family inclusion, local work rights and current checklist not fully resolved.",
+      "Reduced threshold is not general; investment is not total relocation cost."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Individual investor: external own funds into Brazilian legal entity, generally at least BRL 500,000 plus plan and job/income potential; BRL 150,000 alternative only for qualifying innovation projects.",
+        "reason": "Distinct RN 13 thresholds and project conditions.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_NORMATIVA_N%C2%BA_13_DE_12_DE_DEZEMBRO_DE_2017.pdf"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/portal-de-imigracao-laboral/navegacao-guiada-1/possui-autorizacao-de-residencia/o-que-deseja/qual-a-finalidade-desejada-1/investidor-pessoa-fisica/investidor-pessoa-fisica",
+        "outcome": "Official MJSP page retrieved; distinct standard and innovation investor categories listed."
+      },
+      {
+        "url": "https://portaldeimigracao.mj.gov.br/images/resolucoes_normativas/RESOLU%C3%87%C3%83O_NORMATIVA_N%C2%BA_13_DE_12_DE_DEZEMBRO_DE_2017.pdf",
+        "outcome": "Official RN 13 PDF retrieved; amended text states BRL floors and business plan conditions."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "General and innovation thresholds",
+        "locator": "RN 13 arts. 1–4, amended by RN 49/2024"
+      }
+    ]
+  },
+  {
+    "id": "br-vitem-xiv-nomad",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Digital nomad criteria and permit",
+        "summary": "Brazil's official immigration authority says foreign-employer remote workers need USD 1,500 monthly foreign-source income or USD 18,000 available bank funds; residence is up to one year and renewable for an equal period. This is not Brazilian local employment authorization.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/publicacoes/5_Passos_para_obter_autoriza%C3%A7%C3%A3o_de_resid%C3%AAncia_como_N%C3%B4made_Digital_Ingl%C3%AAs_2.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 1500,
+        "currency": "USD",
+        "period": "monthly",
+        "description": "Alternative minimum regular foreign-source income",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/publicacoes/5_Passos_para_obter_autoriza%C3%A7%C3%A3o_de_resid%C3%AAncia_como_N%C3%B4made_Digital_Ingl%C3%AAs_2.pdf"
+      },
+      {
+        "amount": 18000,
+        "currency": "USD",
+        "period": "balance",
+        "description": "Alternative available bank funds",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/publicacoes/5_Passos_para_obter_autoriza%C3%A7%C3%A3o_de_resid%C3%AAncia_como_N%C3%B4made_Digital_Ingl%C3%AAs_2.pdf"
+      }
+    ],
+    "limitations": [
+      "No minimum budget, total relocation cost, dependent cost, processing guarantee, PR or citizenship clock established.",
+      "Archive 'total year one' and processing claims must not be treated as official requirements."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Foreign employment/service relationship and remote-work declaration; USD 1,500 monthly foreign income OR USD 18,000 bank funds; residence up to one year, renewable for an equal period.",
+        "reason": "Official immigration authority gives alternative tests and residence duration.",
+        "sourceUrl": "https://portaldeimigracao.mj.gov.br/images/publicacoes/5_Passos_para_obter_autoriza%C3%A7%C3%A3o_de_resid%C3%AAncia_como_N%C3%B4made_Digital_Ingl%C3%AAs_2.pdf"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://portaldeimigracao.mj.gov.br/images/publicacoes/5_Passos_para_obter_autoriza%C3%A7%C3%A3o_de_resid%C3%AAncia_como_N%C3%B4made_Digital_Ingl%C3%AAs_2.pdf",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Digital nomad criteria and permit",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "ca-ee",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Proof of settlement funds",
+        "summary": "Federal Skilled Worker and Federal Skilled Trades candidates generally need family-size settlement funds; Canadian Experience Class and qualifying authorized workers with valid job offers are exempt. Funds must be available and legally accessible. Table shown by IRCC was updated July 7, 2025.",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Current published funds table date",
+        "summary": "Live IRCC page retrieved Oct 25 2026 still shows the same family-size thresholds and explicitly labels them updated July 7, 2025; no newer 2026 table was found on the official page. Use the amounts as the currently published IRCC values but disclose their table date.",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 15263,
+        "currency": "CAD",
+        "period": "balance",
+        "description": "IRCC published minimum for family size 1; larger family amounts vary, table updated July 7 2025",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html"
+      }
+    ],
+    "limitations": [
+      "Express Entry is a pool and multiple programs with distinct rules; no unconditional income, job-offer, or fixed processing-week claim applies.",
+      "IRCC live page retrieved Oct 25 2026 still labels the table Updated July 7, 2025; no newer official amount found. Confirm before filing because IRCC updates yearly."
+    ],
+    "unsupportedFields": [
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "minBudget",
+        "value": null,
+        "reason": "Settlement-fund requirement varies by family and program; exempt candidates exist; do not use a universal threshold.",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/documents/proof-funds.html",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Proof of settlement funds",
+        "locator": "Official source section indicated in claim."
+      },
+      {
+        "topic": "Published table date/currentness",
+        "locator": "IRCC Proof of funds page, amount table header “Updated July 7, 2025”; page retrieved Oct 25, 2026."
+      }
+    ]
+  },
+  {
+    "id": "ca-suv",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Intake status",
+        "summary": "IRCC states it is not accepting new Start-Up Visa applications; program paused June 30, 2026. Existing accepted applications continue processing. Applicants who qualify may still apply for an open work permit while their application is processed.",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa/about.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Program is paused to new applicants; historical route requirements do not make intake open.",
+      "No basis for archive costs, processing clock, dependent costs or general work-right claim."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "routeStatus",
+        "value": "closed",
+        "reason": "IRCC explicitly says it is not accepting new applications; pause effective June 30, 2026.",
+        "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa/about.html"
+      }
+    ],
+    "routeStatus": "closed",
+    "auditAttempts": [
+      {
+        "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa/about.html",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Intake status",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "cr-investment-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Investor residence amount and validity",
+        "summary": "Costa Rica's current consolidated regulation sets minimum qualifying investment at USD 150,000 across eligible registered movable/immovable property, shares/securities, productive projects, venture capital, or sustainable tourism infrastructure. Investor residence is granted for two years and renewable for equal periods if investment is maintained continuously.",
+        "sourceUrl": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/D/2020-2029/2020-2024/2023/1825D/158B0A.HTML",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 150000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Qualifying investment; categories and official exchange-rate wording in regulation",
+        "sourceUrl": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/D/2020-2029/2020-2024/2023/1825D/158B0A.HTML"
+      }
+    ],
+    "limitations": [
+      "Not a general property-purchase amount: investment forms are regulated and evidence/registration apply.",
+      "Temporary residence validity is not processing time, PR eligibility or citizenship eligibility.",
+      "Checklist, dependent costs, work rights and actual processing clock not established here."
+    ],
+    "unsupportedFields": [
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Qualifying investment of at least USD 150,000 in one of the regulated investment categories; two-year renewable residence, conditional on maintaining investment.",
+        "reason": "Archive needs current qualifying amount/categories and must distinguish permit duration from processing.",
+        "sourceUrl": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/D/2020-2029/2020-2024/2023/1825D/158B0A.HTML"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/D/2020-2029/2020-2024/2023/1825D/158B0A.HTML",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Investor residence amount and validity",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "cr-rentista-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Rentista threshold",
+        "summary": "Costa Rica General Migration Law art. 82 requires stable monthly rent/income from abroad or the national banking system of at least USD 2,500 or equivalent; dependants may be included for migration purposes.",
+        "sourceUrl": "https://www.migracion.go.cr/Documentos%20compartidos/Leyes/Ley%20General%20de%20Migraci%C3%B3n%20y%20Extranjer%C3%ADa%208764.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Insurance contribution distinction",
+        "summary": "CCSS contribution reference for rentista may not be below equivalent of USD 2,500; this is social insurance calculation, not separate visa income threshold.",
+        "sourceUrl": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/A/2010-2019/2010-2014/2012/1208B/EA688.HTML",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 2500,
+        "currency": "USD",
+        "period": "monthly",
+        "description": "Stable rent/income from abroad or Costa Rican national banking system under Migration Law art. 82; dependants may be included.",
+        "sourceUrl": "https://www.migracion.go.cr/Documentos%20compartidos/Leyes/Ley%20General%20de%20Migraci%C3%B3n%20y%20Extranjer%C3%ADa%208764.pdf"
+      }
+    ],
+    "limitations": [
+      "Law establishes criterion, not a complete current DGME checklist; confirm prescribed certificate/guarantee evidence.",
+      "No income rule proves work rights, processing time, PR or citizenship eligibility."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "minMonthlyIncome",
+        "value": 2500,
+        "reason": "Costa Rica Migration Law art. 82 sets USD 2,500 monthly stable income/rent.",
+        "sourceUrl": "https://www.migracion.go.cr/Documentos%20compartidos/Leyes/Ley%20General%20de%20Migraci%C3%B3n%20y%20Extranjer%C3%ADa%208764.pdf"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.pgrweb.go.cr/DOCS/NORMAS/1/VIGENTE/D/2010-2019/2010-2014/2012/11B29/158B2C.HTML",
+        "outcome": "Catalog-linked PGR regulation not retrieved; searched and used official DGME Law 8764 PDF plus PGR/CCSS page."
+      },
+      {
+        "url": "https://www.migracion.go.cr/Documentos%20compartidos/Leyes/Ley%20General%20de%20Migraci%C3%B3n%20y%20Extranjer%C3%ADa%208764.pdf",
+        "outcome": "Official DGME legal PDF retrieved; art. 82 states USD 2,500/month and dependants."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Rentista rule",
+        "locator": "General Migration Law 8764, art. 82"
+      },
+      {
+        "topic": "CCSS contribution",
+        "locator": "PGR/CCSS regulation excerpt on rentista insured income"
+      }
+    ]
+  },
+  {
+    "id": "dm-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "EDF contribution schedule",
+        "summary": "Official CBIU lists USD 200,000 for principal, USD 250,000 for principal plus up to three dependants, then USD 25,000 per additional minor and USD 40,000 per additional adult. Qualifying amount is not total fees.",
+        "sourceUrl": "https://www.cbiu.gov.dm/investment-options/economic-diversification-fund/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Application channel and process",
+        "summary": "Official 2025 process guide uses authorized agents and background checks; investment paid after approval in principle, with no guaranteed completion clock established.",
+        "sourceUrl": "https://www.cbiu.gov.dm/wp-content/uploads/2025/03/CBIU_Dominica_2025_Application-Process-Guide_F.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 200000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "EDF contribution for a main applicant; family schedule and fees differ.",
+        "sourceUrl": "https://www.cbiu.gov.dm/investment-options/economic-diversification-fund/"
+      }
+    ],
+    "limitations": [
+      "Archive USD 200k is correct for one applicant but not a family total or all-in cost.",
+      "No processingWeeks or citizenship completion guarantee verified."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "passportAccess"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "EDF: USD 200,000 single applicant; USD 250,000 applicant plus up to three dependants; additional minor USD 25,000, adult USD 40,000, plus fees/due diligence.",
+        "reason": "Current CBIU schedule provides family-dependent pricing.",
+        "sourceUrl": "https://www.cbiu.gov.dm/investment-options/economic-diversification-fund/"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.cbiu.gov.dm/investment-options/economic-diversification-fund/",
+        "outcome": "Official current CBIU EDF page retrieved; USD family contribution tiers."
+      },
+      {
+        "url": "https://www.cbiu.gov.dm/wp-content/uploads/2025/03/CBIU_Dominica_2025_Application-Process-Guide_F.pdf",
+        "outcome": "Official process guide retrieved; authorized agent/background checks and payment after approval in principle."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Contribution tiers",
+        "locator": "EDF page, terms and investment fees"
+      },
+      {
+        "topic": "Process",
+        "locator": "2025 Application Process Guide, Step 3 Investment"
+      }
+    ]
+  },
+  {
+    "id": "eg-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Investment citizenship options",
+        "summary": "Government portal’s headline program list gives real estate USD 300,000, investment project USD 450,000, deposit USD 500,000 for three years, and direct revenue USD 250,000. The official application form clarifies the investment-project total: at least USD 350,000 project investment plus separate USD 100,000 non-refundable Treasury contribution. Application fee USD 10,000.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Project investment cost and non-refundable contribution",
+        "summary": "Official application form breaks the investment-project option into at least USD 350,000 invested in/participating in the project under Investment Law 72/2017 plus USD 100,000 in non-refundable direct revenue to the Treasury; if project is liquidated, stopped, or disposed of before five years of operation, USD 250,000 non-refundable deposit is required to retain citizenship. This is not simply USD 450,000 of assets.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/ECI/Upload/Application/%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 250000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "Direct revenue contribution option.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/"
+      },
+      {
+        "amount": 300000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Minimum real estate purchase option.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/"
+      },
+      {
+        "amount": 500000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Cash deposit held three years; refundable in EGP at CBE exchange rate on repayment, without interest; not a donation.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/"
+      },
+      {
+        "amount": 350000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Minimum investment/participation in the investment project; project option also requires a separate non-refundable USD 100,000 Treasury contribution.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/ECI/Upload/Application/%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8.pdf"
+      },
+      {
+        "amount": 100000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "Separate non-refundable direct-revenue contribution to the Treasury in the project option.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/ECI/Upload/Application/%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8.pdf"
+      },
+      {
+        "amount": 250000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "Contingent non-refundable deposit required to retain citizenship if project stopped/liquidated/disposed before five years of operation.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/ECI/Upload/Application/%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8.pdf"
+      }
+    ],
+    "limitations": [
+      "Portal states 6–12 month estimate; not a guaranteed visa-processing service level.",
+      "Fee/current implementation detail and dependent fees not fully established; page uses Arabic.",
+      "The portal headline labels project option “USD 450,000”; official form shows composition is USD 350,000 project investment plus USD 100,000 non-refundable contribution. Early project closure/disposal before five operating years can trigger USD 250,000 replacement deposit to retain citizenship."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Four options: USD 250,000 direct revenue; USD 300,000 real estate; investment project with USD 350,000 minimum project investment plus separate USD 100,000 non-refundable Treasury contribution; or USD 500,000 deposit for three years. USD 10,000 application fee. Portal estimates 6–12 months.",
+        "reason": "Official program portal differentiates payment/deposit/investment.",
+        "sourceUrl": "https://egyptcitizenship.gov.eg/"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://egyptcitizenship.gov.eg/",
+        "outcome": "Official Egyptian PM .gov.eg portal opened; four program minimums, fee and timeline shown."
+      },
+      {
+        "url": "https://egyptcitizenship.gov.eg/ECI/Upload/Application/%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9%20%D9%86%D9%85%D9%88%D8%B0%D8%AC%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8.pdf",
+        "outcome": "Official government application form retrieved; project route is USD 350,000 investment plus separate USD 100,000 non-refundable remittance; USD 250,000 contingency if disposed before five years."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Threshold and fees",
+        "locator": "Homepage lines 13–30 (Arabic)"
+      },
+      {
+        "topic": "Timing estimate",
+        "locator": "Homepage lines 15–21 and 36–46"
+      },
+      {
+        "topic": "Project option and citizenship retention",
+        "locator": "Official application form PDF, investor program choice section (Arabic text); USD 350k project investment + USD 100k non-refundable direct revenues; early project disposition triggers USD 250k deposit."
+      }
+    ]
+  },
+  {
+    "id": "gd-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Current program options and prices",
+        "summary": "IMA Grenada lists NTF contribution USD 235,000 for a single applicant or family of four; approved project real estate USD 270,000 plus USD 50,000 government contribution. Dependant profiles and fees affect total.",
+        "sourceUrl": "https://imagrenada.gd/enquiries/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Agent and eligibility rules",
+        "summary": "IMA says application must go through authorized local agent; applicant must satisfy personal requirements including age 18, criminal record and health.",
+        "sourceUrl": "https://imagrenada.gd/becoming-a-citizen/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 235000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "NTF contribution for applicant or family up to four; fees/dependant rules apply.",
+        "sourceUrl": "https://imagrenada.gd/enquiries/"
+      },
+      {
+        "amount": 270000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Approved project real estate, plus USD 50,000 government contribution for applicant/family up to four.",
+        "sourceUrl": "https://imagrenada.gd/enquiries/"
+      }
+    ],
+    "limitations": [
+      "Legacy cbi.gov.gd USD 150,000 page is stale; current authority IMA uses USD 235,000.",
+      "Archive calls route NDF; current authority calls it NTF. Processing and citizenship timings not independently verified."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "passportAccess"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Current NTF: USD 235,000 single or family up to four; approved-project real estate USD 270,000 plus USD 50,000 government contribution; apply through authorized agent.",
+        "reason": "IMA current schedule supersedes legacy USD 150,000 and archive NDF label.",
+        "sourceUrl": "https://imagrenada.gd/enquiries/"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://imagrenada.gd",
+        "outcome": "Official IMA homepage opened; links to citizenship and costs pages."
+      },
+      {
+        "url": "https://imagrenada.gd/enquiries/",
+        "outcome": "Official IMA FAQ retrieved; current USD 235k NTF and USD 270k+50k real estate."
+      },
+      {
+        "url": "https://www.cbi.gov.gd/index_php/",
+        "outcome": "Legacy official page retrieved but dated and stale; USD 150k rejected."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Current NTF/real estate threshold",
+        "locator": "IMA Enquiries, Investment Options"
+      },
+      {
+        "topic": "Agent requirement",
+        "locator": "IMA Becoming a Citizen"
+      }
+    ]
+  },
+  {
+    "id": "mu-property",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Property-linked residence permit",
+        "summary": "EDB says non-citizens acquiring residential property under approved IRS, RES or PDS schemes for USD 375,000 qualify for residence permit while holding the property; spouse and children under 24 may qualify. PDS permit holders are exempt from work permit to invest and work.",
+        "sourceUrl": "https://edbmauritius.org/real-estate-hospitality",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Purchase currency rules",
+        "summary": "EDB states amendments effective 13 Dec 2024 require 85% purchase price in Mauritian rupees and remaining 15% in foreign currency or rupees; for property over USD 750,000, first USD 750,000 from own funds and local rupee loan can cover remainder.",
+        "sourceUrl": "https://edbmauritius.org/newsroom/amendments-to-irs-res-ihs-pds-and-scs-regulations",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 375000,
+        "currency": "USD",
+        "period": "assets",
+        "description": "Qualifying property under approved IRS/RES/PDS schemes; residence permit while property ownership continues.",
+        "sourceUrl": "https://edbmauritius.org/real-estate-hospitality"
+      }
+    ],
+    "limitations": [
+      "Not any property qualifies; scheme/project conditions and acquisition costs apply.",
+      "Permit validity is ownership-linked, not processing time or citizenship clock."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "remoteFriendly"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Qualifying property in approved IRS/RES/PDS scheme at USD 375,000; permit while property held. PDS permit holders may invest and work without a work permit. 2024 currency-payment rules apply.",
+        "reason": "EDB scheme and amendment pages.",
+        "sourceUrl": "https://edbmauritius.org/real-estate-hospitality"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://edbmauritius.org/real-estate-hospitality",
+        "outcome": "Official EDB page retrieved; threshold, dependants, ownership duration and PDS work exemption."
+      },
+      {
+        "url": "https://edbmauritius.org/wp-content/uploads/2025/03/FAQ-Amendments-to-Property-Regulations.pdf",
+        "outcome": "Official 2025 EDB FAQ retrieved; 85/15 MUR/FX payment and local loan rule."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Property threshold and rights",
+        "locator": "EDB Real Estate & Hospitality, IRS/RES/PDS sections"
+      },
+      {
+        "topic": "Currency/payment rules",
+        "locator": "EDB FAQ on Amendments, 2025"
+      }
+    ]
+  },
+  {
+    "id": "mx-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Temporary residence validity and solvency",
+        "summary": "Denver SRE consulate lists temporary residence for stays over 180 days and less than four years, without paid activities under its description; its checklist accepts either USD 70,000 minimum monthly balance for 12 months, USD 4,200 monthly employment/pension income for six months, or qualifying Mexican property over USD 558,000. Consular solvency amounts vary by post/year.",
+        "sourceUrl": "https://consulmex.sre.gob.mx/denver/index.php/visasparapersonasextranjeras",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Work rights",
+        "summary": "Oklahoma SRE consulate says temporary resident may work when salary is paid from abroad; local Mexico paid job requires employer to obtain authorization from INM.",
+        "sourceUrl": "https://consulmex.sre.gob.mx/oklahoma/index.php/visas",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 70000,
+        "currency": "USD",
+        "period": "balance",
+        "description": "Denver post example only: minimum monthly savings/investment balance over preceding 12 months.",
+        "sourceUrl": "https://consulmex.sre.gob.mx/denver/index.php/visasparapersonasextranjeras"
+      },
+      {
+        "amount": 4200,
+        "currency": "USD",
+        "period": "monthly",
+        "description": "Denver post example alternative: income for six months, free of liens.",
+        "sourceUrl": "https://consulmex.sre.gob.mx/denver/index.php/visasparapersonasextranjeras"
+      }
+    ],
+    "limitations": [
+      "Solvency thresholds are post-specific and change; Denver figures are not national universal thresholds. Confirm consular jurisdiction.",
+      "Temporary duration is not processing time; permanent-residence path and citizenship clock vary by eligibility basis."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Temporary residence >180 days and up to four years; financial solvency and exact threshold vary by consulate/year. Denver page is one example only ($70k balance/12 months or $4.2k income/6 months). Remote income and local-work authorization differ.",
+        "reason": "Current SRE consular checklist plus separate work condition.",
+        "sourceUrl": "https://consulmex.sre.gob.mx/denver/index.php/visasparapersonasextranjeras"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://consulmex.sre.gob.mx/denver/index.php/visasparapersonasextranjeras",
+        "outcome": "Official SRE Denver page retrieved with current post-specific thresholds."
+      },
+      {
+        "url": "https://consulmex.sre.gob.mx/oklahoma/index.php/visas",
+        "outcome": "Official SRE page confirms duration and foreign salary/local employer work distinction."
+      },
+      {
+        "url": "https://www.inm.gob.mx",
+        "outcome": "Generic INM portal did not provide local consular economic-solvency table; used SRE consular checklist and marked post variance."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Solvency checklist",
+        "locator": "Denver page, Temporary Resident Visa > Specific Requirements"
+      },
+      {
+        "topic": "Employment condition",
+        "locator": "Oklahoma SRE, Temporary Resident Visa"
+      }
+    ]
+  },
+  {
+    "id": "pa-friendly",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Friendly Nations eligibility",
+        "summary": "Decree 416 and 2021 Decree 197 restrict permanent-residence subcategory to designated nationalities and qualifying economic/professional purposes. SNM 2026 decree index shows Decree 16 adds Ecuador, confirming list is mutable; current consolidated text is needed for final nationality list.",
+        "sourceUrl": "https://www.migracion.gob.pa/wp-content/uploads/DECRETO_EJECUTIVO_197.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Separate financial-solvency route",
+        "summary": "SNM fixed-term deposit PDF describes a separate permanent residence route with B/.300,000 deposit for two years before applying for permanent residence; not a Friendly Nations requirement.",
+        "sourceUrl": "https://www.migracion.gob.pa/wp-content/uploads/03.SOLVENCIA_ECONOMICA_DEPOSITO_PLAZO_FIJO.pdf",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Do not conflate Friendly Nations with separate solvency deposit pathway. Exact current modalities/list need consolidated 2026 checklist.",
+      "Archive’s Azerbaijan eligibility not demonstrated; original list excluded Azerbaijan and later amendments need checking.",
+      "No all-in cost, processing time or citizenship clock established."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Friendly Nations is nationality-restricted permanent residence requiring qualifying economic/professional purpose and current decree evidence. Separate deposit routes are distinct; verify current 2026 country list and modalities, including whether Azerbaijan is listed.",
+        "reason": "2021 decree and 2026 amendments show restricted mutable eligibility list.",
+        "sourceUrl": "https://www.migracion.gob.pa/wp-content/uploads/DECRETO_EJECUTIVO_197.pdf"
+      }
+    ],
+    "routeStatus": "unclear",
+    "auditAttempts": [
+      {
+        "url": "https://www.migracion.gob.pa",
+        "outcome": "Official SNM home page opened; links to permits and decrees."
+      },
+      {
+        "url": "https://www.migracion.gob.pa/wp-content/uploads/DECRETO_EJECUTIVO_197.pdf",
+        "outcome": "Official 2021 amendment retrieved; modifies designated-country list and category rules."
+      },
+      {
+        "url": "https://www.migracion.gob.pa/decretos-3/",
+        "outcome": "Official 2026 decree index retrieved; Decree 16 adds Ecuador."
+      },
+      {
+        "url": "https://www.migracion.gob.pa/wp-content/uploads/03.SOLVENCIA_ECONOMICA_DEPOSITO_PLAZO_FIJO.pdf",
+        "outcome": "Official fixed-deposit route retrieved; separate route, not used as Friendly Nations threshold."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Eligibility",
+        "locator": "Decree 197/2021 amending Decree 416, arts. 1–3"
+      },
+      {
+        "topic": "Updated nationality list",
+        "locator": "SNM 2026 decree index, Executive Decree 16"
+      }
+    ]
+  },
+  {
+    "id": "py-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Temporary to permanent path",
+        "summary": "DNM says temporary residence is granted up to two years, renewable for an equal period, and is prerequisite for permanent residence; resident-in-process status permits work/study and exit/reentry.",
+        "sourceUrl": "https://migraciones.gov.py/residencia-temporal/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Current permanent solvency rules",
+        "summary": "DNM Resolution 407/2026 effective for applications from 6 Jul 2026 unifies permanent-residence proof and requires verifiable income and evidence of actual declared activity. Twelve categories include remote workers, property owners, shareholders, pensioners and others.",
+        "sourceUrl": "https://migraciones.gov.py/migraciones-actualiza-el-regimen-de-acreditacion-de-solvencia-economica-para-extranjeros/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Generic low-bar/instant permanent-residence claim is inaccurate: ordinary route requires prior temporary residence and category-based solvency documents.",
+      "Investor SUACE is separate. No one universal amount in overview; current detailed checklist required.",
+      "Processing time, total costs, dependants and citizenship clock remain unverified."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Temporary residence up to two years, renewable for equal term, is prerequisite to permanent residence; applications since 6 July 2026 require category-specific verified solvency evidence under DNM Resolution 407/2026. Investor SUACE is separate.",
+        "reason": "Official 2026 rule change supersedes generic “PIT permanent low bar” description.",
+        "sourceUrl": "https://migraciones.gov.py/migraciones-actualiza-el-regimen-de-acreditacion-de-solvencia-economica-para-extranjeros/"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://migraciones.gov.py/residencia-temporal/",
+        "outcome": "Official DNM page retrieved; temporary validity and permanent prerequisite/work rights."
+      },
+      {
+        "url": "https://migraciones.gov.py/residencia-permanente/",
+        "outcome": "Official permanent categories page retrieved; ordinary change-of-category and SUACE are distinct."
+      },
+      {
+        "url": "https://migraciones.gov.py/migraciones-actualiza-el-regimen-de-acreditacion-de-solvencia-economica-para-extranjeros/",
+        "outcome": "Official June 2026 notice retrieved; Resolution 407/2026 effective July 6, 12 categories."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Temporary validity",
+        "locator": "DNM temporary residency page, Plazo de validez and Beneficios"
+      },
+      {
+        "topic": "Solvency",
+        "locator": "DNM Resolution 407/2026 notice"
+      }
+    ]
+  },
+  {
+    "id": "kn-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "SISC contribution",
+        "summary": "Current official CIU lists US$250,000 for main applicant or family up to four, plus US$25,000 per additional dependent under 18 and US$50,000 per additional adult; due diligence US$10,000 main and US$7,500 per dependent aged 16+. Interview required for principal. CIU says 120–180 days to communicate approval in principle, denial, or delay, not citizenship completion guarantee.",
+        "sourceUrl": "https://ciu.gov.kn/sustainable-island-state-contribution/",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [
+      {
+        "amount": 250000,
+        "currency": "USD",
+        "period": "one-time",
+        "description": "SISC contribution for main applicant or family up to four; additional dependent contribution and fees apply",
+        "sourceUrl": "https://ciu.gov.kn/sustainable-island-state-contribution/"
+      }
+    ],
+    "limitations": [
+      "120–180 days is a decision-status communication window after acknowledgment, not guaranteed citizenship processing time.",
+      "Archive's $250k pricing assumptions and dependent fees should be revisited; route has age-based dependent amounts, due diligence, mandatory interview and authorized-agent requirement.",
+      "No PR interval: route is citizenship by investment, but grant completion timing not given here."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "passportAccess"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "SISC: USD 250,000 for principal/family up to four; additional dependent under 18 USD 25,000 and adult USD 50,000; due diligence applies; authorized agent and principal interview required. CIU's 120–180 days is notice of status, not citizenship guarantee.",
+        "reason": "Current official CIU schedule replaces simplistic flat budget and unsupported timing claims.",
+        "sourceUrl": "https://ciu.gov.kn/sustainable-island-state-contribution/"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://ciu.gov.kn/sustainable-island-state-contribution/",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "SISC contribution",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "us-dv",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Registration and issuance status",
+        "summary": "Official State Department instructions describe DV-2026, whose registration ended Nov 7, 2024; DV-2027 dates were not supplied in the instructions retrieved. The Aug 31, 2026 issuance guidance page contains conflicting text: a top update says the December 2025 pause ended after an Aug 28 court order, while the body says all issuances are paused. Current issuance status is therefore unclear from that official page and requires recheck.",
+        "sourceUrl": "https://travel.state.gov/content/travel/en/us-visas/immigrate/diversity-visa-program-entry/diversity-visa-instructions.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Conflicting issuance notice",
+        "summary": "The official notice's top update and body conflict on whether visa issuance is paused; do not treat either statement as unqualified current status.",
+        "sourceUrl": "https://travel.state.gov/en/newsroom/visas/2025/diversity-visa-issuance-updated-guidance.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Entry is free but ancillary application/medical/travel costs are not zero; archive total cost unsupported.",
+      "Azerbaijan birth/nativity eligibility must be checked against each year's instructions; annual country eligibility can change.",
+      "Do not claim annual Oct–Nov window or fixed odds; DV-2027 registration dates were not found, and the current official issuance page is internally contradictory.",
+      "Residence years to citizenship is not visa-processing time."
+    ],
+    "unsupportedFields": [
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "passportAccess"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "DV-2026 registration is closed; no DV-2027 dates located in current official instructions. Current visa-issuance status unclear because State Department's August 2026 guidance contains conflicting statements.",
+        "reason": "Avoid inaccurate evergreen annual-open and issuance claims.",
+        "sourceUrl": "https://travel.state.gov/en/newsroom/visas/2025/diversity-visa-issuance-updated-guidance.html"
+      }
+    ],
+    "routeStatus": "unclear",
+    "auditAttempts": [
+      {
+        "url": "https://travel.state.gov/content/travel/en/us-visas/immigrate/diversity-visa-program-entry/diversity-visa-instructions.html",
+        "outcome": "Official source retrieved; see claims/limitations."
+      },
+      {
+        "url": "https://travel.state.gov/en/newsroom/visas/2025/diversity-visa-issuance-updated-guidance.html",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Registration and issuance status",
+        "locator": "Official source section indicated in claim."
+      },
+      {
+        "topic": "Conflicting issuance notice",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "us-e2",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Treaty nationality",
+        "summary": "State Department treaty-country list includes Azerbaijan for E-2 treaty investor classification (effective August 2, 2001); Azerbaijani nationality can satisfy the nationality threshold. This alone does not establish business or investment eligibility.",
+        "sourceUrl": "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/treaty.html",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "No generic minimum investment amount: investment must be substantial in relation to enterprise cost, at risk, and in a bona fide non-marginal enterprise; thresholds and evidentiary rules not reviewed here.",
+      "E-2 is nonimmigrant and does not itself grant permanent residence; family/work authorization rules not fully reviewed."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Azerbaijani nationals may qualify for E-2 by treaty nationality, but must independently satisfy investment, ownership/control and enterprise requirements; no universal USD 100,000 minimum established.",
+        "reason": "Treaty eligibility is real, but archive's approximate $100k is not a legal universal minimum.",
+        "sourceUrl": "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/treaty.html"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/treaty.html",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Treaty nationality",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "us-eb2",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Classification and offer exception",
+        "summary": "Regulation covers advanced-degree professionals or exceptional ability; ordinary petition requires job offer and labor certification unless waived in national interest. One boolean cannot accurately represent both branches.",
+        "sourceUrl": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-204/subpart-A/section-204.5",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Visa availability/priority date, NIW eligibility and current processing are not determined by basic classification regulation.",
+      "Offer rule must remain branch-dependent; no universal processing or PR years claim."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "jobOfferRequired"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "jobOfferRequired",
+        "value": null,
+        "reason": "Ordinary EB-2 generally has job offer/labor certification; NIW may waive these. Catalog must model pathway branch before choosing a boolean.",
+        "sourceUrl": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-204/subpart-A/section-204.5"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-204/subpart-A/section-204.5",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Classification and offer exception",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "us-eb3",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "EB-3 worker categories",
+        "summary": "Regulation distinguishes skilled workers (at least two years training/experience), professionals (baccalaureate degree), and other workers; employer petition and labor-certification/Schedule A evidence apply.",
+        "sourceUrl": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-204/subpart-A/section-204.5",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "The archive collapses distinct worker classes; actual offer/qualification criteria are job-specific. Visa availability and wait are country/priority-date dependent.",
+      "PR grant is permanent status; it does not imply citizenship timeline or processing duration."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship"
+    ],
+    "suggestedCorrections": [],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-204/subpart-A/section-204.5",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "EB-3 worker categories",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  },
+  {
+    "id": "uy-residency",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Residence types and means of life",
+        "summary": "Official Interior Ministry page updated 29 Jul 2026 lists permanent and temporary categories; no fixed universal USD income floor. Temporary categories depend on grounds, generally 6 months–2 years; Mercosur temporary residence up to two years renewable.",
+        "sourceUrl": "https://www.gub.uy/tramites/residencia-legal",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Citizenship habitual residence",
+        "summary": "Official citizenship procedure requires habitual residence and means of life for 3 years with family constituted in Uruguay or 5 years otherwise; absences exceeding six consecutive months reset qualifying time. This is eligibility duration, not processing.",
+        "sourceUrl": "https://www.gub.uy/tramites/carta-ciudadania",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "No universal USD 1,800/month floor identified; evidence is category/activity-specific and sufficient for maintenance.",
+      "Citizenship is not automatic at year three; habitual residence, means and other conditions apply. Archive tax holiday not reviewed."
+    ],
+    "unsupportedFields": [
+      "minMonthlyIncome",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "citizenshipLanguage",
+      "taxNote"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "yearsToCitizenship",
+        "value": null,
+        "reason": "Official eligibility is 3 or 5 years habitual residence depending on family status, with proof and absence limits.",
+        "sourceUrl": "https://www.gub.uy/tramites/carta-ciudadania"
+      },
+      {
+        "field": "requirements",
+        "value": "Means of life must be documented and sufficient for maintenance; no fixed universal USD 1,800 threshold. Citizenship eligibility is 3 or 5 years habitual residence depending on family situation.",
+        "reason": "Official residence and citizenship service pages.",
+        "sourceUrl": "https://www.gub.uy/tramites/residencia-legal"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://www.gub.uy/tramites/residencia-legal",
+        "outcome": "Official Interior Ministry residence page retrieved, updated July 29 2026."
+      },
+      {
+        "url": "https://www.gub.uy/tramites/carta-ciudadania",
+        "outcome": "Official citizenship procedure retrieved; 3/5-year habitual residence and six-month absence reset."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Residence types",
+        "locator": "Residencia Legal page, type selector and cautions"
+      },
+      {
+        "topic": "Citizenship period",
+        "locator": "Carta de ciudadanía, Ingreso al país y residencia"
+      }
+    ]
+  },
+  {
+    "id": "vu-cbi",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Program status and rules",
+        "summary": "Citizenship Office framework lists DSP among investor citizenship routes and links official Order 33/2019 regulations. Its designated-agent page says DSP agents are to engage a new contract with the Citizenship Office in 2026; current contribution schedule not found in accessible official pages.",
+        "sourceUrl": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      },
+      {
+        "topic": "Oath/presence",
+        "summary": "Official Citizenship Office notice refers to oath of allegiance in physical presence and notes a COVID-era video-conference exception; it does not establish an evergreen no-travel rule.",
+        "sourceUrl": "https://vancitizenship.gov.vu/index.php/news-and-updates/95-information",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Current 2026 DSP contribution and fees not verified; historical 2019/2020 schedule cannot establish archive USD 130,000 is current.",
+      "2026 agent-contract notice means program terms/application channel may be transitioning. No processing clock or no-travel guarantee established."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "citizenshipLanguage",
+      "passportAccess"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "DSP exists as statutory investor citizenship path, but current contribution schedule, application availability and travel/oath requirements need Citizenship Office confirmation. Do not publish USD 130,000 or promise no travel without current official evidence.",
+        "reason": "Official framework and agent notice retrieved, but no current pricing schedule.",
+        "sourceUrl": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework"
+      }
+    ],
+    "routeStatus": "unclear",
+    "auditAttempts": [
+      {
+        "url": "https://citizenship.gov.vu",
+        "outcome": "Requested host inaccessible; search identifies official host vancitizenship.gov.vu."
+      },
+      {
+        "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework",
+        "outcome": "Official framework page retrieved; legislation links historical DSP regulations."
+      },
+      {
+        "url": "https://vancitizenship.gov.vu/index.php/about-us/designated-agents",
+        "outcome": "Official page says DSP agents to engage new Citizenship Office contract in 2026; no threshold shown."
+      },
+      {
+        "url": "https://vancitizenship.gov.vu/images/Order_No_33_of_2019_-_New_DSP_Regulations.pdf",
+        "outcome": "Historical official regulation retrieved, not current evidence of 2026 threshold."
+      },
+      {
+        "url": "https://vancitizenship.gov.vu/index.php/news-and-updates/95-information",
+        "outcome": "Official oath notice retrieved; physical presence language with historic COVID exception."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "DSP statutory route",
+        "locator": "Legislative Framework page, Regulations section"
+      },
+      {
+        "topic": "Current availability",
+        "locator": "Citizenship Office Designated Agents page, 2026 notice"
+      },
+      {
+        "topic": "Oath procedure",
+        "locator": "Citizenship Office Information notice"
+      }
+    ]
+  },
+  {
+    "id": "co-nomad",
+    "checkedAt": "2026-10-25T13:47:12Z",
+    "claims": [
+      {
+        "topic": "Visa V digital nomad",
+        "summary": "Colombian Foreign Ministry requires bank statements showing income of at least three current monthly minimum legal wages over the prior three months; visa may be granted up to two years, allows beneficiaries, and prohibits paid work for Colombian persons/entities.",
+        "sourceUrl": "https://cancilleria.gov.co/node/26950",
+        "checkedAt": "2026-10-25T13:47:12Z",
+        "retrieval": "page"
+      }
+    ],
+    "financialRequirements": [],
+    "limitations": [
+      "Archive migration from nomad visa to R residency and citizenship timeline not established by this visa page.",
+      "Do not convert dynamic SMLMV to a static USD figure without dated exchange/wage inputs."
+    ],
+    "unsupportedFields": [
+      "minBudget",
+      "totalYearOneCost",
+      "costPerDependent",
+      "processingWeeks",
+      "yearsToPR",
+      "yearsToCitizenship",
+      "citizenshipLanguage"
+    ],
+    "suggestedCorrections": [
+      {
+        "field": "requirements",
+        "value": "Visa V digital nomad requires proof of income ≥3 SMLMV over the prior three months, health insurance, and does not authorize paid work for Colombian persons/entities; validity up to two years.",
+        "reason": "Reflects current official visa conditions; not a guaranteed path to R residence.",
+        "sourceUrl": "https://cancilleria.gov.co/node/26950"
+      }
+    ],
+    "routeStatus": "open",
+    "auditAttempts": [
+      {
+        "url": "https://cancilleria.gov.co/node/26950",
+        "outcome": "Official source retrieved; see claims/limitations."
+      }
+    ],
+    "notes": [
+      {
+        "topic": "Visa V digital nomad",
+        "locator": "Official source section indicated in claim."
+      }
+    ]
+  }
+]
