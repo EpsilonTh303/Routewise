@@ -25,3 +25,5 @@ Stage Summary:
 - Verified end-to-end via agent-browser: landing → wizard → results podium → drawer roadmap/radar → filters → explorer, desktop + mobile (375px), no console errors, lint clean, dev.log clean.
 - Scoring reacts correctly to profile changes (e.g., lowest-cost goal → Japan HSP 90% / Paraguay 88%).
 - Deliverable: interactive Next.js app on port 3000 (single `/` route).
+
+2026-10-25: Engine 3.3.0 — added partial AND/OR requirement checks for 12 reviewed routes, optional route-scoped evidence with backward-compatible browser profile v2 serialization, matching-currency financial comparisons, bounded stateless what-if comparison across GUI/REST/CLI/MCP, read-only source queue, and isolated recovery validation. Live catalog/source batches unchanged. Checks: 62 unit, 17 integration, lint/typecheck/build; 24 browser cases validated with four intentional desktop skips (two legacy storage assertions corrected and rerun). LAN restored and Wi-Fi endpoint verified at engine 3.3.0. Remaining source gaps and next work are in tasks.md/HANDOFF.md.

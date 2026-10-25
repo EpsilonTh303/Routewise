@@ -15,7 +15,7 @@ export function Navbar({
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 120, damping: 18 }}
-      className="sticky top-0 z-40 glass-strong border-b border-white/5"
+      className="safe-nav sticky top-0 z-40 glass-strong border-b border-white/5"
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <button
@@ -35,7 +35,7 @@ export function Navbar({
           <button
             onClick={() => onNav("explore")}
             aria-label="Explore all routes"
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+            className={`flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
               view === "explore"
                 ? "bg-emerald-500/15 text-emerald-300"
                 : "text-muted-foreground hover:text-foreground hover:bg-white/5"
@@ -47,7 +47,7 @@ export function Navbar({
           <button
             onClick={() => onNav("strategy")}
             aria-label="My strategy"
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+            className={`flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
               view === "results"
                 ? "bg-emerald-500/15 text-emerald-300"
                 : "text-muted-foreground hover:text-foreground hover:bg-white/5"

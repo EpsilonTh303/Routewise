@@ -9,7 +9,10 @@ export const ALL_PROGRAMS: Program[] = [
   ...AMERICAS_PROGRAMS,
   ...APAC_PROGRAMS,
   ...EMERGING_PROGRAMS,
-];
+].map(program => ({
+  ...program,
+  verification: program.verification ?? { status: "unverified" as const, checkedAt: null, sourceUrl: program.url },
+}));
 
 export const COUNTRY_COUNT = new Set(ALL_PROGRAMS.map((p) => p.country)).size;
 export const PROGRAM_COUNT = ALL_PROGRAMS.length;

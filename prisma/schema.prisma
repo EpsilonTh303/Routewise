@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = env("ROUTEWISE_DATABASE_URL")
 }
 
 model User {
@@ -29,4 +29,113 @@ model Post {
   authorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model CatalogProgram {
+  id                   String   @id
+  country              String
+  flag                 String
+  region               String
+  program              String
+  category             String
+  tagline              String
+  minBudget            Float?
+  minMonthlyIncome     Float?
+  totalYearOneCost     Float?
+  costPerDependent     Float?
+  processingWeeks      Float?
+  yearsToPR            Float?
+  yearsToCitizenship   Float?
+  citizenshipLanguage  String?
+  jobOfferRequired     Boolean?
+  remoteFriendly       Boolean?
+  familyFriendly       Float
+  passportAccess       String
+  devScore             Float
+  azEase               Float
+  languageBonus        Json
+  requirements         Json
+  pros                 Json
+  cons                 Json
+  taxNote              String?
+  url                  String
+  dvLottery            Boolean  @default(false)
+  e2Treaty             Boolean  @default(false)
+  verificationStatus   String   @default("unverified")
+  verificationSourceUrl String
+  checkedAt            DateTime?
+  contentHash          String
+  active               Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  sources              ProgramSource[]
+  revisions            ProgramRevision[]
+  pathway              Json?
+  parentId             String?
+  parent               CatalogProgram? @relation("PathwayParent",fields:[parentId],references:[id],onDelete:Restrict,onUpdate:NoAction)
+  children             CatalogProgram[] @relation("PathwayParent")
+  splitReceipts        CatalogSplit[]
+
+  @@index([active, country])
+  @@index([active, category, region])
+  @@index([verificationStatus])
+  @@index([minBudget])
+  @@index([parentId])
+}
+
+model CatalogSplit {
+  id                String @id
+  parentId          String
+  parentContentHash String
+  childIds          Json
+  appliedAt         DateTime @default(now())
+  parent            CatalogProgram @relation(fields:[parentId],references:[id],onDelete:Restrict)
+}
+
+model ProgramSource {
+  id          String   @id @default(cuid())
+  programId   String
+  url         String
+  title       String?
+  evidence    String?
+  checkedAt   DateTime?
+  createdAt   DateTime @default(now())
+  program     CatalogProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@unique([programId, url])
+}
+
+model ProgramRevision {
+  id          String   @id @default(cuid())
+  programId   String
+  contentHash String
+  snapshot    Json
+  reason      String
+  createdAt   DateTime @default(now())
+  program     CatalogProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@index([programId, createdAt])
+}
+
+model SavedProfile {
+  id          String   @id
+  name        String
+  profile     Json
+  version     Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  runs        StrategyRun[]
+}
+
+model StrategyRun {
+  id              String   @id @default(cuid())
+  profileId       String
+  profileVersion  Int
+  profileSnapshot Json
+  catalogVersion  String
+  result          Json
+  createdAt       DateTime @default(now())
+  profile         SavedProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, createdAt])
 }

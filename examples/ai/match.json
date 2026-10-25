@@ -1,0 +1,25 @@
+{
+  "profile": {
+    "citizenship": "AZ",
+    "age": 30,
+    "familyStatus": "single",
+    "dependents": 0,
+    "budget": 50000,
+    "monthlyIncome": 3000,
+    "expectedSalary": 0,
+    "hasJobOffer": false,
+    "education": "bachelor",
+    "experience": 5,
+    "field": "it",
+    "englishLevel": 2,
+    "turkish": false,
+    "russian": true,
+    "goal": "citizenship",
+    "timeline": "1y",
+    "risk": "medium",
+    "regions": [],
+    "remoteWork": false
+  },
+  "limit": 5,
+  "includeIneligible": false
+}

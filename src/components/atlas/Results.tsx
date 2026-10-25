@@ -5,10 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Pencil, Trophy, Filter, Search, ChevronDown } from "lucide-react";
 import type { MatchResult, Profile, Category, Region } from "@/lib/types";
 import { CATEGORY_META, REGION_META } from "@/lib/types";
-import { buildStrategy, passportInfo } from "@/lib/scoring";
+import { buildStrategy, passportInfo, compareOptionalNumber } from "@/lib/scoring";
+import { formatMoney, formatDecision, formatCitizenship } from "@/lib/format";
 import { ProgramCard, MatchRing } from "./ProgramCard";
 import { ProgramDrawer } from "./ProgramDrawer";
+import { EligibilityBadge } from "./EligibilityBadge";
 import { Input } from "@/components/ui/input";
+import { ScenarioComparison } from "./ScenarioComparison";
 
 const CATEGORY_KEYS = Object.keys(CATEGORY_META) as Category[];
 const REGION_KEYS = Object.keys(REGION_META) as Region[];
@@ -50,10 +53,12 @@ function PlanPodiumCard({ plan, index, onOpen }: {
         </div>
       </div>
       <p className="mt-3 flex-1 text-xs leading-relaxed text-muted-foreground">{plan.roleNote}</p>
+      <div className="mt-2"><EligibilityBadge status={r.eligibility} /></div>
+      {r.gateIssues.length > 0 && <p className="mt-1 text-xs text-amber-200">{r.gateIssues.join(" · ")}</p>}
       <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/8 pt-3 text-center">
-        <div><p className="text-sm font-extrabold">${(r.adjustedCost >= 1000 ? Math.round(r.adjustedCost / 1000) + "k" : r.adjustedCost)}</p><p className="text-[9px] uppercase text-muted-foreground">Year 1</p></div>
-        <div><p className="text-sm font-extrabold">{p.processingWeeks >= 52 ? (p.processingWeeks / 52).toFixed(1) + "y" : p.processingWeeks + "w"}</p><p className="text-[9px] uppercase text-muted-foreground">Decision</p></div>
-        <div><p className="text-sm font-extrabold">{p.yearsToCitizenship === 0 ? "⚡ now" : p.yearsToCitizenship ? p.yearsToCitizenship + "y" : "—"}</p><p className="text-[9px] uppercase text-muted-foreground">Citizenship</p></div>
+        <div><p className="text-sm font-extrabold">{formatMoney(r.adjustedCost)}</p><p className="text-[9px] uppercase text-muted-foreground">Year 1</p></div>
+        <div><p className="text-sm font-extrabold">{formatDecision(p.processingWeeks)}</p><p className="text-[9px] uppercase text-muted-foreground">Decision</p></div>
+        <div><p className="text-sm font-extrabold">{formatCitizenship(p)}</p><p className="text-[9px] uppercase text-muted-foreground">Citizenship</p></div>
       </div>
     </motion.button>
   );
@@ -66,6 +71,7 @@ export function Results({ profile, results, onEdit }: {
   const [cat, setCat] = useState<Category | "all">("all");
   const [region, setRegion] = useState<Region | "all">("all");
   const [onlyEligible, setOnlyEligible] = useState(false);
+  const [includeAlternatives,setIncludeAlternatives]=useState(false);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState<"match" | "cost" | "speed">("match");
 
@@ -73,7 +79,7 @@ export function Results({ profile, results, onEdit }: {
   const passport = passportInfo(profile.citizenship);
 
   const filtered = useMemo(() => {
-    let list = results.filter((r) => r.eligibility !== "ineligible");
+    let list = results.filter((r) => r.eligibility !== "ineligible" && (includeAlternatives || r.explanation?.goalAligned!==false));
     if (cat !== "all") list = list.filter((r) => r.program.category === cat);
     if (region !== "all") list = list.filter((r) => r.program.region === region);
     if (onlyEligible) list = list.filter((r) => r.eligibility === "eligible");
@@ -82,13 +88,13 @@ export function Results({ profile, results, onEdit }: {
       list = list.filter((r) =>
         r.program.country.toLowerCase().includes(q) || r.program.program.toLowerCase().includes(q));
     }
-    if (sortBy === "cost") list = [...list].sort((a, b) => a.adjustedCost - b.adjustedCost);
-    if (sortBy === "speed") list = [...list].sort((a, b) => a.program.processingWeeks - b.program.processingWeeks);
+    if (sortBy === "cost") list = [...list].sort((a, b) => compareOptionalNumber(a.adjustedCost,b.adjustedCost));
+    if (sortBy === "speed") list = [...list].sort((a, b) => compareOptionalNumber(a.program.processingWeeks,b.program.processingWeeks));
     return list;
-  }, [results, cat, region, onlyEligible, query, sortBy]);
+  }, [results, cat, region, onlyEligible, query, sortBy,includeAlternatives]);
 
   const drawerResult = results.find((r) => r.program.id === drawerId) ?? null;
-  const eligibleCount = results.filter((r) => r.eligibility === "eligible").length;
+  const eligibleCount = results.filter((r) => r.eligibility === "eligible" && r.explanation?.goalAligned!==false).length;
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6">
@@ -118,6 +124,8 @@ export function Results({ profile, results, onEdit }: {
           Your relocation strategy
         </h2>
         <p className="mb-8 text-center text-xs text-muted-foreground">Tap a card for the full roadmap, costs and requirements</p>
+        <p className="mb-4 text-center text-xs text-muted-foreground">Ready modeled checks come first. Conditional options need work; all other program requirements still require review.</p>
+        {plans.length===0 && <p className="mb-6 rounded-2xl border border-amber-400/20 p-4 text-center text-sm text-amber-200">No dependable, goal-aligned plan passes the current strategy filters. Review your goal, budget and the routes below. Lotteries remain exploratory options.</p>}
         <div className="grid gap-4 md:grid-cols-3">
           {plans.map((plan, i) => (
             <PlanPodiumCard key={plan.result.program.id} plan={plan} index={i}
@@ -126,33 +134,36 @@ export function Results({ profile, results, onEdit }: {
         </div>
       </section>
 
+      <ScenarioComparison profile={profile} programs={results.map(result=>result.program)} />
+
       {/* filters */}
-      <div className="sticky top-16 z-30 mt-12 rounded-2xl glass-strong p-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="flex items-center gap-1.5 pr-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+      <div className="catalog-filters sticky z-30 mt-12 min-w-0 rounded-2xl glass-strong p-3">
+        <div aria-label="Program categories" className="category-strip flex min-w-0 items-center gap-2 overflow-x-auto pb-2">
+          <span className="flex shrink-0 items-center gap-1.5 pr-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
             <Filter className="h-3.5 w-3.5" /> Filter
           </span>
-          <button onClick={() => setCat("all")}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === "all" ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
+          <button onClick={() => setCat("all")} aria-pressed={cat==="all"}
+            className={`min-h-11 shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === "all" ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
             All routes
           </button>
           {CATEGORY_KEYS.map((k) => (
-            <button key={k} onClick={() => setCat(k)}
-              className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === k ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
+            <button key={k} onClick={() => setCat(k)} aria-pressed={cat===k}
+              className={`min-h-11 shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === k ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
               {CATEGORY_META[k].emoji} {CATEGORY_META[k].label}
             </button>
           ))}
-          <div className="ml-auto flex items-center gap-2">
-            <div className="relative">
+        </div>
+          <div className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-5">
+            <div className="relative col-span-2 min-w-0 sm:col-span-1">
               <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search country…"
-                className="h-9 w-36 rounded-full bg-white/5 pl-8 text-xs" />
+              <Input aria-label="Search matching programs" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search country…"
+                className="h-11 w-full rounded-full bg-white/5 pl-8 text-base sm:text-sm" />
             </div>
-            <div className="relative">
+            <div className="relative min-w-0">
               <select
                 value={region} onChange={(e) => setRegion(e.target.value as Region | "all")}
                 aria-label="Region filter"
-                className="h-9 appearance-none rounded-full border border-white/10 bg-white/5 pl-3 pr-8 text-xs font-semibold outline-none">
+                className="h-11 w-full min-w-0 appearance-none rounded-full border border-white/10 bg-white/5 pl-3 pr-8 text-base font-semibold outline-none sm:text-sm">
                 <option value="all">All regions</option>
                 {REGION_KEYS.map((k) => <option key={k} value={k}>{REGION_META[k]} {k}</option>)}
               </select>
@@ -160,16 +171,18 @@ export function Results({ profile, results, onEdit }: {
             </div>
             <button
               onClick={() => setSortBy(sortBy === "match" ? "cost" : sortBy === "cost" ? "speed" : "match")}
-              className="rounded-full bg-white/5 px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground">
-              Sort: {sortBy === "match" ? "match %" : sortBy === "cost" ? "cheapest" : "fastest"} ↑↓
+              className="min-h-11 rounded-full bg-white/5 px-3 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground">
+              Sort: {sortBy === "match" ? "ready + fit" : sortBy === "cost" ? "cheapest" : "fastest"} ↑↓
             </button>
             <button
               onClick={() => setOnlyEligible(!onlyEligible)}
-              className={`rounded-full px-3 py-2 text-xs font-semibold transition-colors ${onlyEligible ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
+              aria-pressed={onlyEligible}
+              className={`min-h-11 rounded-full px-3 py-2 text-xs font-semibold transition-colors ${onlyEligible ? "bg-emerald-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
               Eligible only
             </button>
+            <button onClick={()=>setIncludeAlternatives(!includeAlternatives)} aria-pressed={includeAlternatives}
+              className={`min-h-11 rounded-full px-3 py-2 text-xs font-semibold ${includeAlternatives?"bg-amber-400 text-black":"bg-white/5 text-muted-foreground"}`}>Other goals</button>
           </div>
-        </div>
       </div>
 
       {/* grid */}

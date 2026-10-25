@@ -5,7 +5,6 @@ import {
   motion, useMotionValue, useSpring, useTransform,
 } from "framer-motion";
 import { ArrowRight, Globe2, MapPin, Route } from "lucide-react";
-import { PROGRAM_COUNT, COUNTRY_COUNT } from "@/lib/data";
 
 const FLOATING_FLAGS = [
   { flag: "🇩🇪", x: "-8%", y: "6%", delay: 0 },
@@ -25,7 +24,7 @@ function PassportCard() {
 
   return (
     <div
-      className="relative h-[290px] w-[420px] max-w-[86vw] [perspective:1200px]"
+      className="passport-card relative h-[290px] w-[420px] max-w-[86vw] [perspective:1200px]"
       onMouseMove={(e) => {
         const r = ref.current?.getBoundingClientRect();
         if (!r) return;
@@ -40,7 +39,7 @@ function PassportCard() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9 + f.delay * 0.35, type: "spring", stiffness: 200 }}
-          className="absolute z-10 grid h-11 w-11 place-items-center rounded-full glass text-xl shadow-lg animate-float"
+          className="passport-flags absolute z-10 grid h-11 w-11 place-items-center rounded-full glass text-xl shadow-lg animate-float"
           style={{ left: f.x, top: f.y, animationDelay: `${i * 0.7}s` }}
         >
           {f.flag}
@@ -69,29 +68,29 @@ function PassportCard() {
 
         <div className="relative flex h-full flex-col justify-between [transform:translateZ(40px)]">
           <div className="flex items-start justify-between">
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] tracking-[0.28em] text-emerald-200/80">AZƏRBAYCAN RESPUBLİKASI</p>
               <p className="mt-0.5 text-[10px] tracking-[0.28em] text-emerald-200/50">REPUBLIC OF AZERBAIJAN</p>
             </div>
             <span className="rounded-md bg-amber-400/15 px-2 py-1 text-[10px] font-bold tracking-widest text-amber-300">PASSPORT</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             {/* flame emblem hint */}
-            <div className="grid h-16 w-16 place-items-center rounded-xl border border-amber-300/30 bg-amber-400/10 text-2xl">🔥</div>
-            <div>
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-amber-300/30 bg-amber-400/10 text-2xl sm:h-16 sm:w-16">🔥</div>
+            <div className="min-w-0">
               <p className="text-xs text-emerald-200/60">VIZA / VISA</p>
-              <p className="mt-0.5 font-mono text-sm text-emerald-100">P&lt;AZN ROUTEWISE&lt;&lt;STRATEGY&lt;&lt;&lt;&lt;</p>
-              <p className="font-mono text-sm text-emerald-100">AZ76FREEDOM4504567890&lt;&lt;&lt;&lt;&lt;&lt;</p>
+              <p className="passport-code mt-0.5 font-mono text-sm text-emerald-100">P&lt;AZN ROUTEWISE&lt;&lt;STRATEGY&lt;&lt;&lt;&lt;</p>
+              <p className="passport-code font-mono text-sm text-emerald-100">AZ76FREEDOM4504567890&lt;&lt;&lt;&lt;&lt;&lt;</p>
             </div>
           </div>
 
           <div className="flex items-end justify-between">
             <div>
               <p className="text-[10px] tracking-widest text-emerald-200/60">STARTING POINT</p>
-              <p className="text-lg font-bold text-white">Baku → anywhere</p>
+              <p className="text-base font-bold text-white sm:text-lg">Baku → anywhere</p>
             </div>
-            <span className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
+            <span className="shrink-0 rounded-full bg-white/10 px-2 py-1.5 text-[10px] font-semibold text-emerald-200 sm:px-3 sm:text-xs">
               📍 76 visa-free
             </span>
           </div>
@@ -101,13 +100,13 @@ function PassportCard() {
   );
 }
 
-const STATS = [
-  { icon: Route, value: String(PROGRAM_COUNT), label: "visa programs" },
-  { icon: Globe2, value: `${COUNTRY_COUNT}`, label: "countries" },
+export function Hero({ onStart, onExplore,programCount,countryCount }: { onStart: () => void; onExplore: () => void;programCount:number;countryCount:number }) {
+const stats = [
+  { icon: Route, value: String(programCount), label: "visa programs" },
+  { icon: Globe2, value: `${countryCount}`, label: "countries" },
   { icon: MapPin, value: "6", label: "continents" },
 ];
 
-export function Hero({ onStart, onExplore }: { onStart: () => void; onExplore: () => void }) {
   return (
     <section className="relative mx-auto flex max-w-6xl flex-col items-center gap-12 px-4 pb-16 pt-14 sm:px-6 lg:flex-row lg:items-center lg:gap-8 lg:pt-24">
       <div className="flex-1 text-center lg:text-left">
@@ -132,7 +131,7 @@ export function Hero({ onStart, onExplore }: { onStart: () => void; onExplore: (
         >
           One passport in.
           <br />
-          <span className="text-gradient-emerald">Sixty-two routes</span>
+          <span className="text-gradient-emerald">{programCount} routes</span>
           <br />
           <span className="text-gradient-gold">out.</span>
         </motion.h1>
@@ -144,8 +143,8 @@ export function Hero({ onStart, onExplore }: { onStart: () => void; onExplore: (
           className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0"
         >
           Enter your citizenship, budget, family and career — RouteWise scores{" "}
-          <strong className="text-foreground">{PROGRAM_COUNT} real residence &amp; citizenship programs</strong>{" "}
-          across {COUNTRY_COUNT} countries, filters what you actually qualify for, and assembles a
+          <strong className="text-foreground">{programCount} recorded residence &amp; citizenship programs</strong>{" "}
+          across {countryCount} countries, checks your profile against the recorded requirements, and assembles a
           Plan A → B → C relocation strategy with costs and timelines.
         </motion.p>
 
@@ -176,7 +175,7 @@ export function Hero({ onStart, onExplore }: { onStart: () => void; onExplore: (
           transition={{ delay: 0.55 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-8 lg:justify-start"
         >
-          {STATS.map((s) => (
+          {stats.map((s) => (
             <div key={s.label} className="flex items-center gap-3">
               <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/5 text-emerald-400">
                 <s.icon className="h-5 w-5" />
@@ -190,7 +189,7 @@ export function Hero({ onStart, onExplore }: { onStart: () => void; onExplore: (
         </motion.div>
       </div>
 
-      <div className="relative flex flex-1 justify-center lg:justify-end">
+      <div className="relative flex w-full min-w-0 flex-1 justify-center lg:justify-end">
         <PassportCard />
       </div>
     </section>

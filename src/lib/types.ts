@@ -30,23 +30,23 @@ export interface Program {
   category: Category;
   tagline: string;
   /** One-time investment / deposit / donation in USD (0 if none) */
-  minBudget: number;
+  minBudget: number | null;
   /** Required proven monthly income or salary, USD/month (0 if none) */
-  minMonthlyIncome: number;
+  minMonthlyIncome: number | null;
   /** Realistic all-in cost of year one incl. fees, legal, relocation — USD, main applicant */
-  totalYearOneCost: number;
+  totalYearOneCost: number | null;
   /** Extra per dependent spouse/child, USD */
-  costPerDependent: number;
+  costPerDependent: number | null;
   /** Weeks from application to residence decision */
-  processingWeeks: number;
+  processingWeeks: number | null;
   /** Years of residence until permanent residence (null = no PR track) */
   yearsToPR: number | null;
   /** Years of residence until citizenship eligibility (0 = immediate, null = none) */
   yearsToCitizenship: number | null;
   /** Language required for citizenship, e.g. "German B1" */
   citizenshipLanguage?: string;
-  jobOfferRequired: boolean;
-  remoteFriendly: boolean;
+  jobOfferRequired: boolean | null;
+  remoteFriendly: boolean | null;
   /** 0–1: how well the program includes spouse + children */
   familyFriendly: number;
   /** How easy the border is for an Azerbaijani passport */
@@ -62,10 +62,33 @@ export interface Program {
   cons: string[];
   taxNote?: string;
   url: string;
+  /** Audit state of the recorded rules, not a claim that a linked page was checked. */
+  verification?: {
+    status: "unverified" | "verified";
+    checkedAt: string | null;
+    sourceUrl: string;
+  };
   /** US Diversity Visa eligibility */
   dvLottery?: boolean;
   /** E-2 US treaty investor country */
   e2Treaty?: boolean;
+  /** Archival decomposition provenance. Null numeric fields mean unknown, never zero. */
+  pathway?: {
+    parentId: string;
+    recipeId: string;
+    branch: string;
+    unknownFields: string[];
+    notes: string[];
+    remoteWorkRequired: boolean;
+    review?: {
+      batchId: string;
+      status: "partial";
+      reviewedAt: string;
+      claims: {topic: string; summary: string; sourceUrl: string; checkedAt: string; retrieval: "page" | "official-index"}[];
+      limitations: string[];
+      financialRequirements: {amount: number; currency: string; period: "one-time" | "monthly" | "annual" | "balance" | "assets"; description: string; sourceUrl: string}[];
+    };
+  };
 }
 
 export type Education = "highschool" | "bachelor" | "master" | "phd";
@@ -77,6 +100,8 @@ export type Goal =
   | "remote" | "business" | "study" | "family-safe";
 
 export interface Profile {
+  /** Optional documented facts; legacy financial sliders are planning estimates only. */
+  evidence?: {routes:Record<string,import("./requirements").ApplicantEvidence>};
   citizenship: string; // ISO-ish key, e.g. "AZ"
   age: number;
   familyStatus: "single" | "couple" | "family";
@@ -102,15 +127,39 @@ export interface Profile {
 }
 
 export interface ScoreBreakdown {
-  cost: number;
-  speed: number;
-  citizenship: number;
+  cost: number | null;
+  speed: number | null;
+  citizenship: number | null;
   qol: number;
   access: number;
   fit: number;
 }
+export type ScoreWeights = Record<keyof ScoreBreakdown, number>;
 
 export type Eligibility = "eligible" | "conditional" | "ineligible";
+
+export interface MatchExplanation {
+  requirements?: {
+    version: string;
+    scope: "partial";
+    result: import("./requirements").RequirementResult;
+  };
+  goalAligned: boolean;
+  requiredBudget: number | null;
+  budgetHeadroom: number | null;
+  decisionMonths: number | null;
+  dataComplete: boolean;
+  missingFields: string[];
+  knownBudgetFloor: number;
+  accessCalibration: "AZ" | "unknown";
+  strengths: string[];
+  tradeoffs: string[];
+  warnings: string[];
+  nextSteps: string[];
+  weights: ScoreWeights;
+  baseScore: number;
+  adjustments: { reason: string; points: number }[];
+}
 
 export interface MatchResult {
   program: Program;
@@ -120,7 +169,9 @@ export interface MatchResult {
   /** Human-readable blocking issues */
   gateIssues: string[];
   /** Adjusted cost for the user's family size */
-  adjustedCost: number;
+  adjustedCost: number | null;
+  /** Transparent score calculation and the limits of the modeled checks. */
+  explanation: MatchExplanation;
 }
 
 export const CATEGORY_META: Record<Category, { label: string; emoji: string; color: string }> = {

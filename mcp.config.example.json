@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "routewise": {
+      "command": "node",
+      "args": ["/absolute/path/to/project/scripts/mcp.mjs"],
+      "env": {"ROUTEWISE_DATABASE_URL": "file:/absolute/path/to/project/db/routewise.sqlite"}
+    }
+  }
+}

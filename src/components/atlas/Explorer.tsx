@@ -5,11 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search, Compass } from "lucide-react";
 import type { MatchResult, Profile, Category, Region, Program } from "@/lib/types";
 import { CATEGORY_META, REGION_META } from "@/lib/types";
-import { ALL_PROGRAMS, PROGRAM_COUNT } from "@/lib/data";
 import { scoreProgram, passportInfo } from "@/lib/scoring";
 import { ProgramCard } from "./ProgramCard";
 import { ProgramDrawer } from "./ProgramDrawer";
 import { Input } from "@/components/ui/input";
+import { SourceReviewQueue } from "./SourceReviewQueue";
 
 const CATEGORY_KEYS = Object.keys(CATEGORY_META) as Category[];
 const REGION_KEYS = Object.keys(REGION_META) as Region[];
@@ -23,7 +23,7 @@ const NEUTRAL_PROFILE: Profile = {
   risk: "medium", regions: [], remoteWork: true,
 };
 
-export function Explorer({ savedProfile }: { savedProfile: Profile | null }) {
+export function Explorer({ savedProfile, programs }: { savedProfile: Profile | null; programs:Program[] }) {
   const [drawerId, setDrawerId] = useState<string | null>(null);
   const [cat, setCat] = useState<Category | "all">("all");
   const [region, setRegion] = useState<Region | "all">("all");
@@ -31,8 +31,8 @@ export function Explorer({ savedProfile }: { savedProfile: Profile | null }) {
   const profile = savedProfile ?? NEUTRAL_PROFILE;
 
   const results = useMemo<MatchResult[]>(
-    () => ALL_PROGRAMS.map((p: Program) => scoreProgram(p, profile)).sort((a, b) => b.matchPct - a.matchPct),
-    [profile]
+    () => programs.map((p: Program) => scoreProgram(p, profile)).sort((a, b) => b.matchPct - a.matchPct),
+    [profile,programs]
   );
 
   const filtered = useMemo(() => {
@@ -56,37 +56,39 @@ export function Explorer({ savedProfile }: { savedProfile: Profile | null }) {
           The <span className="text-gradient-gold">full atlas</span>
         </h1>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground">
-          All {PROGRAM_COUNT} programs across 45+ countries — scores shown against {savedProfile ? "your saved profile" : "a reference profile"}.{" "}
+          All {programs.length} programs across {new Set(programs.map(p=>p.country)).size} countries — scores shown against {savedProfile ? "your saved profile" : "a reference profile"}.{" "}
           Build your own profile for personalized results.
         </p>
       </div>
 
-      <div className="sticky top-16 z-30 rounded-2xl glass-strong p-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="relative">
+      <div className="mb-6"><SourceReviewQueue programs={programs} asOf={new Date().toISOString().slice(0,10)}/></div>
+
+      <div className="catalog-filters sticky z-30 min-w-0 rounded-2xl glass-strong p-3">
+        <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="relative min-w-0">
             <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-            <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={`Search ${PROGRAM_COUNT} programs…`}
-              className="h-9 w-44 rounded-full bg-white/5 pl-8 text-xs" />
+            <Input aria-label="Search programs" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={`Search ${programs.length} programs…`}
+              className="h-11 w-full rounded-full bg-white/5 pl-8 text-base sm:text-sm" />
           </div>
-          <button onClick={() => setCat("all")}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === "all" ? "bg-amber-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
+          <div className="relative min-w-0">
+            <select value={region} onChange={e=>setRegion(e.target.value as Region|"all")} aria-label="Region filter"
+              className="h-11 w-full min-w-0 rounded-full border border-white/10 bg-white/5 px-3 text-base font-semibold sm:text-sm">
+              <option value="all">All regions</option>
+              {REGION_KEYS.map(k=><option key={k} value={k}>{REGION_META[k]} {k}</option>)}
+            </select>
+          </div>
+        </div>
+        <div aria-label="Program categories" className="category-strip mt-2 flex min-w-0 gap-2 overflow-x-auto pb-1">
+          <button onClick={() => setCat("all")} aria-pressed={cat==="all"}
+            className={`min-h-11 shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === "all" ? "bg-amber-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
             All
           </button>
           {CATEGORY_KEYS.map((k) => (
-            <button key={k} onClick={() => setCat(k)}
-              className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === k ? "bg-amber-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
+            <button key={k} onClick={() => setCat(k)} aria-pressed={cat===k}
+              className={`min-h-11 shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${cat === k ? "bg-amber-400 text-black" : "bg-white/5 text-muted-foreground hover:text-foreground"}`}>
               {CATEGORY_META[k].emoji} {CATEGORY_META[k].label}
             </button>
           ))}
-          <div className="ml-auto relative">
-            <select
-              value={region} onChange={(e) => setRegion(e.target.value as Region | "all")}
-              aria-label="Region filter"
-              className="h-9 appearance-none rounded-full border border-white/10 bg-white/5 pl-3 pr-8 text-xs font-semibold outline-none">
-              <option value="all">All regions</option>
-              {REGION_KEYS.map((k) => <option key={k} value={k}>{REGION_META[k]} {k}</option>)}
-            </select>
-          </div>
         </div>
       </div>
 

@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Banknote, CalendarClock, Flag, ShieldCheck, TriangleAlert } from "lucide-react";
+import { Banknote, CalendarClock, Flag } from "lucide-react";
 import type { MatchResult } from "@/lib/types";
 import { CATEGORY_META } from "@/lib/types";
+import { EligibilityBadge } from "./EligibilityBadge";
+import { formatMoney, formatDecision, formatCitizenship } from "@/lib/format";
 
 export function MatchRing({ pct, size = 64, stroke = 6, delay = 0 }: {
   pct: number; size?: number; stroke?: number; delay?: number;
@@ -38,7 +40,7 @@ export function ProgramCard({ result, rank, onOpen, delay = 0 }: {
 }) {
   const p = result.program;
   const meta = CATEGORY_META[p.category];
-  const cond = result.eligibility === "conditional";
+  const cond = result.eligibility !== "eligible";
 
   return (
     <motion.button
@@ -67,8 +69,8 @@ export function ProgramCard({ result, rank, onOpen, delay = 0 }: {
           <div className="flex items-center gap-2">
             <span className="text-2xl leading-none">{p.flag}</span>
             <span className="truncate text-base font-bold">{p.country}</span>
-            {p.dvLottery && p.dvLottery && (
-              <span className="rounded bg-emerald-400/15 px-1.5 py-0.5 text-[9px] font-bold text-emerald-300">DV ✓</span>
+            {p.dvLottery && (
+              <span className="rounded bg-amber-400/15 px-1.5 py-0.5 text-[9px] font-bold text-amber-300">Lottery</span>
             )}
           </div>
           <p className="mt-0.5 truncate text-sm font-medium text-emerald-300/90">{p.program}</p>
@@ -80,18 +82,13 @@ export function ProgramCard({ result, rank, onOpen, delay = 0 }: {
         <span className={`rounded-md bg-white/5 px-2 py-1 text-[11px] font-semibold ${meta.color}`}>
           {meta.emoji} {meta.label}
         </span>
-        {cond ? (
-          <span className="inline-flex items-center gap-1 rounded-md bg-amber-400/10 px-2 py-1 text-[11px] font-semibold text-amber-300">
-            <TriangleAlert className="h-3 w-3" /> {result.gateIssues[0] ?? "Conditional"}
-          </span>
-        ) : (
-          <span className="inline-flex items-center gap-1 rounded-md bg-emerald-400/10 px-2 py-1 text-[11px] font-semibold text-emerald-300">
-            <ShieldCheck className="h-3 w-3" /> Eligible
-          </span>
-        )}
-        {p.passportAccess !== "visa-required" && (
+        <EligibilityBadge status={result.eligibility} />
+        {result.explanation?.dataComplete===false && <span className="rounded-md bg-amber-400/10 px-2 py-1 text-[11px] text-amber-200">Provisional data</span>}
+        {result.explanation?.goalAligned===false && <span className="rounded-md bg-amber-400/10 px-2 py-1 text-[11px] text-amber-300">Other goal</span>}
+        {cond && <span className="text-[11px] text-muted-foreground">{result.gateIssues[0]}</span>}
+        {result.explanation?.accessCalibration === "AZ" && p.passportAccess !== "visa-required" && (
           <span className="rounded-md bg-white/5 px-2 py-1 text-[11px] font-semibold text-muted-foreground">
-            {p.passportAccess === "visa-free" ? "🟢 visa-free" : "🟡 e-visa"}
+            {p.passportAccess === "visa-free" ? "AZ: visa-free" : "AZ: e-visa"}
           </span>
         )}
       </div>
@@ -99,18 +96,18 @@ export function ProgramCard({ result, rank, onOpen, delay = 0 }: {
       <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/8 pt-3.5">
         <div>
           <p className="flex items-center gap-1 text-[10px] uppercase tracking-wide text-muted-foreground"><Banknote className="h-3 w-3" /> Year 1</p>
-          <p className="mt-0.5 text-sm font-bold">${result.adjustedCost.toLocaleString()}</p>
+          <p className="mt-0.5 text-sm font-bold">{formatMoney(result.adjustedCost)}</p>
         </div>
         <div>
           <p className="flex items-center gap-1 text-[10px] uppercase tracking-wide text-muted-foreground"><CalendarClock className="h-3 w-3" /> Decision</p>
           <p className="mt-0.5 text-sm font-bold">
-            {p.processingWeeks >= 52 ? `${(p.processingWeeks / 52).toFixed(1)}y` : `${p.processingWeeks}w`}
+            {formatDecision(p.processingWeeks)}
           </p>
         </div>
         <div>
           <p className="flex items-center gap-1 text-[10px] uppercase tracking-wide text-muted-foreground"><Flag className="h-3 w-3" /> Citizenship</p>
           <p className="mt-0.5 text-sm font-bold">
-            {p.yearsToCitizenship === 0 ? "⚡ immediate" : p.yearsToCitizenship ? `${p.yearsToCitizenship}y` : "—"}
+            {formatCitizenship(p)}
           </p>
         </div>
       </div>

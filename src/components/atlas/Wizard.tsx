@@ -11,6 +11,7 @@ import { CITIZENSHIPS } from "@/lib/types";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
+import { ApplicantEvidenceEditor } from "./ApplicantEvidenceEditor";
 
 const REGION_LIST: Region[] = [
   "Western Europe", "Nordics & Baltics", "North America", "Latin America",
@@ -26,11 +27,13 @@ const REGION_EMOJI: Record<Region, string> = {
 
 const GOALS: { key: Goal; label: string; desc: string; icon: React.ElementType }[] = [
   { key: "citizenship", label: "Second citizenship", desc: "Passport is the mission", icon: Globe2 },
-  { key: "pr-fast", label: "Fast residence", desc: "Move with minimum wait", icon: Timer },
+  { key: "pr-fast", label: "Fast residence decision", desc: "Prioritize shorter processing", icon: Timer },
   { key: "lowest-cost", label: "Lowest cost", desc: "Stretch every dollar", icon: Wallet },
   { key: "top-qol", label: "Best quality of life", desc: "Top-tier countries only", icon: Heart },
   { key: "remote", label: "Remote work", desc: "Keep my job/income", icon: Briefcase },
   { key: "business", label: "Business / startup", desc: "Found & scale abroad", icon: Rocket },
+  { key: "study", label: "Study abroad", desc: "Prioritize student routes", icon: GraduationCap },
+  { key: "family-safe", label: "Family inclusion", desc: "Prioritize family-friendly routes", icon: Heart },
 ];
 
 const FIELDS: { key: WorkField; label: string }[] = [
@@ -99,6 +102,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
   onCancel: () => void;
 }) {
   const [step, setStep] = useState(0);
+  const [evidenceValid,setEvidenceValid]=useState(true);
   const [p, setP] = useState<Profile>(initial ?? {
     citizenship: "AZ", age: 30, familyStatus: "single", dependents: 0,
     budget: 50000, monthlyIncome: 3000, expectedSalary: 0, hasJobOffer: false,
@@ -148,13 +152,13 @@ export function Wizard({ initial, onComplete, onCancel }: {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -60 }}
             transition={{ duration: 0.25 }}
-            className="space-y-8 glass rounded-3xl p-6 sm:p-8"
+            className="space-y-8 glass rounded-3xl p-4 sm:p-8"
           >
             <div>
               <SectionTitle icon={Globe2}>Current citizenship</SectionTitle>
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
                 {CITIZENSHIPS.map((c) => (
-                  <button key={c.key} onClick={() => set("citizenship", c.key)}
+                  <button key={c.key} aria-pressed={p.citizenship===c.key} onClick={() => set("citizenship", c.key)}
                     className={`flex items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left transition-all active:scale-95 ${
                       p.citizenship === c.key
                         ? "border-emerald-400/60 bg-emerald-500/15 shadow-[0_0_18px_-4px_rgba(16,185,129,0.5)]"
@@ -186,7 +190,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
                 <SectionTitle icon={Heart}>Family</SectionTitle>
                 <div className="flex flex-wrap gap-2">
                   {(["single", "couple", "family"] as const).map((f) => (
-                    <button key={f} onClick={() => { set("familyStatus", f); if (f === "single") set("dependents", 0); if (f === "couple") set("dependents", Math.max(1, p.dependents)); if (f === "family") set("dependents", Math.max(2, p.dependents)); }}
+                    <button key={f} onClick={() => { set("familyStatus", f); if (f === "single") set("dependents", 0); if (f === "couple") set("dependents", 1); if (f === "family") set("dependents", Math.max(1, p.dependents)); }}
                       className={chip(p.familyStatus === f)}>
                       {f === "single" ? "Single" : f === "couple" ? "Couple" : "With kids"}
                     </button>
@@ -197,7 +201,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
                     Dependents:
                     <button className="h-8 w-8 rounded-lg bg-white/5 text-lg font-bold hover:bg-white/10" onClick={() => set("dependents", Math.max(1, p.dependents - 1))}>−</button>
                     <span className="w-6 text-center font-mono font-bold text-foreground">{p.dependents}</span>
-                    <button className="h-8 w-8 rounded-lg bg-white/5 text-lg font-bold hover:bg-white/10" onClick={() => set("dependents", Math.min(6, p.dependents + 1))}>+</button>
+                    <button aria-label="Add dependent" className="h-8 w-8 rounded-lg bg-white/5 text-lg font-bold hover:bg-white/10" onClick={() => {set("dependents", Math.min(6, p.dependents + 1));if(p.familyStatus==="couple") set("familyStatus","family");}}>+</button>
                   </div>
                 )}
               </div>
@@ -213,14 +217,14 @@ export function Wizard({ initial, onComplete, onCancel }: {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -60 }}
             transition={{ duration: 0.25 }}
-            className="space-y-8 glass rounded-3xl p-6 sm:p-8"
+            className="space-y-8 glass rounded-3xl p-4 sm:p-8"
           >
             <div>
               <SectionTitle icon={Wallet}>Budget — liquid funds for relocation & investment</SectionTitle>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <div className="mb-4 flex items-baseline justify-between">
+              <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-3 sm:p-5">
+                <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3">
                   <span className="font-mono text-3xl font-extrabold text-gradient-gold">{fmtUSD(p.budget)}</span>
-                  <div className="flex gap-1.5">
+                  <div className="flex flex-wrap gap-1.5">
                     {[10000, 50000, 150000, 500000, 1000000].map((v) => (
                       <button key={v} onClick={() => set("budget", v)}
                         className={`rounded-md px-2 py-1 text-[11px] font-semibold transition-colors ${
@@ -241,22 +245,23 @@ export function Wizard({ initial, onComplete, onCancel }: {
                 <SectionTitle icon={Wallet}>Current monthly income</SectionTitle>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <Input type="number" className="pl-7" value={p.monthlyIncome} min={0}
+                  <Input aria-label="Current monthly income" type="number" className="pl-7" value={p.monthlyIncome} min={0}
                     onChange={(e) => set("monthlyIncome", Math.max(0, +e.target.value || 0))} />
                 </div>
                 <p className="mt-1.5 text-[11px] text-muted-foreground">Salary, rent, dividends — provable income</p>
               </div>
               <div>
-                <SectionTitle icon={Briefcase}>Expected salary abroad</SectionTitle>
+                <SectionTitle icon={Briefcase}>Offered monthly salary</SectionTitle>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                  <Input type="number" className="pl-7" value={p.expectedSalary || ""} placeholder="0 — no offer yet"
+                  <Input aria-label="Offered monthly salary" type="number" min={0} className="pl-7" value={p.expectedSalary || ""} placeholder="0 — no offer yet"
                     onChange={(e) => set("expectedSalary", Math.max(0, +e.target.value || 0))} />
                 </div>
                 <label className="mt-2.5 flex cursor-pointer items-center gap-2.5 text-sm">
                   <Switch checked={p.hasJobOffer} onCheckedChange={(v) => set("hasJobOffer", v)} />
                   I have an employer willing to sponsor
                 </label>
+                <p className="mt-1.5 text-[11px] text-muted-foreground">Used for salary thresholds only when you confirm an employer offer.</p>
               </div>
             </div>
 
@@ -318,7 +323,7 @@ export function Wizard({ initial, onComplete, onCancel }: {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -60 }}
             transition={{ duration: 0.25 }}
-            className="space-y-8 glass rounded-3xl p-6 sm:p-8"
+            className="space-y-8 glass rounded-3xl p-4 sm:p-8"
           >
             <div>
               <SectionTitle icon={Rocket}>What matters most?</SectionTitle>
@@ -369,6 +374,8 @@ export function Wizard({ initial, onComplete, onCancel }: {
         )}
       </AnimatePresence>
 
+      <div hidden={step!==2}><ApplicantEvidenceEditor profile={p} onChange={setP} onValidityChange={setEvidenceValid}/></div>
+
       {/* nav buttons */}
       <div className="mt-8 flex items-center justify-between">
         <button
@@ -386,7 +393,8 @@ export function Wizard({ initial, onComplete, onCancel }: {
           </button>
         ) : (
           <button
-            onClick={() => onComplete(p)}
+            disabled={!evidenceValid}
+            onClick={() => evidenceValid&&onComplete(p)}
             className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 px-7 py-3.5 text-base font-bold text-black glow-gold transition-transform hover:scale-[1.03] active:scale-95"
           >
             Generate strategy <SparkleIcon />

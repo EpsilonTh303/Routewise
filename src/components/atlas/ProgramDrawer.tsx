@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
 } from "recharts";
@@ -10,12 +12,18 @@ import {
 } from "lucide-react";
 import type { MatchResult, Profile } from "@/lib/types";
 import { CATEGORY_META } from "@/lib/types";
-import { buildRoadmap, passportInfo } from "@/lib/scoring";
+import { buildRoadmap, passportInfo, requiredBudget } from "@/lib/scoring";
+import { ELIGIBILITY_META } from "@/lib/eligibility";
+import { EligibilityBadge } from "./EligibilityBadge";
+import { formatMoney, formatDecision, formatCitizenship } from "@/lib/format";
 import { MatchRing } from "./ProgramCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { RequirementChecklist } from "./RequirementChecklist";
 
-function monthLabel(monthsFromNow: number) {
+function monthLabel(monthsFromNow: number | null) {
+  if(monthsFromNow===null) return "Timing needs review";
   const d = new Date();
+  d.setDate(1);
   d.setMonth(d.getMonth() + Math.round(monthsFromNow));
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
@@ -24,9 +32,12 @@ export function ProgramDrawer({ result, profile, onClose }: {
   result: MatchResult; profile: Profile; onClose: () => void;
 }) {
   const p = result.program;
+  const returnFocus = useRef<HTMLElement | null>(null);
+  const reducedMotion=useReducedMotion();
   const meta = CATEGORY_META[p.category];
   const passport = passportInfo(profile.citizenship);
   const roadmap = buildRoadmap(p, profile);
+  const funds=requiredBudget(p,profile);
   const radarData = [
     { dim: "Cost", v: result.breakdown.cost },
     { dim: "Speed", v: result.breakdown.speed },
@@ -34,56 +45,66 @@ export function ProgramDrawer({ result, profile, onClose }: {
     { dim: "Quality of life", v: result.breakdown.qol },
     { dim: "Passport ease", v: result.breakdown.access },
     { dim: "Profile fit", v: result.breakdown.fit },
-  ];
+  ].filter(item=>item.v!==null);
 
   return (
-    <motion.div
-      className="fixed inset-0 z-50 flex justify-end"
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-    >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+    <Dialog.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
+      <Dialog.Portal>
+      <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" />
+      <Dialog.Content asChild aria-modal="true"
+        onOpenAutoFocus={() => { returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null; }}
+        onCloseAutoFocus={(event) => { event.preventDefault(); returnFocus.current?.focus(); }}
+      >
       <motion.aside
         initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
         transition={{ type: "spring", stiffness: 260, damping: 30 }}
-        className="relative z-10 flex h-full w-full max-w-xl flex-col border-l border-white/10 bg-[#101310]"
-        role="dialog" aria-label={`${p.country} ${p.program} details`}
+        className="fixed inset-y-0 right-0 z-50 flex h-dvh w-full max-w-xl flex-col overflow-hidden border-l border-white/10 bg-[#101310]"
       >
         {/* header */}
-        <div className="relative border-b border-white/8 p-6">
+        <div className="relative max-h-[45dvh] shrink-0 overflow-y-auto border-b border-white/8 p-4 pt-[max(1rem,env(safe-area-inset-top))] sm:p-6">
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-4">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-4">
               <MatchRing pct={result.matchPct} size={72} stroke={7} />
-              <div>
+              <div className="min-w-0 break-words">
                 <div className="flex items-center gap-2">
                   <span className="text-3xl">{p.flag}</span>
-                  <h2 className="text-xl font-extrabold tracking-tight">{p.country}</h2>
+                  <Dialog.Title className="text-xl font-extrabold tracking-tight">{p.country} <span className="sr-only">{p.program} details</span></Dialog.Title>
                 </div>
                 <p className="mt-0.5 font-semibold text-emerald-300">{p.program}</p>
                 <p className="text-xs text-muted-foreground">{meta.emoji} {meta.label} · {p.region}</p>
               </div>
             </div>
-            <button onClick={onClose} aria-label="Close"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/5 transition-colors hover:bg-white/15">
+            <Dialog.Close asChild><button aria-label="Close"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/5 transition-colors hover:bg-white/15">
               <X className="h-4 w-4" />
-            </button>
+            </button></Dialog.Close>
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.tagline}</p>
+          <Dialog.Description className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.tagline}</Dialog.Description>
+          <div className="mt-3"><EligibilityBadge status={result.eligibility} /></div>
           {result.eligibility !== "eligible" && (
             <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-400/25 bg-amber-400/8 p-3 text-xs text-amber-200">
               <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
-              <span><strong>Conditional:</strong> {result.gateIssues.join(" · ")}</span>
+              <span><strong>{ELIGIBILITY_META[result.eligibility].label}:</strong> {result.gateIssues.join(" · ")}</span>
             </div>
           )}
+          {funds!==null && result.adjustedCost!==null && funds>result.adjustedCost && <p className="mt-3 text-sm text-amber-200">Minimum available funds: {formatMoney(funds)}. This includes the recorded capital requirement; it is separate from the year-one spending estimate.</p>}
         </div>
 
         <ScrollArea className="min-h-0 flex-1 overflow-hidden">
-          <div className="space-y-7 p-6">
+          <div className="space-y-7 p-4 sm:p-6">
+            <p className="text-xs text-muted-foreground">Eligible / Conditional / Ineligible describe the modeled checks. Full legal eligibility and authority approval remain unassessed.</p>
+            {result.explanation.requirements&&<section aria-label="Structured requirement checks" className="space-y-3">
+              <h3 className="text-sm font-bold text-emerald-300">Documented requirement checks · partial coverage</h3>
+              <p className="text-xs text-muted-foreground">Missing evidence stays unknown. Alternatives are evaluated with OR; all required checks use AND. Applicant assertions do not verify documents. Comparison uses matching currency and income basis; no exchange rate is applied.</p>
+              <RequirementChecklist result={result.explanation.requirements.result}/>
+              <p className="text-xs text-muted-foreground">Rule snapshot: {result.explanation.requirements.version}. Effective date is unknown unless explicitly stated by the source; this is not a complete application checklist.</p>
+            </section>}
             {/* key numbers */}
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
               {[
-                { icon: Banknote, label: "Year 1 all-in", value: `$${result.adjustedCost.toLocaleString()}` },
-                { icon: CalendarClock, label: "Decision", value: `~${p.processingWeeks} weeks` },
-                { icon: Flag, label: "Citizenship", value: p.yearsToCitizenship === 0 ? "Immediate" : p.yearsToCitizenship ? `${p.yearsToCitizenship} years` : "None" },
+                { icon: Banknote, label: "Year 1 all-in", value: formatMoney(result.adjustedCost) },
+                { icon: CalendarClock, label: "Decision", value: formatDecision(p.processingWeeks) },
+                { icon: Flag, label: "Citizenship", value: formatCitizenship(p) },
                 { icon: Percent, label: "QoL score", value: `${p.devScore}/10` },
               ].map((s) => (
                 <div key={s.label} className="rounded-xl border border-white/8 bg-white/[0.03] p-3">
@@ -94,16 +115,40 @@ export function ProgramDrawer({ result, profile, onClose }: {
               ))}
             </div>
 
+            {p.pathway && <section aria-label="Pathway provenance" className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-100"><h3 className="font-bold">Separate archived pathway</h3><p className="mt-1">Original family: {p.pathway.parentId}. Branch-specific costs and timelines must be reviewed; missing figures are not zero.</p><p className="mt-2">Unknown fields: {p.pathway.unknownFields.join(", ") || "None recorded"}</p></section>}
+
+            {p.pathway?.review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
+              <h3 className="font-bold text-emerald-200">Official sources checked · partial review</h3>
+              <p className="text-muted-foreground">Reviewed {p.pathway.review.reviewedAt.slice(0,10)}. These citations support the listed claims; the complete route and your eligibility remain under review.</p>
+              <ul className="space-y-3">{p.pathway.review.claims.map((claim,index)=><li key={`${claim.sourceUrl}-${index}`}><p>{claim.summary}</p><a className="mt-1 inline-block break-all text-emerald-300 underline" href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">{new URL(claim.sourceUrl).hostname} · {claim.topic}{claim.retrieval==="official-index"?" · indexed evidence; direct access blocked":""}</a></li>)}</ul>
+              {p.pathway.review.financialRequirements.length>0 && <div><h4 className="font-bold">Amounts in source currency</h4><ul className="mt-2 space-y-2">{p.pathway.review.financialRequirements.map((item,index)=><li key={index}>{item.currency} {item.amount.toLocaleString("en-US")} · {item.period}: {item.description}</li>)}</ul><p className="mt-2 text-muted-foreground">Non-USD amounts are not converted or compared against your USD budget. Fees, investments, assets and income are separate requirements.</p></div>}
+              <details><summary className="cursor-pointer py-2 font-semibold">Unresolved evidence</summary><ul className="space-y-2 text-muted-foreground">{p.pathway.review.limitations.map(item=><li key={item}>{item}</li>)}</ul></details>
+            </section>}
+
+            {result.explanation && <section aria-label="Recommendation explanation" className="space-y-4 rounded-2xl border border-white/10 p-4">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-emerald-300">Why this match</h3>
+              <p className="text-xs text-muted-foreground">A fit score, not an approval probability. Available funds: {formatMoney(result.explanation.requiredBudget)} · budget buffer: {formatMoney(result.explanation.budgetHeadroom)}.</p>
+              <ul className="space-y-1 text-xs text-emerald-200">{result.explanation.strengths.map(item=><li key={item}>＋ {item}</li>)}</ul>
+              {result.explanation.tradeoffs.length>0 && <div><h4 className="text-xs font-bold text-amber-200">Trade-offs</h4><ul className="mt-1 space-y-1 text-xs text-muted-foreground">{result.explanation.tradeoffs.map(item=><li key={item}>• {item}</li>)}</ul></div>}
+              <div><h4 className="text-xs font-bold">Next checks</h4><ol className="mt-1 list-inside list-decimal space-y-1 text-xs text-muted-foreground">{result.explanation.nextSteps.map(item=><li key={item}>{item}</li>)}</ol></div>
+              <details className="text-xs text-muted-foreground"><summary className="cursor-pointer py-2 font-semibold">Assumptions and score calculation</summary>
+                <ul className="space-y-1">{result.explanation.warnings.map(item=><li key={item}>• {item}</li>)}</ul>
+                <p className="mt-2">Weighted dimensions: {result.explanation.baseScore.toFixed(1)}</p>
+                <ul>{result.explanation.adjustments.map(item=><li key={item.reason}>{item.points.toFixed(1)}: {item.reason}</li>)}</ul>
+              </details>
+            </section>}
+
             {/* radar */}
             <div>
               <h3 className="mb-1 text-sm font-bold uppercase tracking-wider text-emerald-300">Match anatomy</h3>
+              {radarData.length<6 && <p className="mb-2 text-xs text-amber-200">Unknown dimensions are omitted from the chart and score, not treated as zero or free.</p>}
               <div className="h-64 rounded-2xl border border-white/8 bg-white/[0.02] p-2">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={radarData} outerRadius="72%">
                     <PolarGrid stroke="oklch(0.35 0.01 100)" />
                     <PolarAngleAxis dataKey="dim" tick={{ fill: "oklch(0.7 0.01 100)", fontSize: 11 }} />
                     <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-                    <Radar dataKey="v" stroke="#34d399" fill="#34d399" fillOpacity={0.32} animationDuration={800} />
+                    <Radar dataKey="v" stroke="#34d399" fill="#34d399" fillOpacity={0.32} isAnimationActive={!reducedMotion} animationDuration={800} />
                   </RadarChart>
                 </ResponsiveContainer>
               </div>
@@ -125,7 +170,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
                       {s.icon}
                     </span>
                     <p className="text-[11px] font-bold uppercase tracking-wider text-amber-300/90">
-                      ≈ {monthLabel(s.monthsFromNow)}
+                      {s.monthsFromNow===null?monthLabel(null):`≈ ${monthLabel(s.monthsFromNow)}`}
                     </p>
                     <p className="text-sm font-bold">{s.label}</p>
                     <p className="text-xs leading-relaxed text-muted-foreground">{s.detail}</p>
@@ -137,6 +182,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
             {/* requirements */}
             <div>
               <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-emerald-300">Core requirements</h3>
+              <p className="mb-3 text-xs text-muted-foreground">Recorded requirements · {p.pathway?.review ? `partial source review ${p.pathway.review.reviewedAt.slice(0,10)}` : p.verification?.status === "verified" && p.verification.checkedAt ? `source checked ${p.verification.checkedAt}` : "source review pending"}. Match scores measure profile fit, not approval probability.</p>
               <ul className="space-y-2">
                 {p.requirements.map((r) => (
                   <li key={r} className="flex items-start gap-2.5 text-sm">
@@ -177,27 +223,27 @@ export function ProgramDrawer({ result, profile, onClose }: {
                 <Globe2 className="h-4 w-4 text-amber-300" />
                 <p className="mt-2 text-xs font-bold">{passport.flag} {passport.name}</p>
                 <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                  Entry: {p.passportAccess}. Your passport: ~{passport.visaFree} visa-free (rank #{passport.rank})
+                  {profile.citizenship==="AZ"?`Recorded AZ entry: ${p.passportAccess}.` : "Entry access for your citizenship is not modeled."} Passport figures are archived estimates.
                 </p>
               </div>
               <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
                 <Users className="h-4 w-4 text-emerald-300" />
                 <p className="mt-2 text-xs font-bold">Family</p>
                 <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                  {p.familyFriendly >= 0.9 ? "Spouse + children (often parents) included" : p.familyFriendly >= 0.75 ? "Spouse & children join" : "Dependents limited"}
+                  {p.pathway ? "Family rules need separate source review" : p.familyFriendly >= 0.9 ? "Spouse + children (often parents) included" : p.familyFriendly >= 0.75 ? "Spouse & children join" : "Dependents limited"}
                 </p>
               </div>
               <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">
                 <Landmark className="h-4 w-4 text-amber-300" />
                 <p className="mt-2 text-xs font-bold">Tax snapshot</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{p.taxNote ?? "Standard local taxation"}</p>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{p.taxNote ?? "Tax treatment not reviewed"}</p>
               </div>
             </div>
           </div>
         </ScrollArea>
 
         {/* footer CTA */}
-        <div className="border-t border-white/8 p-4">
+        <div className="safe-bottom shrink-0 border-t border-white/8 p-4">
           <a
             href={p.url} target="_blank" rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-emerald-600 py-3.5 text-sm font-bold text-black transition-transform hover:scale-[1.01] active:scale-95"
@@ -209,6 +255,8 @@ export function ProgramDrawer({ result, profile, onClose }: {
           </p>
         </div>
       </motion.aside>
-    </motion.div>
+      </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

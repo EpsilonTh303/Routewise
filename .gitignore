@@ -12,6 +12,9 @@ node_modules
 
 # testing
 /coverage
+/test-results/
+/playwright-report/
+/.playwright/
 
 # next.js
 /.next/
@@ -32,6 +35,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+/.npm-cache/
+/db/*.sqlite*
+/db/*.db-*
+/backups/
+/tmp/
+/mcp.config.json
 
 # vercel
 .vercel

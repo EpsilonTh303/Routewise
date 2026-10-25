@@ -47,6 +47,7 @@
 
 /* ============ DARK PREMIUM THEME (emerald + gold) ============ */
 :root {
+  --app-nav-height: calc(4rem + env(safe-area-inset-top, 0px));
   --radius: 0.75rem;
   --background: oklch(0.135 0.006 100);
   --foreground: oklch(0.955 0.004 100);
@@ -186,3 +187,26 @@
 }
 ::-webkit-scrollbar-thumb:hover { background: oklch(0.5 0.08 162); }
 .scroll-slim::-webkit-scrollbar { width: 6px; }
+
+.safe-nav { padding-top: env(safe-area-inset-top, 0px); }
+.catalog-filters { top: var(--app-nav-height); }
+.safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px)); }
+.category-strip { scrollbar-width: thin; overscroll-behavior-x: contain; }
+
+@media (pointer: coarse) {
+  button:not([role="switch"]), select, input[data-slot="input"] { min-height: 44px; }
+  input[data-slot="input"], select, textarea { font-size: 16px; }
+  button { touch-action: manipulation; }
+  label:has([role="switch"]), [data-slot="slider"] { min-height: 44px; }
+}
+
+@media (max-width: 639px) {
+  .passport-flags { display: none; }
+  .passport-card { width: min(100%, 370px); height: 260px; }
+  .passport-code { font-size: 10px; overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -1,9 +1,8 @@
 "use client";
 
 import { Compass, ShieldAlert } from "lucide-react";
-import { PROGRAM_COUNT, COUNTRY_COUNT } from "@/lib/data";
 
-export function Footer() {
+export function Footer({programCount,countryCount}:{programCount:number;countryCount:number}) {
   return (
     <footer className="mt-auto border-t border-white/5 bg-black/30">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -16,7 +15,7 @@ export function Footer() {
               <span className="font-bold tracking-tight">Route<span className="text-gradient-gold">Wise</span></span>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              An independent strategy explorer: {PROGRAM_COUNT} residence &amp; citizenship programs across {COUNTRY_COUNT} countries,
+              An independent strategy explorer: {programCount} residence &amp; citizenship programs across {countryCount} countries,
               scored live in your browser against your own profile. Calibrated around the Azerbaijani passport —
               the most under-served passport in immigration tech.
             </p>
