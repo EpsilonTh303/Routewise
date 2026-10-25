@@ -1,5 +1,9 @@
 # RouteWise clean-session handoff
 
+## Descriptive Germany journey v1 — 2026-10-26
+
+Added standalone src/lib/journey.ts contract/validation and src/lib/data/germany-study-journey.ts four-stage example. Conditions link existing pilot audit claims and route-scoped fact/manual evidence specifications; offer present/absent/any branches are conditional navigation, not legal assessments. Work and PR have no fabricated standalone Program records. Existing Program/profile/persistence schemas, applied manifests, scoring and GUI remain unchanged; no runtime consumer is wired. Read STUDY_PATHWAYS.md for scope and future-consumption requirements. Seven new model tests cover JSON round trips, four stages, job branches, source/evidence links, old catalog compatibility, graph integrity and invalid data. Validation: 101 unit tests, 27 isolated integration tests, typecheck, lint and production build passed. LAN launcher restarted after build; firewall unchanged. No live data writes or deployment.
+
 ## German What-if fix — 2026-10-26
 
 Added the existing optional boolean german field to the scenario patch allowlist. The full merged-profile validator and shared matching pipeline remain unchanged; German skill affects useful-language fit, not documented legal-language evidence. Two regression tests failed with Unknown profile patch key before the fix and now cover enabling/disabling German, legacy profiles, score changes, unchanged missing checks, explicit unmet language evidence, unrelated routes, invalid types, other languages and immutable base profiles. HTTP and real MCP integration scenarios now include German. Validation: 94 unit tests, 27 isolated integration tests, lint, typecheck and production build passed. Build initially met a Prisma DLL lock while integration was running; retry after completion succeeded. LAN launcher restarted afterward; firewall unchanged. No catalog or profile persistence changes.

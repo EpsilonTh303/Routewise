@@ -2,6 +2,16 @@
 
 ## Purpose
 
+### Descriptive stage model v1 (2026-10-26)
+
+`src/lib/journey.ts` defines a separate JSON-serializable `Journey` contract and Zod validator. `src/lib/data/germany-study-journey.ts` provides the German four-stage example: master's → graduate job search → work permit → permanent residence. It is not imported by scoring, the UI, catalog setup or persistence. Existing `Program`/profile schemas, applied batch manifests and catalog records are unchanged.
+
+Each stage has an ID, kind, label, optional catalog links (`programIds`, empty where no standalone record exists), conditions, and outgoing transitions. Each condition references one existing claim by program ID, immutable audit batch ID and unique claim topic; that claim retains its summary, source URL, retrieval method and observation date in the existing catalog. Evidence specifications either reference an existing route-scoped applicant fact or require manual document/authority review. They describe evidence needed, not evidence supplied or an assessed result. Conditions are partial checklists, never a full permit checklist.
+
+Transitions carry a target stage, a `jobOffer` branch (`present`, `absent`, `any`) and their own conditions. The example distinguishes completion without an offer → job-search application, completion with an offer → separate work-status application, and job search with an offer → separate work-status application. These are navigation candidates only: the transition conditions **and destination-stage conditions** still require review; a job offer does not establish qualifying employment or grant a permit. Missing job-offer information must not be interpreted as `absent`. No traversal/evaluation is implemented in this version. PR remains a separate conditional application; no durations, thresholds, new fact keys or applicant outcomes are introduced.
+
+`journeySchema.parse` checks structure, strict fields, unique stage/checklist IDs, valid targets, reachability and absence of cycles. `validateJourney(value, programs)` additionally checks catalog/evidence links and dated claim references. Call it against the intended catalog snapshot before future consumption; a missing/renamed claim or changed batch must fail validation. This does not reverify current law or replace the pilot's partial-source limitations. New source evidence still requires a new guarded catalog batch. The model is an extension point for later work, not a migration or an active engine rule.
+
 Study is a possible first step in a conditional sequence, not a promise of employment, permanent residence, or citizenship. The first four source-backed exploratory records now live in `src/lib/data/study-pilot.ts`:
 
 - `de-masters-study`

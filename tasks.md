@@ -4,6 +4,8 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Add descriptive v1 German master's → graduate search → work permit → PR model, source/evidence references, conditional offer branches and schema/catalog validation tests. Keep engine, UI, existing Program records and applied batches unchanged (2026-10-26).
+
 - [x] Accept German changes in What-if patches through the existing boolean profile field and matching pipeline; cover score/eligibility/missing checks, other languages, HTTP and MCP with regression tests (2026-10-26).
 
 - [x] Fix study rule matching when JSON object keys are reordered; reuse canonical comparison, preserve array/content guards, and add assessment/scoring/roadmap regression coverage. Checks: 92 unit tests, 27 isolated integration tests, typecheck and lint passed (2026-10-26).
