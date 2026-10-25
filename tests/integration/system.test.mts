@@ -134,11 +134,14 @@ test("structured evidence and temporary scenarios round trip through HTTP withou
   const matched=await service.match({profile:documented,limit:100,includeIneligible:true});
   const check=matched.results.find(result=>result.program.id===programId)!;
   assert.equal(check.explanation.requirements?.result.status,"met");
-  const input={profile,scenarios:[{id:"more-funds",label:"More funds",changes:{budget:100000}}],limit:5};
+  const input={profile,scenarios:[{id:"more-funds",label:"More funds",changes:{budget:100000}},{id:"german",label:"German skills",changes:{german:true}}],limit:20};
   const request=new Request("http://test/api/v1/scenarios",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input)});
   const response=await handleApi(request,["scenarios"],service);
   assert.equal(response.status,200);
   assert.deepEqual((await response.json()).data,await service.scenarios(input));
+  const comparison=await service.scenarios(input);
+  const snapshot=await repository.snapshot();
+  assert.deepEqual(comparison.scenarios[1].results,matchPrograms(snapshot.programs,{...profile,german:true}).slice(0,20));
   const queue=await handleApi(new Request("http://test/api/v1/reviews?asOf=2026-10-25&limit=3"),["reviews"],service);
   assert.equal(queue.status,200);
   const queueData=(await queue.json()).data;
@@ -206,7 +209,7 @@ test("official MCP client initializes, discovers tools, validates input and read
     assert.equal((stats.structuredContent as {programCount:number}).programCount,79);
     const matched=await client.callTool({name:"match_profile",arguments:{profile,limit:5,includeIneligible:true}});
     assert.deepEqual(matched.structuredContent,await service.match({profile,limit:5,includeIneligible:true}));
-    const scenarios={profile,scenarios:[{id:"funds",label:"Funds",changes:{budget:100000}}],limit:3};
+    const scenarios={profile,scenarios:[{id:"funds",label:"Funds",changes:{budget:100000}},{id:"german",label:"German skills",changes:{german:true}}],limit:3};
     assert.deepEqual((await client.callTool({name:"compare_scenarios",arguments:scenarios})).structuredContent,await service.scenarios(scenarios));
     assert.deepEqual((await client.callTool({name:"get_source_review_queue",arguments:{asOf:"2026-10-25",limit:3}})).structuredContent,await service.reviewQueue({asOf:"2026-10-25",limit:3}));
     const detail=await client.callTool({name:"get_program",arguments:{id:"de-bluecard"}});

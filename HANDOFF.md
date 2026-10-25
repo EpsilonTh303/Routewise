@@ -1,5 +1,9 @@
 # RouteWise clean-session handoff
 
+## German What-if fix — 2026-10-26
+
+Added the existing optional boolean german field to the scenario patch allowlist. The full merged-profile validator and shared matching pipeline remain unchanged; German skill affects useful-language fit, not documented legal-language evidence. Two regression tests failed with Unknown profile patch key before the fix and now cover enabling/disabling German, legacy profiles, score changes, unchanged missing checks, explicit unmet language evidence, unrelated routes, invalid types, other languages and immutable base profiles. HTTP and real MCP integration scenarios now include German. Validation: 94 unit tests, 27 isolated integration tests, lint, typecheck and production build passed. Build initially met a Prisma DLL lock while integration was running; retry after completion succeeded. LAN launcher restarted afterward; firewall unchanged. No catalog or profile persistence changes.
+
 ## JSON key-order fix — 2026-10-26
 
 Extracted the existing recursive canonical JSON comparison into src/lib/canonical-json.ts and reused it for the study evidence/requirements guard. Nested object key order no longer disables assessments or conditional roadmaps; array order and actual content changes still invalidate stale projections. Catalog manifests and rule semantics are unchanged. Regression coverage compares all four pilot routes across missing/positive/negative facts, scoring and roadmaps, plus array/content edits. Validation: 92 unit tests, 27 isolated integration tests, typecheck, lint and diff whitespace check passed. No live data changes or deployment; primary commits the scoped fix.

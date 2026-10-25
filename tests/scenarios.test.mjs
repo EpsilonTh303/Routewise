@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { ALL_PROGRAMS } from '../src/lib/data/index.ts';
 import { PATHWAY_REVIEWS } from '../src/lib/data/reviewed-pathways.ts';
 import { compareScenarios, scenarioRequestSchema } from '../src/lib/scenarios.ts';
+import { studyPilotPrograms } from '../src/lib/data/study-pilot.ts';
+import { matchPrograms } from '../src/lib/scoring.ts';
 
 const profile = {
   citizenship:'AZ', age:30, familyStatus:'single', dependents:0, budget:100000, monthlyIncome:0, expectedSalary:0,
@@ -10,6 +12,41 @@ const profile = {
   goal:'remote', timeline:'flexible', risk:'medium', regions:[], remoteWork:true,
 };
 const from = id => structuredClone(ALL_PROGRAMS.find(program => program.id === id));
+
+test('German what-ifs accept legacy profiles and recalculate scores without inventing language evidence',()=>{
+  const catalog=[...studyPilotPrograms,from('de-bluecard'),from('us-dv')];
+  const base={...profile,education:'bachelor',experience:0,englishLevel:0,turkish:false,russian:false,goal:'study'};
+  const before=structuredClone(base);
+  const result=compareScenarios(catalog,base,[{id:'german',label:'German skills',changes:{german:true}}]);
+  assert.deepEqual(result.scenarios[0].results,matchPrograms(catalog,{...base,german:true}));
+  const master=result.scenarios[0].results.find(item=>item.program.id==='de-masters-study');
+  const oldMaster=result.base.results.find(item=>item.program.id===master.program.id);
+  assert.ok(master.breakdown.fit>oldMaster.breakdown.fit);
+  assert.ok(master.matchPct>oldMaster.matchPct);
+  assert.equal(master.eligibility,oldMaster.eligibility);
+  assert.deepEqual(master.explanation.requirements,oldMaster.explanation.requirements);
+  assert.equal(master.explanation.requirements.result.status,'unknown');
+  const unrelated=id=>result.scenarios[0].results.find(item=>item.program.id===id);
+  assert.deepEqual(unrelated('us-dv'),result.base.results.find(item=>item.program.id==='us-dv'));
+  const reversed=compareScenarios(catalog,{...base,german:true},[{id:'remove',label:'Remove German',changes:{german:false}}]);
+  assert.deepEqual(reversed.scenarios[0].results,matchPrograms(catalog,{...base,german:false}));
+  assert.deepEqual(base,before);
+});
+
+test('German and other language patches use the existing validated profile and evidence pipeline',()=>{
+  const catalog=studyPilotPrograms;
+  const id='de-masters-study';
+  const changes={german:true,englishLevel:2,turkish:false,russian:false,evidence:{routes:{[id]:{facts:{programmeLanguage:false}}}}};
+  const result=compareScenarios(catalog,profile,[{id:'languages',label:'Languages',changes}]);
+  assert.deepEqual(result.scenarios[0].results,matchPrograms(catalog,{...profile,...changes}));
+  const master=result.scenarios[0].results.find(item=>item.program.id===id);
+  assert.equal(master.eligibility,'ineligible');
+  assert.ok(result.scenarios[0].changes.find(item=>item.programId===id).requirements.some(item=>item.id==='programmeLanguage'&&item.before==='unknown'&&item.after==='unmet'));
+  for(const changes of [{englishLevel:0},{englishLevel:3},{turkish:false},{russian:false}]){
+    assert.deepEqual(compareScenarios(catalog,profile,[{id:'language',label:'Language',changes}]).scenarios[0].results,matchPrograms(catalog,{...profile,...changes}));
+  }
+  for(const german of ['true',1,null]) assert.throws(()=>compareScenarios(catalog,profile,[{id:'invalid',label:'Invalid',changes:{german}}]));
+});
 
 test('scenario request bounds count, labels, limit and rejects unknown patch keys and duplicate ids', () => {
   const valid = {profile, scenarios:[{id:'what-if',label:'What if',changes:{budget:50000}}]};

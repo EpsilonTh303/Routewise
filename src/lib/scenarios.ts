@@ -9,7 +9,7 @@ import { REQUIREMENT_VERSION } from "./route-requirements";
 
 const PROFILE_KEYS = new Set([
   "evidence", "citizenship", "age", "familyStatus", "dependents", "budget", "monthlyIncome", "expectedSalary",
-  "hasJobOffer", "education", "experience", "field", "englishLevel", "turkish", "russian", "goal", "timeline", "risk", "regions", "remoteWork",
+  "hasJobOffer", "education", "experience", "field", "englishLevel", "turkish", "russian", "german", "goal", "timeline", "risk", "regions", "remoteWork",
 ]);
 const profileChangesSchema = z.record(z.string(), z.unknown()).superRefine((changes, ctx) => {
   for (const key of Object.keys(changes)) if (!PROFILE_KEYS.has(key)) ctx.addIssue({ code: "custom", path: [key], message: "Unknown profile patch key." });
