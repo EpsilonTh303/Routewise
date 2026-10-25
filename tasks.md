@@ -4,6 +4,9 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Check/commit latest local work and publish sanitized history to EpsilonTh303/Routewise. Owner approved public visibility; Pages enabled with Actions source. See PUBLISHING.md for safe future publication and check GitHub Actions for deployment status.
+- [x] Add tested Pages static mode with public catalog only, repository base path, local profile/scenario behavior and automatic deployment workflow; preserve the normal Node/REST/MCP edition.
+
 - [x] Add German to setup/profile and apply relevant language overlap to fit for every citizenship. Keep documented legal language checks independent and legacy profiles compatible.
 - [x] Simplify route drawer: remove radar, archive lineage, score arithmetic and unverified passport/family/tax summary boxes; retain conditions, roadmap, cautions and source audit last.
 

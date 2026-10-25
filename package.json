@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "npm run db:generate && npm run typecheck && next build --webpack && node scripts/package-standalone.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "test:pages": "node scripts/browser-tests.mjs test --config playwright.pages.config.mjs",
     "start": "node scripts/start.mjs",
     "start:lan": "node scripts/lan-server.mjs",
     "typecheck": "tsc --noEmit",

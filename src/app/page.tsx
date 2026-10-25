@@ -14,6 +14,7 @@ import { Results } from "@/components/atlas/Results";
 import { Explorer } from "@/components/atlas/Explorer";
 import { Footer } from "@/components/atlas/Footer";
 import {ProfilePage} from "@/components/atlas/ProfilePage";
+import {publicCatalogSchema} from '@/lib/public-catalog';
 
 const STORAGE_KEY = BROWSER_PROFILE_KEY;
 type View = "landing" | "wizard" | "results" | "explore" | "profile";
@@ -33,6 +34,13 @@ export default function Home() {
     const controller=new AbortController();
     void (async()=>{
       try {
+        if(process.env.NEXT_PUBLIC_STATIC_EXPORT==='true') {
+          const response=await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH??''}/catalog.json`,{signal:controller.signal});
+          if(!response.ok) throw new Error('Catalog unavailable');
+          const snapshot=publicCatalogSchema.parse(await response.json());
+          if(!controller.signal.aborted) setPrograms(snapshot.programs);
+          return;
+        }
         const items:Program[]=[];let offset:number|null=0;let version:string|undefined;
         while(offset!==null) {
           const response=await fetch(`/api/v1/programs?limit=100&offset=${offset}`,{signal:controller.signal,cache:"no-store"});

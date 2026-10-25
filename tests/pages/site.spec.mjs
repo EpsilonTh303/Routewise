@@ -1,0 +1,26 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+const profile=JSON.parse(readFileSync(new URL('../../examples/ai/match.json',import.meta.url),'utf8')).profile;
+test('Pages subpath works without a backend and preserves local profile editing',async({page,request})=>{
+  const failures=[],api=[];
+  page.on('requestfailed',r=>failures.push(r.url()));
+  page.on('request',r=>{if(new URL(r.url()).pathname.startsWith('/api/')) api.push(r.url());});
+  await page.addInitScript(p=>{if(!localStorage.getItem('routewise-profile-v1')) localStorage.setItem('routewise-profile-v1',JSON.stringify(p));},profile);
+  const snapshot=await request.get('catalog.json');expect(snapshot.ok()).toBe(true);
+  const catalog=await snapshot.json();expect(catalog.programs).toHaveLength(79);expect(catalog.profiles).toBeUndefined();
+  await page.goto('./');await expect(page.getByRole('heading',{level:1})).toBeVisible();
+  await page.getByRole('button',{name:'Explore all routes',exact:true}).click();
+  await page.getByRole('textbox',{name:'Search programs'}).fill('German master');
+  await page.getByRole('button',{name:/German master's study residence route/}).click();
+  await expect(page.getByRole('dialog')).toContainText('18 months');
+  await page.getByRole('button',{name:'Close',exact:true}).click();
+  await page.getByRole('button',{name:'My profile',exact:true}).click();
+  await page.getByRole('button',{name:'Edit profile',exact:true}).click();
+  await page.getByLabel('German language',{exact:true}).check();
+  await page.getByRole('button',{name:'Save changes',exact:true}).click();
+  await page.reload();await page.getByRole('button',{name:'My profile',exact:true}).click();
+  await expect(page.getByText(/German, Russian/)).toBeVisible();
+  expect(api).toEqual([]);expect(failures).toEqual([]);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await request.get('api/v1/stats')).status()).toBe(404);
+});

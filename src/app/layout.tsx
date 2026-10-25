@@ -16,18 +16,18 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RouteWise — Immigration Strategy Engine",
   description:
-    "Enter your citizenship, budget and profile. RouteWise scores 62 real residence & citizenship programs across 51 countries and builds your personal relocation strategy — calibrated for the Azerbaijani passport.",
+    "Explore residence and citizenship routes, compare your profile and plan conditional study-to-work pathways with dated official sources.",
   keywords: [
     "immigration", "citizenship", "residency", "golden visa", "digital nomad",
     "Azerbaijan", "relocation strategy", "visa", "second passport",
   ],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH??''}/routewise-icon.svg`,
   },
   openGraph: {
     title: "RouteWise — Immigration Strategy Engine",
     description:
-      "62 programs. 51 countries. One personal relocation strategy.",
+      "Residence and citizenship routes. One personal relocation strategy.",
     type: "website",
   },
 };

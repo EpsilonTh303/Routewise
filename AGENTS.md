@@ -23,6 +23,8 @@ Commit each completed, working version or coherent fix after its required checks
 
 The primary agent owns integration and commits. Research/implementation sub-agents must not stage, commit, amend, reset, clean, rebase or push unless the primary agent explicitly assigns commit ownership for a separate isolated checkout. Shared-workspace Luna agents produce scoped changes and evidence for review; the primary agent reviews, validates and commits the accepted result. A commit is not authorization to push or publish externally.
 
+The owner explicitly authorized publication to EpsilonTh303/Routewise and making that repo public for Pages. The original local history contains private import paths; never push original main, backup refs, --all or --mirror. Read PUBLISHING.md and use scripts/prepare-publication.mjs to create/audit a sanitized publication clone without changing original local history. Future pushes must remain fast-forward and scoped to the approved release.
+
 Use Node 22.18+ and `npm ci`; `package-lock.json` is authoritative. Use the commands in README.md for migration/setup, tests, MCP and CLI examples. Never invoke `db:reset` or pass `--accept-data-loss` as a routine fix. Production startup must not seed, reset, or silently modify schema. Use migrations and take a backup before modifying an existing database.
 
 Keep the database path explicit and stable across working directories and interfaces. Do not put database credentials, profile values, database files, browser caches, or backups in Git. The original tracked `.env` and `db/custom.db` are historical imports; leave their values/history alone unless the user explicitly asks to change them.
