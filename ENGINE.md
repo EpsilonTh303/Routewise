@@ -1,4 +1,10 @@
-# Recommendation engine 3.3.0
+# Recommendation engine 3.4.0
+
+## 3.4.0 all-catalog source audit
+
+All 75 active records now have a catalog-wide audit outcome: 74 partial and one unresolved. `program.audit` separates dated claims from intake availability, native financial evidence and missing fields; historical pathway evidence is preserved. No full-route verification is inferred. Canada SUV is closed/paused to new intake and remains searchable but cannot be a primary plan. Unclear availability is also excluded from primary strategies.
+
+Unsupported archive costs, USD conversions and universal processing/residence clocks are null. The engine omits unknown score dimensions and does not interpret them as zero spending or immediate approval. All currently audited routes have incomplete year-one costs, so the strategy can honestly be empty. Citizenship fields explicitly marked unknown display Needs review rather than asserting that no legal pathway exists. The immutable audit batch, preservation checks and remaining source limitations are documented in SOURCE_REVIEW.md and research/PRIMARY_REVIEW.md.
 
 ## 3.3.0 structured checks and scenarios
 

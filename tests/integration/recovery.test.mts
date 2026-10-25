@@ -9,6 +9,7 @@ import { DatabaseSync } from "node:sqlite";
 import { projectRoot } from "../../scripts/runtime-config.mjs";
 import { CatalogRepository } from "../../src/lib/server/catalog";
 import { RouteWiseService } from "../../src/lib/server/service";
+import { sourceInputs } from "../catalog-source-inputs.mts";
 
 const exec=promisify(execFile);
 const tempParent=resolve(projectRoot,"tmp");mkdirSync(tempParent,{recursive:true});
@@ -34,7 +35,7 @@ after(async()=>{
 
 test("backup restore retains catalog history, saved profiles, evaluation snapshots and integrity",async()=>{
   const prior=await repository.get("de-bluecard");
-  await repository.import({program:{...prior.program,tagline:"Recovery fixture revision"},expectedHash:prior.contentHash,reason:"Recovery test revision"});
+  await repository.import({program:{...prior.program,tagline:"Recovery fixture revision"},sources:sourceInputs(prior),expectedHash:prior.contentHash,reason:"Recovery test revision"});
   const saved=await service.saveProfile({id:"recovery-profile",name:"Recovery profile",profile});
   const strategy=await service.saveStrategy(saved.id);
   const expectedHistory=await repository.history(prior.program.id,20,0);

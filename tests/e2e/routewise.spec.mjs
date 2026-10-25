@@ -20,8 +20,8 @@ test('Explorer preserves ineligible labels and modal keyboard focus', async ({pa
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await page.getByRole('button',{name:'Explore all routes'}).click();
-  await page.getByRole('textbox',{name:'Search programs'}).fill('EU Blue Card');
-  const card=page.getByRole('button',{name:/EU Blue Card/});
+  await page.getByRole('textbox',{name:'Search programs'}).fill('Start-Up Visa');
+  const card=page.getByRole('button',{name:/Start-Up Visa/});
   await expect(card.getByText('Ineligible',{exact:true})).toBeVisible();
   await card.focus();
   await page.keyboard.press('Enter');

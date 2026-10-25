@@ -19,6 +19,7 @@ export function decodeProgram(row: CatalogProgram): Program {
     url:row.url,dvLottery:row.dvLottery,e2Treaty:row.e2Treaty,
     verification:{status:row.verificationStatus,checkedAt:row.checkedAt?.toISOString() ?? null,sourceUrl:row.verificationSourceUrl},
     ...(row.pathway?{pathway:row.pathway}:{}),
+    ...(row.audit?{audit:row.audit}:{}),
   });
 }
 
@@ -105,7 +106,7 @@ export class CatalogRepository {
       const existing = await tx.catalogProgram.findUnique({where:{id:p.id}});
       if (existing && (initialOnly || existing.contentHash===contentHash)) return {id:p.id,status:"unchanged" as const,contentHash:existing.contentHash};
       if (existing && record.expectedHash!==existing.contentHash) throw new ServiceError("CONFLICT","Catalog record changed or expectedHash is missing. Read the current record before updating.",409);
-      const {verification,pathway,...fields} = p;
+      const {verification,pathway,audit,...fields} = p;
       if(pathway) {
         if(pathway.parentId===p.id) throw new ServiceError("INVALID_INPUT","A pathway cannot be its own parent.");
         const parent=await tx.catalogProgram.findUnique({where:{id:pathway.parentId},select:{parentId:true}});
@@ -114,6 +115,7 @@ export class CatalogRepository {
       const data = {...fields,languageBonus:jsonValue(p.languageBonus),requirements:jsonValue(p.requirements),pros:jsonValue(p.pros),cons:jsonValue(p.cons),
         citizenshipLanguage:p.citizenshipLanguage??null,taxNote:p.taxNote??null,
         pathway:pathway?jsonValue(pathway):Prisma.DbNull,parentId:pathway?.parentId??null,
+        audit:audit?jsonValue(audit):Prisma.DbNull,
         verificationStatus:verification!.status,verificationSourceUrl:verification!.sourceUrl,checkedAt:verification!.checkedAt?new Date(verification!.checkedAt):null,
         contentHash,active:record.active};
       await tx.catalogProgram.upsert({where:{id:p.id},create:data,update:data});

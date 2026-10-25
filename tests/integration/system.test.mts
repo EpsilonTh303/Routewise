@@ -16,6 +16,8 @@ import { ALL_PROGRAMS } from "../../src/lib/data/index";
 import { PATHWAY_RECORDS } from "../../src/lib/data/pathway-splits";
 import { PATHWAY_REVIEWS } from "../../src/lib/data/reviewed-pathways";
 import { matchPrograms } from "../../src/lib/scoring";
+import { CATALOG_SOURCE_AUDIT } from "../../src/lib/data/catalog-source-audit";
+import { sourceInputs } from "../catalog-source-inputs.mts";
 
 const exec=promisify(execFile);
 const tempParent=resolve(projectRoot,"tmp");mkdirSync(tempParent,{recursive:true});
@@ -43,8 +45,13 @@ after(async()=>{
 test("real migrations and seed produce queryable records, sources and revisions",async()=>{
   const stats=await service.stats();
   assert.equal(stats.programCount,75);assert.equal(stats.countryCount,51);assert.equal(stats.verifiedCount,0);
-  assert.equal(await database.programRevision.count(),102+PATHWAY_REVIEWS.length);
-  assert.equal(await database.programSource.count(),89+PATHWAY_REVIEWS.reduce((count,item)=>count+new Set([PATHWAY_RECORDS.find(record=>record.program.id===item.id)!.program.url,...item.review.claims.map(claim=>claim.sourceUrl)]).size-1,0));
+  assert.equal(await database.programRevision.count(),102+PATHWAY_REVIEWS.length+CATALOG_SOURCE_AUDIT.items.length);
+  assert.equal(stats.auditedCount,75);assert.equal(stats.partiallyReviewedCount,74);assert.equal(stats.unresolvedAuditCount,1);
+  for(const item of CATALOG_SOURCE_AUDIT.items) {
+    const record=await repository.get(item.id);
+    assert.deepEqual(record.program.audit,item.patch.audit);
+    for(const claim of record.program.audit!.claims) assert.ok(record.sources.some(source=>source.url===claim.sourceUrl&&source.evidence?.includes(claim.summary)));
+  }
   const list=await repository.search({query:"blue card",limit:1});
   assert.equal(list.items[0].id,"de-bluecard");
   assert.equal((await repository.search({maxBudget:5000})).items.every(p=>p.minBudget<=5000&&p.totalYearOneCost<=5000),true);
@@ -66,13 +73,13 @@ test("catalog updates are versioned, reject stale writes, and survive reseeding"
   const old=await repository.get("de-bluecard");
   const prior=(await repository.snapshot()).version;
   const program={...old.program,tagline:"Test-only database revision"};
-  await assert.rejects(()=>repository.import({program,reason:"Test update"}),/expectedHash/);
-  await repository.import({program,expectedHash:old.contentHash,reason:"Test update"});
-  await assert.rejects(()=>repository.import({program:{...program,tagline:"Stale update"},expectedHash:old.contentHash,reason:"Stale"}),/changed/);
+  await assert.rejects(()=>repository.import({program,sources:sourceInputs(old),reason:"Test update"}),/expectedHash/);
+  await repository.import({program,sources:sourceInputs(old),expectedHash:old.contentHash,reason:"Test update"});
+  await assert.rejects(()=>repository.import({program:{...program,tagline:"Stale update"},sources:sourceInputs(old),expectedHash:old.contentHash,reason:"Stale"}),/changed/);
   const current=await repository.get(program.id);
-  assert.equal(current.revisions.length,2);assert.notEqual((await repository.snapshot()).version,prior);
+  assert.equal(current.revisions.length,old.revisions.length+1);assert.notEqual((await repository.snapshot()).version,prior);
   const history=await repository.history(program.id,1,0);
-  assert.equal(history.total,2);assert.equal(history.nextOffset,1);
+  assert.equal(history.total,old.revisions.length+1);assert.equal(history.nextOffset,1);
   assert.equal((await repository.revision(history.items[0].id)).programId,program.id);
   const seeded=await run(["--import","tsx","scripts/database.mts","seed"]);
   assert.match(seeded.stdout,/"unchanged":62/);
@@ -98,7 +105,7 @@ test("stateless matching uses the live catalog and stores no private profiles",a
   assert.deepEqual(result.results,matchPrograms(snapshot.programs,profile).filter(r=>r.explanation.goalAligned));
   assert.equal(await database.savedProfile.count(),0);assert.equal(await database.strategyRun.count(),0);
   assert.equal(result.catalogVersion,snapshot.version);
-  assert.equal(result.engineVersion,"3.3.0");
+  assert.equal(result.engineVersion,"3.4.0");
   const response=await handleApi(new Request("http://localhost/api/v1/match",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({profile,includeIneligible:true,limit:100})}),["match"],service);
   assert.equal(response.status,200);
   assert.deepEqual((await response.json()).data,result);
@@ -128,7 +135,7 @@ test("structured evidence and temporary scenarios round trip through HTTP withou
   const queue=await handleApi(new Request("http://test/api/v1/reviews?asOf=2026-10-25&limit=3"),["reviews"],service);
   assert.equal(queue.status,200);
   const queueData=(await queue.json()).data;
-  assert.equal(queueData.items.length,3);assert.equal(queueData.counts.unreviewed,49);
+  assert.equal(queueData.items.length,3);assert.equal(queueData.counts.unreviewed,0);assert.equal(queueData.counts.unresolved,1);
   assert.equal(queueData.items[0].id,"ae-golden-property");
   assert.deepEqual([await database.savedProfile.count(),await database.strategyRun.count()],privateCounts);
 });
@@ -263,7 +270,7 @@ test("reviewed claims survive repository, tool and reseed round trips",async()=>
   const body=await response.json();
   assert.deepEqual(body.data.program.pathway.review,review);
   const stats=await service.stats();
-  assert.equal(stats.partiallyReviewedCount,26);
+  assert.equal(stats.partiallyReviewedCount,74);
 });
 
 test("review batch conflicts roll back all changes and preserve edited pathways",async()=>{

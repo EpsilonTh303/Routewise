@@ -41,13 +41,17 @@ async function main() {
     console.log(JSON.stringify({backup:target}));
     return;
   }
-  if(["setup","seed","import","split","split-plan","review","review-plan"].includes(command)) {
+  if(["setup","seed","import","split","split-plan","review","review-plan","audit","audit-plan"].includes(command)) {
     const {db}=await import("../src/lib/db");
     const {CatalogRepository}=await import("../src/lib/server/catalog");
     const repository=new CatalogRepository(db);
     try {
       await repository.initializeConnection();
-      if(command==="review" || command==="review-plan") {
+      if(command==="audit" || command==="audit-plan") {
+        const {CATALOG_SOURCE_AUDIT}=await import("../src/lib/data/catalog-source-audit");
+        const {applySourceAudit,planSourceAudit}=await import("../src/lib/server/apply-source-audit");
+        console.log(JSON.stringify(await (command==="audit"?applySourceAudit(repository,CATALOG_SOURCE_AUDIT):planSourceAudit(repository,CATALOG_SOURCE_AUDIT))));
+      } else if(command==="review" || command==="review-plan") {
         const {applyCatalogReviews,planCatalogReviews}=await import("../src/lib/server/review-catalog");
         console.log(JSON.stringify(await (command==="review"?applyCatalogReviews(repository):planCatalogReviews(repository))));
       } else if(command==="split" || command==="split-plan") {
@@ -67,12 +71,15 @@ async function main() {
         const splits=await applyCatalogSplits(repository);
         const {applyCatalogReviews}=await import("../src/lib/server/review-catalog");
         const reviews=await applyCatalogReviews(repository);
-        console.log(JSON.stringify({programs:ALL_PROGRAMS.length,...counts,splits,reviews}));
+        const {CATALOG_SOURCE_AUDIT}=await import("../src/lib/data/catalog-source-audit");
+        const {applySourceAudit}=await import("../src/lib/server/apply-source-audit");
+        const audits=await applySourceAudit(repository,CATALOG_SOURCE_AUDIT);
+        console.log(JSON.stringify({programs:ALL_PROGRAMS.length,...counts,splits,reviews,audits}));
       }
     } finally {await db.$disconnect();}
     return;
   }
-  console.log("Database commands: generate | setup (migrate + seed missing records) | deploy | seed | status | import record.json | split-plan | split | review-plan | review | backup [file]");
+  console.log("Database commands: generate | setup (migrate + seed missing records) | deploy | seed | status | import record.json | split-plan | split | review-plan | review | audit-plan | audit | backup [file]");
   if(command!=="help") process.exitCode=1;
 }
 

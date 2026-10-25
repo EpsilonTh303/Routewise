@@ -1,5 +1,17 @@
 # Official-source review — 25 October 2026
 
+## Catalog-wide audit, engine 3.4.0
+
+The newer immutable `official-catalog-audit-2026-10-25-v2` covers all 75 active records with 88 cited claim summaries: 74 partial audits and one unresolved Korea F-2-7 retrieval. Forty-two claims remain official-index/limited evidence; no record is wholly verified. Primary review and corrected research interpretations are in `research/PRIMARY_REVIEW.md`. The older pathway review described below is retained unchanged as historical evidence.
+
+New metadata is `program.audit`, persisted in its own nullable JSON column. It separates claim review from intake availability (open/closed/unclear), native financial evidence and unknown scalar fields. Original `pathway.review` remains available. Source rows retain dated historical claim lines alongside the latest observation time; immutable revisions preserve the prior record.
+
+Canada Start-Up Visa is recorded as closed/paused to new intake, not a low-budget applicant failure. Six route availability/applicability states remain unclear. Unsupported archive USD conversions, all-in and dependent costs, universal processing and residence clocks were cleared to null. Country/family/access scores remain contextual heuristics. Incomplete routes do not enter primary strategies even when selected claim checks are met.
+
+Before applying to an existing DB, take a backup, run `db:deploy`, inspect `catalog:audit:plan`, then explicitly apply `catalog:audit`. The whole batch is atomic and guarded by expected record hashes. `CatalogAudit` records the exact batch ID and manifest hash: reapplying the same batch never overwrites later edits, and a changed manifest under an applied ID is rejected. Fresh setup applies the same batch after the original splits/reviews. Normal startup never changes schema or seeds.
+
+The following sections describe the original 27-pathway review batch and its scope at that time.
+
 Three Luna agents researched the 27 separated records in parallel. The primary agent cross-checked their sources, corrected stale research results, and reviewed the final data changes. Agent working notes are in `research/*-review.json`; the reviewed, applied catalog batch is `src/lib/data/reviewed-pathways.ts`.
 
 ## Scope and evidence

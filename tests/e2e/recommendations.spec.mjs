@@ -3,18 +3,30 @@ import {readFileSync} from 'node:fs';
 
 const sample=JSON.parse(readFileSync(new URL('../../examples/ai/match.json',import.meta.url),'utf8')).profile;
 
-test('GUI Plan A agrees with the API and explains the recommendation',async({page,request})=>{
+test('GUI strategy readiness agrees with the API and explains source gaps',async({page,request})=>{
   const response=await request.post('/api/v1/match',{data:{profile:sample,limit:100}});
   expect(response.ok()).toBe(true);
   const {data}=await response.json();
-  expect(data.engineVersion).toBe('3.3.0');
-  const expected=data.plans[0].result;
-  expect(expected.explanation.goalAligned).toBe(true);
-  expect(expected.program.dvLottery).not.toBe(true);
+  expect(data.engineVersion).toBe('3.4.0');
   await page.addInitScript(profile=>localStorage.setItem('routewise-profile-v1',JSON.stringify(profile)),sample);
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await page.getByRole('button',{name:'My strategy',exact:true}).click();
+  if(data.plans.length===0) {
+    expect(data.strategyStatus).toBe('none');
+    await expect(page.getByRole('region',{name:'Top strategy'}).getByRole('button')).toHaveCount(0);
+    await expect(page.getByText('No dependable, goal-aligned plan passes the current strategy filters.',{exact:false})).toBeVisible();
+    await page.getByRole('button',{name:'Explore all routes',exact:true}).click();
+    await page.getByRole('textbox',{name:'Search programs'}).fill('EU Blue Card');
+    await page.getByRole('button',{name:/EU Blue Card/}).click();
+    const explanation=page.getByRole('dialog').getByRole('region',{name:'Recommendation explanation'});
+    await expect(explanation).toContainText('A fit score, not an approval probability');
+    await expect(explanation).toContainText('Unknown branch fields');
+    return;
+  }
+  const expected=data.plans[0].result;
+  expect(expected.explanation.goalAligned).toBe(true);
+  expect(expected.program.dvLottery).not.toBe(true);
   const primary=page.getByRole('region',{name:'Top strategy'}).getByRole('button',{name:/Plan A — Primary/});
   await expect(primary).toContainText(expected.program.program);
   await expect(primary).toContainText(expected.program.country);
@@ -60,8 +72,10 @@ test('separated remote pathway displays unknown costs and timing honestly',async
   await expect(dialog.getByRole('region',{name:'Pathway provenance'})).toContainText('id-secondhome');
   await expect(dialog).toContainText('Needs review');
   const review=dialog.getByRole('region',{name:'Official source review'});
-  await expect(review).toContainText('partial review');
+  await expect(review).toContainText('Source audit · partial');
   await expect(review).toContainText('60,000');
-  await expect(review.getByRole('link')).toHaveAttribute('href',/bontang\.imigrasi\.go\.id/);
+  const citations=review.getByRole('link');
+  await expect(citations).toHaveCount(branch.program.audit.claims.length);
+  for(const citation of await citations.all()) await expect(citation).toHaveAttribute('href',/bontang\.imigrasi\.go\.id/);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

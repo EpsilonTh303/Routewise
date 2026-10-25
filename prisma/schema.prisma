@@ -71,6 +71,7 @@ model CatalogProgram {
   sources              ProgramSource[]
   revisions            ProgramRevision[]
   pathway              Json?
+  audit                Json?
   parentId             String?
   parent               CatalogProgram? @relation("PathwayParent",fields:[parentId],references:[id],onDelete:Restrict,onUpdate:NoAction)
   children             CatalogProgram[] @relation("PathwayParent")
@@ -90,6 +91,13 @@ model CatalogSplit {
   childIds          Json
   appliedAt         DateTime @default(now())
   parent            CatalogProgram @relation(fields:[parentId],references:[id],onDelete:Restrict)
+}
+
+model CatalogAudit {
+  id           String @id
+  manifestHash String
+  recordIds    Json
+  appliedAt    DateTime @default(now())
 }
 
 model ProgramSource {

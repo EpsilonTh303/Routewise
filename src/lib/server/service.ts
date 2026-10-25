@@ -7,8 +7,9 @@ import { CATEGORY_META } from "../types";
 import { compareScenarios, scenarioRequestSchema } from "../scenarios";
 import { REQUIREMENT_VERSION } from "../route-requirements";
 import { buildSourceReviewQueue } from "../source-freshness";
+import { sourceReview } from "../source-review";
 
-export const ENGINE_VERSION = "3.3.0";
+export const ENGINE_VERSION = "3.4.0";
 export const CALIBRATION = {citizenship:"AZ",verifiedRules:false,notice:"Scores are heuristic profile-fit estimates, not approval probabilities. Passport ease/access is calibrated for Azerbaijan. Consult each program's source review status."};
 
 export class RouteWiseService {
@@ -30,7 +31,10 @@ export class RouteWiseService {
   async stats() {
     const {programs,version} = await this.catalog.snapshot();
     return {catalogVersion:version,engineVersion:ENGINE_VERSION,programCount:programs.length,
-      partiallyReviewedCount:programs.filter(p=>p.pathway?.review?.status==="partial").length,
+      partiallyReviewedCount:programs.filter(p=>sourceReview(p)?.status==="partial").length,
+      unresolvedAuditCount:programs.filter(p=>p.audit?.status==="unresolved").length,
+      auditedCount:programs.filter(p=>p.audit).length,
+      closedIntakeCount:programs.filter(p=>p.audit?.routeStatus==="closed").length,
       countryCount:new Set(programs.map(p=>p.country)).size,verifiedCount:programs.filter(p=>p.verification?.status==="verified").length,
       categoryCounts:Object.fromEntries(Object.keys(CATEGORY_META).map(category=>[category,programs.filter(p=>p.category===category).length])),
       countries:[...new Set(programs.map(p=>p.country))].sort(),calibration:CALIBRATION};

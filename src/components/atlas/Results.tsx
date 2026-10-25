@@ -125,7 +125,7 @@ export function Results({ profile, results, onEdit }: {
         </h2>
         <p className="mb-8 text-center text-xs text-muted-foreground">Tap a card for the full roadmap, costs and requirements</p>
         <p className="mb-4 text-center text-xs text-muted-foreground">Ready modeled checks come first. Conditional options need work; all other program requirements still require review.</p>
-        {plans.length===0 && <p className="mb-6 rounded-2xl border border-amber-400/20 p-4 text-center text-sm text-amber-200">No dependable, goal-aligned plan passes the current strategy filters. Review your goal, budget and the routes below. Lotteries remain exploratory options.</p>}
+        {plans.length===0 && <p className="mb-6 rounded-2xl border border-amber-400/20 p-4 text-center text-sm text-amber-200">No dependable, goal-aligned plan passes the current strategy filters. Source-audited routes with unknown costs, timing or conditions remain exploratory until those gaps are resolved. Review the routes below; missing evidence does not mean there is no legal pathway.</p>}
         <div className="grid gap-4 md:grid-cols-3">
           {plans.map((plan, i) => (
             <PlanPodiumCard key={plan.result.program.id} plan={plan} index={i}

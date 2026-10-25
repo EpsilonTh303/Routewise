@@ -21,7 +21,27 @@ export type Region =
 
 export type PassportAccess = "visa-free" | "evisa" | "visa-required";
 
+export interface SourceClaim {
+  topic:string; summary:string; sourceUrl:string; checkedAt:string; retrieval:"page"|"official-index";
+}
+export interface SourceFinancialRequirement {
+  amount:number;currency:string;period:"one-time"|"monthly"|"annual"|"balance"|"assets";description:string;sourceUrl:string;
+}
+/** Claim audit, distinct from complete-route legal verification. */
+export interface SourceAudit {
+  batchId:string;
+  status:"partial"|"unresolved";
+  reviewedAt:string;
+  routeStatus:"open"|"closed"|"unclear";
+  claims:SourceClaim[];
+  financialRequirements:SourceFinancialRequirement[];
+  limitations:string[];
+  unknownFields:string[];
+  supportsRequirementVersion?:string;
+}
+
 export interface Program {
+  audit?:SourceAudit;
   id: string;
   country: string;
   flag: string;

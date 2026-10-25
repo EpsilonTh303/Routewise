@@ -16,6 +16,7 @@ function canonical(value:unknown):string {
 export function routeRequirement(program:Program,profile:Profile):Requirement|null {
   const review=program.pathway?.review;
   if(!review) return null;
+  if(program.audit&&program.audit.supportsRequirementVersion!==REQUIREMENT_VERSION) return null;
   const expected=PATHWAY_REVIEWS.find(item=>item.id===program.id)?.review;
   if(!expected || canonical(review)!==canonical(expected)) return null;
   const claim=review.claims[0];

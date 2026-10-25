@@ -28,8 +28,21 @@ export const profileSchema: z.ZodType<Profile> = z.object({
 const text = z.string().trim().min(1).max(10000);
 const texts = z.array(text).max(100);
 const url = z.url().refine(v => ["https:", "http:"].includes(new URL(v).protocol), "Only HTTP(S) source links are supported");
+const unknownFieldSchema=z.enum(["minBudget","minMonthlyIncome","totalYearOneCost","costPerDependent","processingWeeks","yearsToPR","yearsToCitizenship","jobOfferRequired","remoteFriendly"]);
+const claimSchema=z.object({topic:text.max(100),summary:text.max(2000),sourceUrl:url,checkedAt:z.iso.datetime(),retrieval:z.enum(["page","official-index"])}).strict();
+const sourceFinancialSchema=z.object({amount:money,currency:z.string().regex(/^[A-Z]{3}$/),period:z.enum(["one-time","monthly","annual","balance","assets"]),description:text,sourceUrl:url}).strict();
+export const sourceAuditSchema=z.object({batchId:id,status:z.enum(["partial","unresolved"]),reviewedAt:z.iso.datetime(),routeStatus:z.enum(["open","closed","unclear"]),
+  claims:z.array(claimSchema).max(30),financialRequirements:z.array(sourceFinancialSchema).max(30),limitations:texts.min(1),
+  unknownFields:z.array(unknownFieldSchema).max(9),supportsRequirementVersion:z.string().min(1).max(100).optional(),
+}).strict().superRefine((audit,context)=>{
+  if(audit.status==="partial"&&audit.claims.length===0) context.addIssue({code:"custom",path:["claims"],message:"Partial review needs at least one cited claim"});
+  if(audit.status==="unresolved"&&(audit.claims.length>0||audit.financialRequirements.length>0||audit.routeStatus!=="unclear")) context.addIssue({code:"custom",message:"Unresolved audit cannot assert claims, amounts or route availability"});
+  if(audit.routeStatus==="closed"&&!audit.claims.some(claim=>/intake|availability|status/i.test(claim.topic))) context.addIssue({code:"custom",message:"Closed intake needs a cited availability claim"});
+  if(audit.financialRequirements.some(item=>!audit.claims.some(claim=>claim.sourceUrl===item.sourceUrl))) context.addIssue({code:"custom",message:"Amounts must reference an audited claim source"});
+});
 export const sourceSchema = z.object({ url, title: text.optional(), evidence: text.optional(), checkedAt: z.iso.datetime().nullable().default(null) }).strict();
 export const programSchema: z.ZodType<Program> = z.object({
+  audit:sourceAuditSchema.optional(),
   id, country: text.max(150), flag: text.max(32), region: regionSchema, program: text.max(300),
   category: categorySchema, tagline: text,
   minBudget: money.nullable(), minMonthlyIncome: money.nullable(), totalYearOneCost: money.nullable(), costPerDependent: money.nullable(),
@@ -66,19 +79,18 @@ export const importSchema = z.object({
   active: z.boolean().default(true), reason: text.max(1000),
   expectedHash: z.string().regex(/^[a-f0-9]{64}$/).optional(),
 }).strict().superRefine((value,context) => {
-  const review=value.program.pathway?.review;
-  if(review) {
+  for(const review of [value.program.pathway?.review,value.program.audit].filter(item=>item!==undefined)) {
     for(const claim of review.claims) {
-      if(!value.sources.some(source=>source.url===claim.sourceUrl && source.checkedAt===claim.checkedAt && source.evidence?.includes(claim.summary))) {
+      if(!value.sources.some(source=>source.url===claim.sourceUrl && (source.checkedAt===claim.checkedAt||source.evidence?.includes(`${claim.checkedAt}: ${claim.summary}`)) && source.evidence?.includes(claim.summary))) {
         context.addIssue({code:"custom",path:["sources"],message:"Reviewed claims need matching dated source evidence"});
       }
     }
     if(review.financialRequirements.some(item=>!review.claims.some(claim=>claim.sourceUrl===item.sourceUrl))) {
       context.addIssue({code:"custom",path:["program","pathway","review"],message:"Financial evidence must reference a reviewed source"});
     }
-    for(const field of value.program.pathway!.unknownFields) {
+  }
+  for(const field of new Set([...(value.program.pathway?.unknownFields??[]),...(value.program.audit?.unknownFields??[])])) {
       if(value.program[field as keyof Program]!==null) context.addIssue({code:"custom",path:["program","pathway","unknownFields"],message:"Unknown fields must have null values"});
-    }
   }
   if (value.program.verification?.status === "verified") {
     const source = value.sources.find(s => s.url === value.program.verification?.sourceUrl && s.checkedAt === value.program.verification?.checkedAt && s.evidence);

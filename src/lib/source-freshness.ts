@@ -1,15 +1,16 @@
 import type { Program } from "./types";
+import { sourceReview } from "./source-review";
 
 export type SourceQueueOptions = {asOf:string;maxAgeDays?:number;limit?:number};
-export type SourceQueueReason = "Potential source conflict"|"Index-only evidence"|"Unreviewed"|"Review is stale"|"Partial coverage";
+export type SourceQueueReason = "Potential source conflict"|"Index-only evidence"|"Unreviewed"|"Review is stale"|"Partial coverage"|"Unresolved audit"|"Intake closed";
 export type SourceQueueItem = {
-  id:string;country:string;program:string;status:"unreviewed"|"partial"|"verified";
+  id:string;country:string;program:string;status:"unreviewed"|"partial"|"unresolved"|"verified";
   reviewedAt:string|null;reasons:SourceQueueReason[];
   sources:{topic:string;summary:string;url:string;checkedAt:string|null;retrieval:"page"|"official-index"|"unreviewed"}[];
 };
 export type SourceReviewQueue = {
   asOf:string;maxAgeDays:number;limit:number;
-  counts:{total:number;unreviewed:number;partial:number;verified:number;stale:number;indexOnly:number;conflicts:number};
+  counts:{total:number;unreviewed:number;partial:number;unresolved:number;verified:number;stale:number;indexOnly:number;conflicts:number};
   items:SourceQueueItem[];
 };
 
@@ -29,11 +30,11 @@ export function buildSourceReviewQueue(programs:Program[],options:SourceQueueOpt
   if(!Number.isInteger(limit)||limit<1||limit>100) throw new Error("limit must be an integer from 1 to 100.");
 
   const rows=programs.map(program=>{
-    const review=program.pathway?.review;
+    const review=sourceReview(program);
     const verified=program.verification?.status==="verified";
-    const status:SourceQueueItem["status"]=verified?"verified":review?"partial":"unreviewed";
+    const status:SourceQueueItem["status"]=verified?"verified":review?review.status:"unreviewed";
     const reviewedAt=review?.reviewedAt.slice(0,10)??program.verification?.checkedAt?.slice(0,10)??null;
-    const sources=review
+    const sources=review?.claims.length
       ?review.claims.map(claim=>({topic:claim.topic,summary:claim.summary,url:claim.sourceUrl,checkedAt:claim.checkedAt.slice(0,10),retrieval:claim.retrieval}))
       :verified
         ?[{topic:"Verification source",summary:"The catalog record is marked verified; this queue does not re-evaluate that review.",url:program.verification!.sourceUrl,checkedAt:program.verification!.checkedAt?.slice(0,10)??null,retrieval:"page" as const}]
@@ -50,13 +51,15 @@ export function buildSourceReviewQueue(programs:Program[],options:SourceQueueOpt
     if(conflict) reasons.push("Potential source conflict");
     if(indexOnly) reasons.push("Index-only evidence");
     if(status==="unreviewed") reasons.push("Unreviewed");
+    if(status==="unresolved") reasons.push("Unresolved audit");
+    if(program.audit?.routeStatus==="closed") reasons.push("Intake closed");
     if(stale) reasons.push("Review is stale");
     if(status==="partial") reasons.push("Partial coverage");
-    return {item:{id:program.id,country:program.country,program:program.program,status,reviewedAt,reasons,sources},priority:conflict?0:indexOnly?1:status==="unreviewed"?2:stale?3:status==="partial"?4:5,stale,indexOnly,conflict};
+    return {item:{id:program.id,country:program.country,program:program.program,status,reviewedAt,reasons,sources},priority:conflict?0:indexOnly||program.audit?.routeStatus==="closed"?1:status==="unreviewed"||status==="unresolved"?2:stale?3:status==="partial"?4:5,stale,indexOnly,conflict};
   });
   rows.sort((a,b)=>a.priority-b.priority||(a.item.reviewedAt??"9999-99-99").localeCompare(b.item.reviewedAt??"9999-99-99")||a.item.country.localeCompare(b.item.country)||a.item.id.localeCompare(b.item.id));
   return {asOf,maxAgeDays,limit,counts:{total:programs.length,unreviewed:rows.filter(row=>row.item.status==="unreviewed").length,
-    partial:rows.filter(row=>row.item.status==="partial").length,verified:rows.filter(row=>row.item.status==="verified").length,
+    partial:rows.filter(row=>row.item.status==="partial").length,unresolved:rows.filter(row=>row.item.status==="unresolved").length,verified:rows.filter(row=>row.item.status==="verified").length,
     stale:rows.filter(row=>row.stale).length,indexOnly:rows.filter(row=>row.indexOnly).length,conflicts:rows.filter(row=>row.conflict).length},
     items:rows.slice(0,limit).map(row=>row.item)};
 }

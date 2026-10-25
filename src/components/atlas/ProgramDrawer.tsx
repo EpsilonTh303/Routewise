@@ -32,6 +32,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
   result: MatchResult; profile: Profile; onClose: () => void;
 }) {
   const p = result.program;
+  const review = p.audit ?? p.pathway?.review;
   const returnFocus = useRef<HTMLElement | null>(null);
   const reducedMotion=useReducedMotion();
   const meta = CATEGORY_META[p.category];
@@ -117,12 +118,13 @@ export function ProgramDrawer({ result, profile, onClose }: {
 
             {p.pathway && <section aria-label="Pathway provenance" className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-100"><h3 className="font-bold">Separate archived pathway</h3><p className="mt-1">Original family: {p.pathway.parentId}. Branch-specific costs and timelines must be reviewed; missing figures are not zero.</p><p className="mt-2">Unknown fields: {p.pathway.unknownFields.join(", ") || "None recorded"}</p></section>}
 
-            {p.pathway?.review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
-              <h3 className="font-bold text-emerald-200">Official sources checked · partial review</h3>
-              <p className="text-muted-foreground">Reviewed {p.pathway.review.reviewedAt.slice(0,10)}. These citations support the listed claims; the complete route and your eligibility remain under review.</p>
-              <ul className="space-y-3">{p.pathway.review.claims.map((claim,index)=><li key={`${claim.sourceUrl}-${index}`}><p>{claim.summary}</p><a className="mt-1 inline-block break-all text-emerald-300 underline" href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">{new URL(claim.sourceUrl).hostname} · {claim.topic}{claim.retrieval==="official-index"?" · indexed evidence; direct access blocked":""}</a></li>)}</ul>
-              {p.pathway.review.financialRequirements.length>0 && <div><h4 className="font-bold">Amounts in source currency</h4><ul className="mt-2 space-y-2">{p.pathway.review.financialRequirements.map((item,index)=><li key={index}>{item.currency} {item.amount.toLocaleString("en-US")} · {item.period}: {item.description}</li>)}</ul><p className="mt-2 text-muted-foreground">Non-USD amounts are not converted or compared against your USD budget. Fees, investments, assets and income are separate requirements.</p></div>}
-              <details><summary className="cursor-pointer py-2 font-semibold">Unresolved evidence</summary><ul className="space-y-2 text-muted-foreground">{p.pathway.review.limitations.map(item=><li key={item}>{item}</li>)}</ul></details>
+            {review && <section aria-label="Official source review" className="space-y-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-4 text-xs">
+              <h3 className="font-bold text-emerald-200">Source audit · {review.status}</h3>
+              <p className="text-muted-foreground">Reviewed {review.reviewedAt.slice(0,10)}. {review.status==="unresolved"?"Evidence retrieval remains unresolved; no route requirements were verified by this attempt.":"These citations support selected claims; the complete route and your eligibility remain under review."}</p>
+              {p.audit&&<p className="font-semibold text-amber-100">Intake status in reviewed sources: {p.audit.routeStatus}. This does not establish individual eligibility.</p>}
+              <ul className="space-y-3">{review.claims.map((claim,index)=><li key={`${claim.sourceUrl}-${index}`}><p>{claim.summary}</p><a className="mt-1 inline-block break-all text-emerald-300 underline" href={claim.sourceUrl} target="_blank" rel="noopener noreferrer">{new URL(claim.sourceUrl).hostname} · {claim.topic}{claim.retrieval==="official-index"?" · indexed evidence; direct access blocked":""}</a></li>)}</ul>
+              {review.financialRequirements.length>0 && <div><h4 className="font-bold">Amounts in source currency</h4><ul className="mt-2 space-y-2">{review.financialRequirements.map((item,index)=><li key={index}>{item.currency} {item.amount.toLocaleString("en-US")} · {item.period}: {item.description}</li>)}</ul><p className="mt-2 text-muted-foreground">Non-USD amounts are not converted or compared against your USD budget. Fees, investments, assets and income are separate requirements.</p></div>}
+              <details><summary className="cursor-pointer py-2 font-semibold">Unresolved evidence</summary><ul className="space-y-2 text-muted-foreground">{review.limitations.map(item=><li key={item}>{item}</li>)}</ul></details>
             </section>}
 
             {result.explanation && <section aria-label="Recommendation explanation" className="space-y-4 rounded-2xl border border-white/10 p-4">
@@ -182,7 +184,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
             {/* requirements */}
             <div>
               <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-emerald-300">Core requirements</h3>
-              <p className="mb-3 text-xs text-muted-foreground">Recorded requirements · {p.pathway?.review ? `partial source review ${p.pathway.review.reviewedAt.slice(0,10)}` : p.verification?.status === "verified" && p.verification.checkedAt ? `source checked ${p.verification.checkedAt}` : "source review pending"}. Match scores measure profile fit, not approval probability.</p>
+              <p className="mb-3 text-xs text-muted-foreground">Recorded requirements · {review ? `partial source review ${review.reviewedAt.slice(0,10)}` : p.verification?.status === "verified" && p.verification.checkedAt ? `source checked ${p.verification.checkedAt}` : "source review pending"}. Match scores measure profile fit, not approval probability.</p>
               <ul className="space-y-2">
                 {p.requirements.map((r) => (
                   <li key={r} className="flex items-start gap-2.5 text-sm">
@@ -230,7 +232,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
                 <Users className="h-4 w-4 text-emerald-300" />
                 <p className="mt-2 text-xs font-bold">Family</p>
                 <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                  {p.pathway ? "Family rules need separate source review" : p.familyFriendly >= 0.9 ? "Spouse + children (often parents) included" : p.familyFriendly >= 0.75 ? "Spouse & children join" : "Dependents limited"}
+                  {p.pathway || p.audit ? "Family rules need separate source review" : p.familyFriendly >= 0.9 ? "Spouse + children (often parents) included" : p.familyFriendly >= 0.75 ? "Spouse & children join" : "Dependents limited"}
                 </p>
               </div>
               <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3.5">

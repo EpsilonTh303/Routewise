@@ -5,7 +5,7 @@ import { buildSourceReviewQueue } from '../src/lib/source-freshness.ts';
 const route=(id,patch={})=>({id,country:id,program:`Route ${id}`,url:'https://example.org/program',verification:{status:'unverified',checkedAt:null,sourceUrl:'https://example.org'},...patch});
 const reviewed=(id,review,verification={status:'unverified',checkedAt:null,sourceUrl:'https://example.org'})=>route(id,{verification,pathway:{review}});
 const claim=(overrides={})=>({topic:'Income',summary:'Income threshold is X',sourceUrl:'https://example.org/rule',checkedAt:'2026-10-01T00:00:00.000Z',retrieval:'page',...overrides});
-const review=(overrides={})=>({reviewedAt:'2026-10-01T00:00:00.000Z',claims:[claim()],limitations:[],...overrides});
+const review=(overrides={})=>({status:'partial',reviewedAt:'2026-10-01T00:00:00.000Z',claims:[claim()],limitations:[],...overrides});
 
 test('queue validates real calendar dates and bounded options',()=>{
   for(const asOf of ['2026-2-01','2026-02-30','not-a-date']) assert.throws(()=>buildSourceReviewQueue([],{asOf}));
@@ -19,7 +19,7 @@ test('queue counts review states, freshness and evidence characteristics without
     reviewed('conflict',review({claims:[claim(),claim({summary:'Income requirement is different'})]}))];
   const before=structuredClone(inputs);
   const queue=buildSourceReviewQueue(inputs,{asOf:'2026-10-25',maxAgeDays:90,limit:4});
-  assert.deepEqual(queue.counts,{total:6,unreviewed:1,partial:4,verified:1,stale:1,indexOnly:1,conflicts:1});
+  assert.deepEqual(queue.counts,{total:6,unreviewed:1,partial:4,unresolved:0,verified:1,stale:1,indexOnly:1,conflicts:1});
   assert.deepEqual(queue.items.map(item=>item.id),['conflict','indexed','unreviewed','old']);
   assert.equal(queue.items.length,4);
   assert.deepEqual(inputs,before);

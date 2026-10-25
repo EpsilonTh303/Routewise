@@ -4,6 +4,7 @@ import type {
 import { ALL_PROGRAMS } from "./data";
 import { assessRouteRequirements } from "./route-requirements";
 import { flattenRequirements } from "./requirements";
+import { sourceReview } from "./source-review";
 
 /* ------------------------------------------------------------------ */
 /* Goal weighting — each goal redistributes the 6 score dimensions      */
@@ -62,6 +63,7 @@ export function compareOptionalNumber(a:number|null,b:number|null):number {
 
 export function programDataGaps(p:Program,u:Profile):string[] {
   const gaps=["minBudget","minMonthlyIncome","totalYearOneCost","processingWeeks","jobOfferRequired","remoteFriendly"].filter(key=>p[key as keyof Program]===null);
+  gaps.push(...(p.audit?.unknownFields.filter(field=>!gaps.includes(field))??[]));
   if((u.dependents>0||u.familyStatus!=="single")&&p.costPerDependent===null) gaps.push("costPerDependent");
   if(u.goal==="citizenship"&&p.pathway?.unknownFields.includes("yearsToCitizenship")) gaps.push("yearsToCitizenship");
   return gaps;
@@ -72,6 +74,7 @@ export function programDataGaps(p:Program,u:Profile):string[] {
 /* ------------------------------------------------------------------ */
 function runGates(p: Program, u: Profile, requirements:ReturnType<typeof assessRouteRequirements>) {
   const issues: string[] = [];
+  if(p.audit?.routeStatus==="closed") issues.push("Official source records this route as closed or paused to new applications");
   const cost = adjustedCost(p, u);
   const funds = requiredBudget(p, u);
   const checks=requirements?flattenRequirements(requirements.result):[];
@@ -172,7 +175,7 @@ export function scoreProgram(p: Program, u: Profile): MatchResult {
   const costScore = funds === null ? null : funds === 0 ? 100 : clamp(45 + Math.log2(Math.max(ratio(u.budget, funds), 0.25)) * 24);
   // Decision speed is distinct from the residence clock. Missing PR is not a five-year wait.
   const speedScore = p.processingWeeks===null?null:100 / (1 + p.processingWeeks / 26);
-  const citizenshipScore = p.pathway?.unknownFields.includes("yearsToCitizenship")?null:p.yearsToCitizenship === null ? 0 : p.yearsToCitizenship === 0 ? 100 : clamp(110 - p.yearsToCitizenship * 10);
+  const citizenshipScore = p.pathway?.unknownFields.includes("yearsToCitizenship")||p.audit?.unknownFields.includes("yearsToCitizenship")?null:p.yearsToCitizenship === null ? 0 : p.yearsToCitizenship === 0 ? 100 : clamp(110 - p.yearsToCitizenship * 10);
   const hasFamily = u.familyStatus !== "single" || u.dependents > 0;
   const qolScore = clamp(p.devScore * 10 - (hasFamily || u.goal === "family-safe" ? (1 - p.familyFriendly) * 12 : 0));
   // The dataset has AZ-specific entry data only. An unknown passport gets a neutral value.
@@ -224,7 +227,8 @@ export function scoreProgram(p: Program, u: Profile): MatchResult {
   if (p.processingWeeks!==null&&p.processingWeeks<=12) strengths.push("Recorded decision estimate is within twelve weeks of filing");
   if (hasFamily && p.familyFriendly>=0.9) strengths.push("High recorded family-inclusion score");
   if (u.citizenship!=="AZ") warnings.push("Passport access for your citizenship is not modeled; the access dimension uses a neutral score.");
-  if (p.verification?.status!=="verified") warnings.push(p.pathway?.review?"Selected claims have dated official-source evidence; the full program, costs and eligibility remain unverified.":"Program rules and figures have not been source-verified.");
+  if (p.verification?.status!=="verified") warnings.push(sourceReview(p)?.claims.length?"Selected claims have dated official-source evidence; the full program, costs and eligibility remain unverified.":"Program rules and figures have not been source-verified.");
+  if(p.audit) warnings.push(...p.audit.limitations,...(p.audit.routeStatus==="unclear"?["Current intake availability is unresolved; this route cannot enter a primary strategy."]:[]));
   warnings.push("Only recorded financial and sponsorship checks are automated. Review the listed qualifications, nationality rules, income type and any alternative qualifying paths.");
   if (p.category === "nomad" && !u.remoteWork) warnings.push("Remote-work evidence is not supplied; check which qualifying path applies.");
   if ((u.familyStatus==="single" && u.dependents>0) || (u.familyStatus!=="single" && u.dependents===0)) warnings.push("Household status and dependent count disagree; costs include at least the declared dependents and any implied partner.");
@@ -236,7 +240,7 @@ export function scoreProgram(p: Program, u: Profile): MatchResult {
   if(!requirements && p.minMonthlyIncome!==null && p.minMonthlyIncome>0 && (!p.jobOfferRequired||u.hasJobOffer) && (p.jobOfferRequired?u.expectedSalary:u.monthlyIncome)<p.minMonthlyIncome) nextSteps.push(`Check documented ${p.jobOfferRequired?"offered salary":"income"} against the recorded $${p.minMonthlyIncome.toLocaleString("en-US")}/month floor.`);
   if(!goalAligned) nextSteps.push("Compare a route that directly supports your selected goal.");
   nextSteps.push("Verify the remaining requirements and current figures using the official source link.");
-  const status:Eligibility=requirementStatus==="unmet"?"ineligible":eligible?(missingFields.length||requirementStatus==="unknown"?"conditional":"eligible"):issues.length===1 && u.budget>=knownFloor*0.75?"conditional":"ineligible";
+  const status:Eligibility=requirementStatus==="unmet"||p.audit?.routeStatus==="closed"?"ineligible":eligible?(missingFields.length||requirementStatus==="unknown"||p.audit?.routeStatus==="unclear"?"conditional":"eligible"):issues.length===1 && u.budget>=knownFloor*0.75?"conditional":"ineligible";
   return {program:p,matchPct:Math.round(clamp(baseScore+adjustments.reduce((sum,item)=>sum+item.points,0),0,98)),breakdown,
     eligibility:status,gateIssues:[...issues,...(missingFields.length?["Branch data incomplete — review needed"]:[]),...(requirements&&requirementStatus!=="met"?[`Structured requirements: ${requirementStatus}`]:[])],adjustedCost:cost,
     explanation:{goalAligned,requiredBudget:funds,budgetHeadroom:funds===null?null:u.budget-funds,decisionMonths,dataComplete:missingFields.length===0,missingFields,knownBudgetFloor:knownFloor,
@@ -274,7 +278,7 @@ export interface Plan {
 export function buildStrategy(results: MatchResult[]): Plan[] {
   const seen=new Set<string>();
   const viable = [...results].sort(compareMatches).filter(r=>{
-    if(seen.has(r.program.id) || r.eligibility==="ineligible" || r.program.dvLottery || r.explanation?.goalAligned===false || r.explanation?.dataComplete===false || (r.explanation?.requirements && r.explanation.requirements.result.status!=="met")) return false;
+    if(seen.has(r.program.id) || r.eligibility==="ineligible" || r.program.dvLottery || (r.program.audit&&r.program.audit.routeStatus!=="open") || r.explanation?.goalAligned===false || r.explanation?.dataComplete===false || (r.explanation?.requirements && r.explanation.requirements.result.status!=="met")) return false;
     seen.add(r.program.id);return true;
   });
   if (viable.length === 0) return [];

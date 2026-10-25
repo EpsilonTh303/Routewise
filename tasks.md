@@ -1,43 +1,45 @@
 # RouteWise next tasks
 
-Updated 2026-10-25 for engine 3.3.0. Read AGENTS.md, HANDOFF.md, ELIGIBILITY.md and SOURCE_REVIEW.md. The applied review batch remains immutable; this pass made no live catalog changes.
+Updated 2026-10-25 for engine 3.4.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.md and research/PRIMARY_REVIEW.md. Primary agent owns commits; Luna agents do not stage/commit in the shared checkout.
 
-## Implemented in this pass
+## Completed source-audit pass
 
-- [x] Pure validated AND/OR requirements with met/unmet/unknown results, source review dates and nullable effective dates.
-- [x] Twelve partial pathway projections: Brazil income OR funds; EB-2 sponsorship versus NIW assessment; Thailand assets/investment and remote history; Australia invitation/nomination; Finland and UAE occupational checks. Full legal eligibility remains unassessed.
-- [x] Optional validated route-scoped applicant facts and financial evidence; legacy profiles remain readable, browser writes version 2, saved evaluation snapshots remain immutable.
-- [x] Matching-currency financial policy with explicit income basis, period and history. No hidden FX; assets, investment, balances, fees and relocation spending remain separate.
-- [x] Shared GUI/REST/CLI/MCP evaluation and bounded stateless scenario comparison. GUI scenarios never save changes.
-- [x] Read-only source queue with explicit as-of date, default 90-day freshness threshold, index-only flags and potential conflict candidates.
-- [x] Isolated backup/restore test preserving revisions, private profiles and evaluations; RECOVERY.md documents recovery.
+- [x] Audit outcomes for all 75 active routes from three Luna region contracts; primary reviewer cross-checked the 79 cited URL inventory and corrected misleading inferences, unit errors and cross-route evidence.
+- [x] Applied immutable official-catalog-audit-2026-10-25-v2: 88 claim summaries, 74 partial audits, one unresolved retrieval. No whole route marked verified.
+- [x] Added generalized program.audit metadata, nullable SQLite column and exact-ID immutable batch receipts; preserved original pathway evidence and revisions.
+- [x] Backed up before migration/application; all 75 expected hashes matched. Private profiles/results and 14 inactive records passed unchanged fingerprint checks.
+- [x] Kept Canada SUV searchable as closed to new intake and excluded it from primary strategies. Unclear intake cannot become a primary plan.
+- [x] Removed unsupported archive total/dependent costs, USD conversions and universal processing/residence clocks. Unknown values remain null; native source amounts stay separate.
+- [x] Prepared STUDY_PATHWAYS.md for a later study → post-study → employment → PR/citizenship phase. No new routes were added in this audit pass.
 
-## 1. Finish source coverage and resolve conflicts — next substantive work
+## 1. Resolve remaining source limitations
 
-- [ ] Resolve ICP versus u.ae property-residence duration with the issuing authority; preserve the conflict until then.
-- [ ] Replace official-index-only evidence with directly retrieved official content where available (Saudi, Migri, Australia and Brazil). Blocked retrieval and research notes do not establish verification.
-- [ ] Confirm Indonesia national E33G/Second Home rules and current checkout/renewal fees; distinguish local reporting guidance from national eligibility.
-- [ ] Complete Costa Rica operational checklists, paid-work and renewal conditions; separate tax incentives.
-- [ ] Review the remaining 49 active archive records, prioritizing actual strategy candidates and requested routes. No student routes are recorded.
-- [ ] Establish route-specific PR/citizenship, physical-presence, renewal, dependent and work-rights claims.
+- [ ] Replace 42 official-index/limited claim retrievals with directly retrieved issuing-authority evidence where possible; record unsuccessful attempts instead of assuming verification.
+- [ ] Korea F-2-7: retrieve current route-specific official criteria; the audit currently establishes no claim.
+- [ ] Resolve six unclear availability/applicability records: Korea, Montenegro property, Panama Friendly Nations, Portugal D7, US DV and Vanuatu.
+- [ ] Resolve UAE property-duration conflict with the issuing authority. Preserve contradictory official claims until resolved.
+- [ ] Confirm Indonesia national Second Home/E33G application and current fee evidence separately from local reporting guidance.
+- [ ] Complete current Costa Rica checklists, work/renewal conditions and source applicability.
+- [ ] Expand each partial review into claim-specific financial, qualification, renewal, presence, dependent, work-rights and PR/citizenship evidence. An audit attempt is not whole-route verification.
 
-Acceptance: exact official URL, dated claim evidence, retrieval method, applicability/effective dates where established, and limitations. New evidence requires a NEW guarded batch/version. Preserve custom catalog edits and atomic conflict rollback. Partial claim review never verifies a whole route. Use Luna researchers when delegating and independently cross-check their findings.
+New evidence requires a NEW guarded batch/version. Never modify the applied v1 review or v2 catalog audit. Preserve edits atomically and independently cross-check Luna results.
 
-## 2. Extend documentary checks from new evidence
+## 2. Add study and post-study pathways in a separate phase
 
-- [ ] Replace unresolved manual checks only when supported: Australia age at invitation and accepted English evidence; Finnish ICT pay/transfer; UAE competent authority, occupation and solvency alternatives.
-- [ ] Attach effective date ranges and source-change policies to new snapshots. Current null effective dates mean unknown, not unlimited legal validity.
-- [ ] Expand beyond the first 12 projections with versioned rules; edited/unrecognized reviews deliberately do not inherit old automatic checks.
-- [ ] Establish year-one/dependent spending and timing separately. Passing partial checks must not promote incomplete branches into Plan A/B/C.
-- [ ] Record individual income-history periods and documentary references rather than only an applicant assertion about qualifying history.
+- [ ] Choose a small pilot set from STUDY_PATHWAYS.md and verify each student/post-study/work transition independently against current official sources.
+- [ ] Model institutions/program eligibility, completion/cohort dates, application windows and permitted work; do not treat a degree as automatic post-study eligibility.
+- [ ] Keep tuition, living funds, balances, fees and dependent evidence separate in native currency.
+- [ ] Represent student → post-study → employment → PR → citizenship as conditional transitions with separate residence-credit and processing clocks.
+- [ ] Introduce additions through a new reviewed batch with migration/validation/API/MCP/mobile support and explicit incomplete states.
 
-## 3. Optional follow-ups
+## 3. Improve assessment coverage from supported evidence
 
-- [ ] If conversion is desired, introduce dated authoritative FX snapshots and stale-rate behavior. Current policy requires matching-currency evidence; no network belongs in scoring.
-- [ ] Extend GUI scenarios to documented-evidence editing and explicit saving only if requested. API/CLI/MCP already accept evidence patches without persistence.
-- [ ] Prioritize the source queue using a requested profile or selected routes; current priority uses evidence quality and age.
-- [ ] Assess persistent hosting only if requested. The current server is a local Windows process. Leave Windows Firewall unchanged.
+- [ ] Extend structured checks beyond the existing 12 projections without substituting planning sliders for documents.
+- [ ] Replace manual checks only when supported: accepted language/qualification evidence, invitation age, Finnish ICT pay/transfer and UAE authority/solvency alternatives.
+- [ ] Add effective date ranges and individual income-history periods/document references.
+- [ ] Establish defensible year-one/dependent spending scenarios separately from legal minimum funds; current missing costs must not be filled merely to enable Plan A/B/C.
+- [ ] FX remains optional: current policy requires matching-currency evidence, with no network in scoring.
 
-## Definition of done
+## Operational rules
 
-Back up before live DB changes. Use isolated test databases. Run required unit/integration/lint/build checks and production E2E for GUI/API changes. Verify ownership before stopping project servers and restore LAN service afterward. Update HANDOFF.md with exact results and remaining gaps. Never reset the DB, overwrite custom edits, or equate a heuristic score with legal eligibility.
+Commit each completed validated version/fix with explicit task files. Never stage environment/profile/database/backup/runtime files or push without authorization. Use isolated tests, backup before live DB changes, verify ownership before stopping project processes, restore LAN after builds, and leave Windows Firewall unchanged. Exact final checks and runtime state belong in HANDOFF.md.
