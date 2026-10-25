@@ -150,6 +150,28 @@ test("structured evidence and temporary scenarios round trip through HTTP withou
   assert.deepEqual([await database.savedProfile.count(),await database.strategyRun.count()],privateCounts);
 });
 
+test("masters stage evidence is assessed through the existing HTTP matching boundary without persistence",async()=>{
+  const counts=[await database.savedProfile.count(),await database.strategyRun.count()];
+  const programId="de-masters-study";
+  for(const value of [undefined,true,false]){
+    const facts=value===undefined?{}:{studyAdmission:value,programmeLanguage:value,securedLivelihood:value};
+    const input={profile:{...profile,goal:"study",evidence:{routes:{[programId]:{facts}}}},includeIneligible:true,limit:20};
+    const response=await handleApi(new Request("http://test/api/v1/match",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input)}),["match"],service);
+    assert.equal(response.status,200);
+    const data=(await response.json()).data;
+    assert.deepEqual(data,await service.match(input));
+    const result=data.results.find((result:{program:{id:string}})=>result.program.id===programId);
+    assert.equal(result.explanation.requirements.result.status,value===false?"unmet":"unknown");
+    assert.equal(result.eligibility,value===false?"ineligible":"conditional");
+    assert.equal(result.explanation.requirements.result.children.find((check:{id:string})=>check.id==="study-costs").status,"unknown");
+    assert.deepEqual(data.plans,[]);
+  }
+  const invalid={profile:{...profile,evidence:{routes:{[programId]:{facts:{studyAdmission:"true"}}}}}};
+  const rejected=await handleApi(new Request("http://test/api/v1/match",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(invalid)}),["match"],service);
+  assert.equal(rejected.status,400);
+  assert.deepEqual([await database.savedProfile.count(),await database.strategyRun.count()],counts);
+});
+
 test("saved profiles protect against lost updates and strategy snapshots remain immutable",async()=>{
   const saved=await service.saveProfile({id:"test-person",name:"Test person",profile});
   await assert.rejects(()=>service.saveProfile({id:saved.id,name:saved.name,profile}),/expectedVersion/);

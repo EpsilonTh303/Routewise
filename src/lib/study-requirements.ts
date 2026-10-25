@@ -2,6 +2,7 @@ import type {Program} from './types';
 import type {FactKey,Requirement,RuleSource} from './requirements';
 import {studyPilotPrograms} from './data/study-pilot';
 import {canonicalJson} from './canonical-json';
+import {germanyStudyJourney} from './data/germany-study-journey';
 
 /** Project only the immutable, attached pilot evidence; generic education never proves graduation. */
 export function studyRouteRequirement(program:Program):Requirement|null {
@@ -14,12 +15,34 @@ export function studyRouteRequirement(program:Program):Requirement|null {
   const manual=(id:string,label:string,reason:string,index=0):Requirement=>({id,kind:'manual',label,reason,source:source(index)});
   let children:Requirement[];
   switch(program.id) {
-    case 'de-masters-study': children=[
-      fact('studyAdmission','Recognised German institution and specific master’s admission'),
-      fact('programmeLanguage','Programme-specific accepted language evidence'),
-      fact('securedLivelihood','Living funds proved by blocked account, scholarship or declaration of commitment'),
-      manual('study-costs','Individual study costs and document checklist','The EUR 11,904 blocked-account amount is one 2026 proof alternative. Confirm tuition, insurance, duration and consular documents separately.'),
-    ];break;
+    case 'de-masters-study': {
+      // Only the master's entry checklist is connected. Never evaluate edges or later stages here.
+      const stage=germanyStudyJourney.stages.find(stage=>stage.id==='masters'&&stage.kind==='masters');
+      if(!stage?.programIds.includes(program.id)) return null;
+      // Preserve the existing rule IDs, labels and manual review; no financial rule is introduced.
+      const supported=[
+        fact('studyAdmission','Recognised German institution and specific master’s admission'),
+        fact('programmeLanguage','Programme-specific accepted language evidence'),
+        fact('securedLivelihood','Living funds proved by blocked account, scholarship or declaration of commitment'),
+        manual('study-costs','Individual study costs and document checklist','The EUR 11,904 blocked-account amount is one 2026 proof alternative. Confirm tuition, insurance, duration and consular documents separately.'),
+      ];
+      children=[];
+      for(const condition of stage.conditions){
+        const reference=condition.source;
+        if(reference.programId!==program.id||reference.auditBatchId!==program.audit!.batchId) return null;
+        const matches=claims.flatMap((claim,index)=>claim.topic===reference.claimTopic?[index]:[]);
+        if(matches.length!==1) return null;
+        for(const evidence of condition.evidence){
+          if(evidence.kind==='fact'&&evidence.programId!==program.id) return null;
+          const check=supported.find(check=>evidence.kind==='manual'?check.kind==='manual':check.kind==='fact'&&check.fact===evidence.fact);
+          if(!check||children.some(child=>child.id===check.id)) return null;
+          children.push({...check,source:source(matches[0])});
+        }
+      }
+      // An incomplete/unsupported model must not silently drop an existing safeguard.
+      if(children.length!==supported.length) return null;
+      break;
+    }
     case 'de-graduate-jobsearch': children=[
       fact('germanDegree','Successfully completed German higher education'),
       fact('healthCoverage','Qualifying health insurance'),

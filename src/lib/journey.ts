@@ -28,7 +28,7 @@ const stageSchema=z.object({
   transitions:z.array(transitionSchema).max(20),
 }).strict();
 
-/** Descriptive sidecar only: not consumed by scoring, persistence or the GUI. */
+/** Stage contract. Only German master's entry is projected into existing requirement checks. */
 export const journeySchema=z.object({
   version:z.literal(1),id,entryStageId:id,stages:z.array(stageSchema).min(1).max(20),
 }).strict().superRefine((journey,ctx)=>{
