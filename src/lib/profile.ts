@@ -11,7 +11,7 @@ export function parseSavedProfile(raw: string | null): Profile | null {
   try {
     const value: unknown = JSON.parse(raw);
     if(isProfile(value)) return value; // migrate v1 without inventing evidence
-    if(value && typeof value === "object" && "version" in value && value.version===2 && "profile" in value && isProfile(value.profile)) return value.profile;
+    if(value && typeof value === "object" && "version" in value && (value.version===2||value.version===3) && "profile" in value && isProfile(value.profile)) return value.profile;
     return null;
   } catch {
     return null;

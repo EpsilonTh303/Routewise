@@ -1,14 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Compass, Globe2, Table2 } from "lucide-react";
+import { Compass, Globe2, Table2, UserRound } from "lucide-react";
 
 export function Navbar({
   view,
   onNav,
+  photo,
 }: {
-  view: "landing" | "wizard" | "results" | "explore";
-  onNav: (v: "landing" | "explore" | "strategy") => void;
+  view: "landing" | "wizard" | "results" | "explore" | "profile";
+  onNav: (v: "landing" | "explore" | "strategy" | "profile") => void;
+  photo?:string|null;
 }) {
   return (
     <motion.header
@@ -55,6 +57,9 @@ export function Navbar({
           >
             <Globe2 className="h-4 w-4" />
             <span className="hidden sm:inline">My strategy</span>
+          </button>
+          <button onClick={()=>onNav("profile")} aria-label="My profile" className={`flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full px-2.5 py-1.5 text-sm font-medium ${view==="profile"?"bg-emerald-500/15 text-emerald-300":"text-muted-foreground hover:bg-white/5 hover:text-foreground"}`}>
+            {photo?<img src={photo} alt="" className="h-8 w-8 rounded-full object-cover"/>:<UserRound className="h-5 w-5"/>}<span className="hidden sm:inline">Profile</span>
           </button>
         </nav>
       </div>

@@ -12,6 +12,7 @@ import { ProgramDrawer } from "./ProgramDrawer";
 import { EligibilityBadge } from "./EligibilityBadge";
 import { Input } from "@/components/ui/input";
 import { ScenarioComparison } from "./ScenarioComparison";
+import type {Persona} from "@/lib/persona";
 
 const CATEGORY_KEYS = Object.keys(CATEGORY_META) as Category[];
 const REGION_KEYS = Object.keys(REGION_META) as Region[];
@@ -64,8 +65,8 @@ function PlanPodiumCard({ plan, index, onOpen }: {
   );
 }
 
-export function Results({ profile, results, onEdit }: {
-  profile: Profile; results: MatchResult[]; onEdit: () => void;
+export function Results({ profile, results, onEdit, persona, onViewProfile }: {
+  profile: Profile; results: MatchResult[]; onEdit: () => void;persona?:Persona;onViewProfile?:()=>void;
 }) {
   const [drawerId, setDrawerId] = useState<string | null>(null);
   const [cat, setCat] = useState<Category | "all">("all");
@@ -103,19 +104,25 @@ export function Results({ profile, results, onEdit }: {
         initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
         className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-3xl glass p-5 sm:p-6"
       >
-        <div>
+        <div className="flex min-w-0 items-center gap-4">
+          {persona?.photo&&<img src={persona.photo} alt="Your profile photo" className="h-16 w-16 shrink-0 rounded-2xl object-cover"/>}
+          <div className="min-w-0">
           <p className="text-xs uppercase tracking-widest text-emerald-300/80">Your profile</p>
           <h1 className="mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">
-            {passport.flag} {passport.name} → <span className="text-gradient-emerald">{eligibleCount} eligible routes</span>
+            {persona?.displayName||`${passport.flag} ${passport.name}`} → <span className="text-gradient-emerald">{eligibleCount} eligible routes</span>
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Budget ${profile.budget.toLocaleString()} · income ${profile.monthlyIncome.toLocaleString()}/mo · {profile.education === "highschool" ? "High school" : profile.education === "bachelor" ? "Bachelor's" : profile.education === "master" ? "Master's" : "PhD"} · {profile.experience}y exp · Passport ≈{passport.visaFree} visa-free (#{passport.rank})
           </p>
         </div>
+          </div>
+        <div className="flex flex-wrap gap-2">
+        {onViewProfile&&<button onClick={onViewProfile} className="rounded-full bg-white/5 px-4 py-2.5 text-sm font-semibold hover:bg-white/10">View profile</button>}
         <button onClick={onEdit}
           className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold transition-colors hover:border-emerald-400/50 hover:text-emerald-300">
           <Pencil className="h-4 w-4" /> Edit profile
         </button>
+        </div>
       </motion.div>
 
       {/* podium */}

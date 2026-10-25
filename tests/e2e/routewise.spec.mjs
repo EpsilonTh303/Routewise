@@ -64,7 +64,7 @@ test('wizard creates and restores a strategy', async ({page}) => {
   await page.getByRole('button',{name:'Generate strategy'}).click();
   await expect(page.getByRole('heading',{name:'Your relocation strategy'})).toBeVisible();
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
-  expect(saved.version).toBe(2);
+  expect(saved.version).toBe(3);
   expect(saved.profile.citizenship).toBe('AZ');
   await page.reload();
   await expect(page.getByRole('heading',{level:1})).toBeVisible();

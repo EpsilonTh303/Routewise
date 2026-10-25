@@ -1,0 +1,52 @@
+import {test,expect} from '@playwright/test';
+import {readFileSync} from 'node:fs';
+const profile=JSON.parse(readFileSync(new URL('../../examples/ai/match.json',import.meta.url),'utf8')).profile;
+
+test('profile is directly editable with a local photo after initial setup',async({page},info)=>{
+  const posts=[];page.on('request',request=>{if(request.method()==='POST') posts.push(request.url());});
+  await page.addInitScript(value=>{if(!localStorage.getItem('routewise-profile-v1')) localStorage.setItem('routewise-profile-v1',JSON.stringify({version:2,profile:value}));},profile);
+  await page.goto('/');
+  await page.getByRole('button',{name:'My profile',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Personal overview'})).toBeVisible();
+  await expect(page.getByRole('button',{name:'Next',exact:true})).toHaveCount(0);
+  await page.getByRole('button',{name:'Edit profile',exact:true}).click();
+  await page.getByLabel('Display name',{exact:true}).fill('Ada Test');
+  await page.getByLabel('Headline',{exact:true}).fill('Planning a master’s abroad');
+  await page.getByLabel('Location',{exact:true}).fill('Baku');
+  await page.getByLabel('About you',{exact:true}).fill('Exploring study and career options.');
+  await page.getByLabel('Available savings (USD)',{exact:true}).fill('73000');
+  await page.getByRole('group',{name:'Profile preferred regions'}).getByRole('checkbox',{name:/Western Europe/}).check();
+  const photo=Buffer.from(await page.evaluate(()=>{const canvas=document.createElement('canvas');canvas.width=32;canvas.height=32;const context=canvas.getContext('2d');context.fillStyle='#10b981';context.fillRect(0,0,32,32);return canvas.toDataURL('image/png').split(',')[1];}),'base64');
+  await page.getByLabel('Profile photo',{exact:true}).setInputFiles({name:'portrait.png',mimeType:'image/png',buffer:photo});
+  await expect(page.getByRole('img',{name:'Profile photo preview',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Save changes',exact:true}).click();
+  await expect(page.getByRole('status')).toContainText('Profile saved');
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Ada Test');
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
+  expect(saved.version).toBe(3);expect(saved.profile.budget).toBe(73000);
+  expect(saved.persona.photo).toMatch(/^data:image\/jpeg;base64,/);
+  expect(saved.profile.photo).toBeUndefined();expect(saved.profile.regions).toContain('Western Europe');
+  expect(posts).toEqual([]);
+  if(info.project.name==='mobile') await page.setViewportSize({width:320,height:700});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:info.outputPath('profile.png')});
+  await page.reload();await page.getByRole('button',{name:'My profile',exact:true}).click();
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Ada Test');
+  await page.getByRole('button',{name:'Edit profile',exact:true}).click();
+  await page.getByLabel('Available savings (USD)',{exact:true}).fill('1');
+  await page.getByRole('button',{name:'Cancel',exact:true}).click();
+  expect((await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')))).profile.budget).toBe(73000);
+});
+
+test('failed profile saves keep the editor and the previously saved data',async({page})=>{
+  await page.addInitScript(value=>localStorage.setItem('routewise-profile-v1',JSON.stringify(value)),profile);
+  await page.goto('/');await page.getByRole('button',{name:'My profile',exact:true}).click();
+  await page.getByRole('button',{name:'Edit profile',exact:true}).click();
+  await page.getByLabel('Display name',{exact:true}).fill('Unsaved change');
+  const before=await page.evaluate(()=>localStorage.getItem('routewise-profile-v1'));
+  await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key==='routewise-profile-v1') throw new DOMException('Quota exceeded','QuotaExceededError');return original.call(this,key,value);};});
+  await page.getByRole('button',{name:'Save changes',exact:true}).click();
+  await expect(page.getByRole('alert').filter({hasText:'could not be saved'})).toBeVisible();
+  await expect(page.getByLabel('Display name',{exact:true})).toHaveValue('Unsaved change');
+  expect(await page.evaluate(()=>localStorage.getItem('routewise-profile-v1'))).toBe(before);
+});

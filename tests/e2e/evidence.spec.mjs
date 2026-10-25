@@ -9,8 +9,7 @@ test('Brazil route accepts documented bank funds as an alternative and guards in
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
   await page.getByRole('button',{name:'My strategy',exact:true}).click();
   await page.getByRole('button',{name:'Edit profile'}).click();
-  await page.getByRole('button',{name:'Next',exact:true}).click();
-  await page.getByRole('button',{name:'Next',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Next',exact:true})).toHaveCount(0);
 
   const editor=page.locator('details').filter({has:page.getByText('Optional route evidence')});
   await editor.locator('summary').click();
@@ -19,15 +18,16 @@ test('Brazil route accepts documented bank funds as an alternative and guards in
   await page.getByRole('button',{name:'Add evidence'}).click();
   const amount=page.getByLabel('Financial evidence 1 amount');
   await amount.fill('18000');
-  await expect(page.getByRole('button',{name:'Generate strategy'})).toBeDisabled();
+  await expect(page.getByRole('button',{name:'Save changes'})).toBeDisabled();
   await page.getByLabel('Financial evidence 1 type').selectOption('balance');
-  await expect(page.getByRole('button',{name:'Generate strategy'})).toBeEnabled();
+  await expect(page.getByRole('button',{name:'Save changes'})).toBeEnabled();
   await expect(page.getByText('1 financial evidence item saved for this route.')).toBeVisible();
 
-  await page.getByRole('button',{name:'Generate strategy'}).click();
+  await page.getByRole('button',{name:'Save changes'}).click();
+  await page.getByRole('button',{name:'View strategy'}).click();
   await expect(page.getByRole('heading',{name:'Your relocation strategy'})).toBeVisible();
   const envelope=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
-  expect(envelope.version).toBe(2);
+  expect(envelope.version).toBe(3);
   const saved=envelope.profile;
   expect(saved.evidence.routes['br-vitem-xiv-nomad']).toEqual({
     facts:{foreignRemoteContract:true},
