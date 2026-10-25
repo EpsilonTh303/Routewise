@@ -17,6 +17,7 @@ import { PATHWAY_RECORDS } from "../../src/lib/data/pathway-splits";
 import { PATHWAY_REVIEWS } from "../../src/lib/data/reviewed-pathways";
 import { matchPrograms } from "../../src/lib/scoring";
 import { CATALOG_SOURCE_AUDIT } from "../../src/lib/data/catalog-source-audit";
+import { SOURCE_FOLLOWUP } from "../../src/lib/data/source-followup";
 import { sourceInputs } from "../catalog-source-inputs.mts";
 
 const exec=promisify(execFile);
@@ -44,13 +45,18 @@ after(async()=>{
 
 test("real migrations and seed produce queryable records, sources and revisions",async()=>{
   const stats=await service.stats();
-  assert.equal(stats.programCount,75);assert.equal(stats.countryCount,51);assert.equal(stats.verifiedCount,0);
-  assert.equal(await database.programRevision.count(),102+PATHWAY_REVIEWS.length+CATALOG_SOURCE_AUDIT.items.length);
-  assert.equal(stats.auditedCount,75);assert.equal(stats.partiallyReviewedCount,74);assert.equal(stats.unresolvedAuditCount,1);
+  assert.equal(stats.programCount,79);assert.equal(stats.countryCount,51);assert.equal(stats.verifiedCount,0);
+  assert.equal(await database.programRevision.count(),108+PATHWAY_REVIEWS.length+CATALOG_SOURCE_AUDIT.items.length);
+  assert.equal(stats.auditedCount,79);assert.equal(stats.partiallyReviewedCount,78);assert.equal(stats.unresolvedAuditCount,1);
   for(const item of CATALOG_SOURCE_AUDIT.items) {
     const record=await repository.get(item.id);
-    assert.deepEqual(record.program.audit,item.patch.audit);
+    const followup=SOURCE_FOLLOWUP.items.find(candidate=>candidate.id===item.id);
+    assert.deepEqual(record.program.audit,followup?.patch.audit??item.patch.audit);
     for(const claim of record.program.audit!.claims) assert.ok(record.sources.some(source=>source.url===claim.sourceUrl&&source.evidence?.includes(claim.summary)));
+  }
+  for (const item of SOURCE_FOLLOWUP.items) {
+    const record=await repository.get(item.id);
+    assert.deepEqual(record.program.audit,item.patch.audit);
   }
   const list=await repository.search({query:"blue card",limit:1});
   assert.equal(list.items[0].id,"de-bluecard");
@@ -113,11 +119,12 @@ test("stateless matching uses the live catalog and stores no private profiles",a
 
 test("goal mismatches are exploratory alternatives, not default recommendations",async()=>{
   const student=await service.match({profile:{...profile,goal:"study"},includeIneligible:true,limit:100});
-  assert.equal(student.counts.goalAligned,0);
-  assert.equal(student.strategyStatus,"none");assert.deepEqual(student.results,[]);assert.deepEqual(student.plans,[]);
-  assert.match(student.notice!,/No program/);
+  assert.equal(student.counts.goalAligned,1);
+  assert.equal(student.strategyStatus,"none");assert.equal(student.results.length,1);assert.equal(student.results[0].program.category,"student");assert.deepEqual(student.plans,[]);
+  assert.equal(student.results[0].program.minBudget,null);assert.equal(student.results[0].adjustedCost,null);
+  assert.match(student.notice!,/No goal-aligned route/);
   const alternatives=await service.match({profile:{...profile,goal:"study"},includeIneligible:true,includeAlternatives:true,limit:100});
-  assert.equal(alternatives.results.length,75);assert.deepEqual(alternatives.plans,[]);
+  assert.equal(alternatives.results.length,79);assert.deepEqual(alternatives.plans,[]);
 });
 
 test("structured evidence and temporary scenarios round trip through HTTP without persistence",async()=>{
@@ -175,14 +182,14 @@ test("HTTP validates requests and does not expose private profile tools",async()
 
 test("CLI returns machine-readable JSON from another working directory",async()=>{
   const result=await exec(process.execPath,[resolve(projectRoot,"scripts/cli.mjs"),"get_catalog_stats"],{cwd:directory,env,timeout:30000});
-  assert.equal(JSON.parse(result.stdout).data.programCount,75);
+  assert.equal(JSON.parse(result.stdout).data.programCount,79);
 });
 
 test("online SQLite backup is consistent and refuses to overwrite files",async()=>{
   const target=join(directory,"backup.sqlite");
   await run(["--import","tsx","scripts/database.mts","backup",target]);
   const copy=new DatabaseSync(target,{readOnly:true});
-  try {assert.equal(Object.values(copy.prepare("PRAGMA integrity_check").get()!)[0],"ok");assert.equal((copy.prepare('SELECT count(*) AS n FROM CatalogProgram').get() as {n:number}).n,90);}
+  try {assert.equal(Object.values(copy.prepare("PRAGMA integrity_check").get()!)[0],"ok");assert.equal((copy.prepare('SELECT count(*) AS n FROM CatalogProgram').get() as {n:number}).n,94);}
   finally {copy.close();}
   await assert.rejects(()=>run(["--import","tsx","scripts/database.mts","backup",target]));
 });
@@ -196,7 +203,7 @@ test("official MCP client initializes, discovers tools, validates input and read
     assert.ok(tools.tools.some(t=>t.name==="match_profile"));
     assert.equal(tools.tools.find(t=>t.name==="delete_profile")?.annotations?.destructiveHint,true);
     const stats=await client.callTool({name:"get_catalog_stats",arguments:{}});
-    assert.equal((stats.structuredContent as {programCount:number}).programCount,75);
+    assert.equal((stats.structuredContent as {programCount:number}).programCount,79);
     const matched=await client.callTool({name:"match_profile",arguments:{profile,limit:5,includeIneligible:true}});
     assert.deepEqual(matched.structuredContent,await service.match({profile,limit:5,includeIneligible:true}));
     const scenarios={profile,scenarios:[{id:"funds",label:"Funds",changes:{budget:100000}}],limit:3};
@@ -270,7 +277,7 @@ test("reviewed claims survive repository, tool and reseed round trips",async()=>
   const body=await response.json();
   assert.deepEqual(body.data.program.pathway.review,review);
   const stats=await service.stats();
-  assert.equal(stats.partiallyReviewedCount,74);
+  assert.equal(stats.partiallyReviewedCount,78);
 });
 
 test("review batch conflicts roll back all changes and preserve edited pathways",async()=>{

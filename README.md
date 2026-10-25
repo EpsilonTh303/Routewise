@@ -1,12 +1,14 @@
 # RouteWise
 
-A database-backed immigration-program explorer with a web GUI, JSON API, command-line tools, and a local MCP server. All interfaces use the same live SQLite catalog and scoring functions. The live catalog has 75 active routes after separating 13 mixed records; all 75 active records have source-audit outcomes (74 partial, one unresolved); complete-record verification remains pending; scores describe heuristic profile fit, not approval probability.
+A database-backed immigration-program explorer with a web GUI, JSON API, command-line tools, and a local MCP server. All interfaces use the same live SQLite catalog and scoring functions. The live catalog has 79 active routes across 51 countries, including four study/post-study pilot records; all have source-audit outcomes (78 partial, one unresolved). Complete-record verification remains pending; scores describe heuristic profile fit, not approval probability.
 
-The current suggestion engine is version **3.4.0**. It prioritizes modeled readiness and direct goal alignment, diversifies comparable backups, and explains its scores, gaps and next checks. See [ENGINE.md](ENGINE.md) for the audit findings, policy, planning assumptions and remaining evidence gaps. Goals absent from the catalog produce an empty direct strategy rather than unrelated recommendations; the current fixture has no student routes.
+The current suggestion engine is version **3.4.0**. It prioritizes modeled readiness and direct goal alignment, diversifies comparable backups, and explains its scores, gaps and next checks. See [ENGINE.md](ENGINE.md) for the audit findings, policy, planning assumptions and remaining evidence gaps. Goals absent from the catalog produce an empty direct strategy. The study pilot is exploratory: missing costs and application evidence exclude it from primary strategies.
 
 ## Start locally
 
-Engine 3.4.0 applies `official-catalog-audit-2026-10-25-v2` to all 75 active records: 88 cited claim summaries, 74 partial audits, one unresolved retrieval and no fully verified routes. Forty-two claims retain indexed/limited retrieval. Unsupported archive costs, converted USD gates and timing/residence estimates are null; incomplete routes remain exploratory. The GUI/API distinguish closed intake from applicant readiness. See [research/PRIMARY_REVIEW.md](research/PRIMARY_REVIEW.md) and [STUDY_PATHWAYS.md](STUDY_PATHWAYS.md) for the review and future study-to-work proposal.
+The immutable original 75-route v2 audit is retained. A separate follow-up adds Portugal own-income service/current wage evidence and Vanuatu published fees, with remaining applicability limits. An append-only pilot adds German master's study, German graduate search, Dutch orientation year and Finnish post-study search. Unsupported all-in costs and calendar predictions remain null. See [SOURCE_REVIEW.md](SOURCE_REVIEW.md) and [STUDY_PATHWAYS.md](STUDY_PATHWAYS.md).
+
+After initial setup, use **Profile** to view your overview or edit settings directly. Name, headline, location, biography and a cropped photo are saved explicitly on this browser/device; identity/photo are separate from assessment requests. Cancel discards drafts, and a storage error preserves the previously saved profile.
 
 Engine 3.3.0 adds partial AND/OR requirement checks for 12 reviewed pathways, optional route-scoped applicant evidence, matching-currency financial comparisons and temporary what-if scenarios. Unknown evidence remains unknown; full legal eligibility is unassessed. See [ELIGIBILITY.md](ELIGIBILITY.md), [FINANCIAL.md](FINANCIAL.md), and [RECOVERY.md](RECOVERY.md). The Explorer includes a read-only source freshness/conflict queue. Browser profiles use a version 2 envelope and still read complete legacy profiles.
 
@@ -55,6 +57,10 @@ npm run db:seed
 npm run db:backup
 npm run catalog:audit:plan
 npm run catalog:audit
+npm run catalog:followup:plan
+npm run catalog:followup
+npm run catalog:study:plan
+npm run catalog:study
 npm run db:backup -- /absolute/path/to/new-backup.sqlite
 npm run catalog:import -- record.json
 ```

@@ -38,11 +38,14 @@ test('GUI strategy readiness agrees with the API and explains source gaps',async
   await expect(explanation).toContainText(expected.explanation.nextSteps[0]);
 });
 
-test('a goal absent from the catalog produces an honest empty strategy with opt-in alternatives',async({page,request})=>{
+test('study goal shows its aligned route without promoting unknown cost to a primary plan',async({page,request})=>{
   const profile={...sample,goal:'study'};
   const response=await request.post('/api/v1/match',{data:{profile}});
   const {data}=await response.json();
-  expect(data.strategyStatus).toBe('none');expect(data.results).toEqual([]);
+  expect(data.counts.goalAligned).toBe(1);expect(data.results).toHaveLength(1);
+  expect(data.results[0].program.category).toBe('student');
+  expect(data.results[0].program.minBudget).toBeNull();expect(data.results[0].adjustedCost).toBeNull();
+  expect(data.strategyStatus).toBe('none');expect(data.plans).toEqual([]);
   await page.addInitScript(value=>localStorage.setItem('routewise-profile-v1',JSON.stringify(value)),profile);
   await page.goto('/');
   await expect(page.getByRole('heading',{level:1})).toBeVisible();
@@ -51,6 +54,7 @@ test('a goal absent from the catalog produces an honest empty strategy with opt-
   await expect(page.getByRole('region',{name:'Top strategy'}).getByRole('button')).toHaveCount(0);
   await page.getByRole('button',{name:'Other goals',exact:true}).click();
   await expect(page.getByText('Other goal',{exact:true}).first()).toBeVisible();
+  await expect(page.getByText(/German master's study residence route/)).toBeVisible();
 });
 
 

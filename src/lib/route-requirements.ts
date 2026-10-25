@@ -3,6 +3,7 @@ import type { Requirement, RuleSource, FactKey } from "./requirements";
 import { evaluateRequirement, requirementSchema } from "./requirements";
 import type { FinancialRequirement } from "./financial";
 import { PATHWAY_REVIEWS } from "./data/reviewed-pathways";
+import {studyRouteRequirement} from './study-requirements';
 
 export const REQUIREMENT_VERSION="requirements-2026-10-25-v1";
 function canonical(value:unknown):string {
@@ -14,6 +15,8 @@ function canonical(value:unknown):string {
  * A custom edit that removes review evidence also removes this automatic assessment.
  */
 export function routeRequirement(program:Program,profile:Profile):Requirement|null {
+  const study=studyRouteRequirement(program);
+  if(study) return requirementSchema.parse(study);
   const review=program.pathway?.review;
   if(!review) return null;
   if(program.audit&&program.audit.supportsRequirementVersion!==REQUIREMENT_VERSION) return null;

@@ -1,0 +1,189 @@
+{
+  "checkedAt": "2026-10-25T14:37:17Z",
+  "scope": "Official-source research for post-study transitions in the Netherlands and Finland. This is research evidence, not an eligibility determination or guarantee of residence.",
+  "routes": [
+    {
+      "id": "nl-graduate-orientation-year",
+      "name": "Netherlands orientation year for highly educated persons",
+      "summary": "A non-extendable one-year permit for qualifying graduates, doctoral graduates and researchers to seek work or start a business. Eligibility depends on the specific qualifying degree/research category and its date; work is unrestricted during the permit. Staying afterwards requires a separate residence application.",
+      "entryStage": "Qualifying completed programme, doctorate or research; it is not an automatic consequence of any Dutch study permit.",
+      "stages": [
+        {
+          "id": "nl-qualifying-completion",
+          "title": "Complete an eligible programme or research",
+          "conditions": [
+            "Within three years before application, the applicant must have completed an accredited bachelor's or master's programme at a Dutch higher education institution; a Dutch post-master's programme of at least one academic year (at least 10 months); one of the specifically listed Dutch Cultural Policy or development cooperation programmes; a master's degree in an Erasmus Mundus Joint Master programme; or qualifying scientific research in the Netherlands within the preceding three years.",
+            "A master's, doctoral or post-master's programme at a designated foreign educational institution can qualify. The institution must be top 200 on the date of graduation/promotion in general or subject rankings from at least two of QS, Times Higher Education or ShanghaiRanking; any subject ranking used must match the study/research subject. Foreign diplomas require Nuffic evaluation, except qualifying Flemish diplomas.",
+            "For a qualifying foreign-institution course, the applicant must also meet one of the IND's accepted language/education alternatives, including IELTS 6.0 or comparable listed test, qualifying Dutch civic-integration documents, or an English- or Dutch-taught master's, doctorate or post-master's programme.",
+            "A previous orientation-year permit after the same study/doctoral programme or same research prevents a repeat on that basis. A new Dutch programme/doctorate must be completed after the prior orientation year; qualifying research must be subsequent and held under the specified Dutch research/highly-skilled-migrant status.",
+            "The IND page lists a valid MVV as needed for the application and describes application from abroad through a Dutch representation; Dutch graduates/researchers meeting residence, valid-permit, BRP and BSN conditions can apply online. Individual nationality and general conditions can affect procedure."
+          ],
+          "durationMonths": null,
+          "workRights": "Not applicable as a separate post-study permit yet; student-status work rules are outside this reviewed evidence.",
+          "sourceUrls": [
+            "https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year"
+          ]
+        },
+        {
+          "id": "nl-orientation-permit",
+          "title": "Apply for the orientation-year residence permit",
+          "conditions": [
+            "File within three years of the relevant graduation/promotion or research date and satisfy one of the eligibility categories above.",
+            "No income proof is required for the orientation-year application. The application fee is €254 according to IND fees page checked for the 2026 schedule.",
+            "The permit is valid for one year and cannot be extended. The IND decision period is normally up to 90 days, subject to possible extension; processing time is not an extra permit-validity period."
+          ],
+          "durationMonths": 12,
+          "workRights": "May work freely, undertake internships, self-employment, freelancing or entrepreneurship; employer does not need a work permit. During application, work requires the qualifying evidence and an IND residence endorsement stating unrestricted work first.",
+          "sourceUrls": [
+            "https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year",
+            "https://ind.nl/en/fees-costs-of-an-application"
+          ]
+        },
+        {
+          "id": "nl-switch-to-work",
+          "title": "Switch to a separate work or business residence permit",
+          "conditions": [
+            "A job does not automatically convert the orientation-year permit. Apply separately for a residence purpose such as highly skilled migrant, start-up or self-employed person.",
+            "For highly skilled migrant status, a Dutch employer/research institution must have an employment contract with the applicant, be an IND-recognised sponsor, and meet the salary and market-rate requirements. IND's 2026 reduced salary criterion for qualifying orientation-year graduates is €3,122 gross monthly excluding holiday pay; confirmation against the live amount table is needed at application date.",
+            "Other work/business categories have their own conditions and are not established by this route review."
+          ],
+          "durationMonths": null,
+          "workRights": "Work rights after the orientation year depend on the separately granted permit and its conditions; the one-year permit cannot be extended.",
+          "sourceUrls": [
+            "https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year",
+            "https://ind.nl/en/residence-permits/work/highly-skilled-migrant",
+            "https://ind.nl/en/required-amounts-income-requirements"
+          ]
+        },
+        {
+          "id": "nl-permanent-residence",
+          "title": "Permanent residence is a separate later application",
+          "conditions": [
+            "IND generally requires at least five consecutive years with a valid Dutch residence permit, main residence in the Netherlands throughout, timely extensions, continued compliance, a current non-temporary residence purpose, income, BRP registration and civic integration at least A2 (or exemption). Exceptions exist.",
+            "Do not treat the orientation-year permit itself as permanent residence or as a guarantee of eligibility. Whether particular temporary-purpose periods count in an individual case requires checking the applicable residence-credit rules and history."
+          ],
+          "durationMonths": null,
+          "workRights": "A permanent permit is a distinct status; this route provides no guaranteed settlement outcome.",
+          "sourceUrls": [
+            "https://ind.nl/en/replace-extend-renew-and-change/permanent-residency/permanent-residence-permit"
+          ]
+        }
+      ],
+      "claims": [
+        {"topic":"qualifying categories and three-year window","summary":"Specified Dutch programme categories, Erasmus Mundus, designated foreign institutions and research can qualify; relevant completion/research must be within three years before filing. Foreign qualification has ranking, language and Nuffic assessment criteria.","sourceUrl":"https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"duration and work rights","summary":"Orientation-year permit lasts one year, is not extendable, and allows unrestricted employment, internship and self-employment; separate permit needed to stay for work afterward.","sourceUrl":"https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"2026 fee and HSM reduced threshold","summary":"Orientation-year application fee €254. IND's 2026 reduced highly skilled migrant criterion is €3,122 gross monthly excluding holiday pay; route-specific eligibility and live amount must be reconfirmed when filing.","sourceUrl":"https://ind.nl/en/required-amounts-income-requirements","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"permanent residence","summary":"General permanent residence requirements include five consecutive years valid residence, main residence, timely extensions, current non-temporary permit, income, registration and civic integration; exceptions apply.","sourceUrl":"https://ind.nl/en/replace-extend-renew-and-change/permanent-residency/permanent-residence-permit","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"}
+      ],
+      "financialRequirements": [
+        {"amount":254,"currency":"EUR","period":"one-time","description":"2026 IND application fee for the orientation-year permit.","sourceUrl":"https://ind.nl/en/fees-costs-of-an-application"},
+        {"amount":3122,"currency":"EUR","period":"monthly","description":"2026 reduced gross salary criterion (excluding holiday pay) for a qualifying highly-skilled-migrant application linked to orientation-year eligibility; this is an employment salary threshold, not a proof-of-funds amount or fee.","sourceUrl":"https://ind.nl/en/required-amounts-income-requirements"}
+      ],
+      "unknowns": [
+        "No student-admission, student-permit, tuition, insurance, dependent-cost or general relocation budget rules were reviewed; do not infer them from this post-study route.",
+        "Individual nationality, MVV exemption, general admission conditions and possible treaty-specific exceptions require case-specific checking.",
+        "Foreign-institution ranking status must be reconstructed for the exact institution, subject and graduation date; a country-level assumption is insufficient.",
+        "Eligibility and clock treatment for permanent residence depend on complete permit history and applicable law; no projected settlement date is supported.",
+        "Salary thresholds and fees are indexed/updated; recheck the official live pages at filing rather than carrying forward this snapshot."
+      ],
+      "profileFacts": ["country","nationality","qualifyingDutchInstitution","programmeAccreditation","programmeLevel","programmeType","graduationDate","priorOrientationYearForSameProgramme","foreignInstitutionRankingsAtGraduation","foreignProgrammeLanguage","acceptedLanguageEvidence","NufficDiplomaEvaluation","researchPermitTypeAndDates","orientationYearApplicationDate","MVVProcedure","employerRecognisedSponsor","grossMonthlySalaryExcludingHolidayPay","permitHistoryAndMainResidence","incomeAndIntegrationEvidence"]
+    },
+    {
+      "id": "fi-graduate-jobsearch",
+      "name": "Finland residence permit to look for work or start a business after studies/research",
+      "summary": "A continuous (A) or temporary (B) permit matching the prior study/research permit type, available to eligible former permit holders after Finnish study/research completion. It can last up to two years (split into periods) and gives unrestricted work rights. Apply within five years after the study/research permit expires; separate permanent-residence rules changed on 8 January 2026.",
+      "entryStage": "A prior Finnish residence permit for studies or qualifying research plus degree/research completion in Finland; route-specific scope differs between EU-directive and national research permits.",
+      "stages": [
+        {
+          "id": "fi-qualifying-completion",
+          "title": "Complete studies or research in Finland while holding a qualifying permit",
+          "conditions": [
+            "Applicant has or had a Finnish residence permit for studies or research and completed a degree in Finland, finished research work, or completed a doctoral degree in Finland.",
+            "For EU Directive 2016/801 research permit holders, the route may be available after Finnish degree completion or finished research. For holders of a national research permit, Migri says this route is available only if they completed a degree in Finland.",
+            "The applicant must not yet have found a job for the job-seeking application. Migri also offers the permit to start a business; business-specific requirements are not fully reviewed here.",
+            "The application may be filed already if the degree certificate will arrive within three months, with proof of expected completion, and the certificate supplied when received."
+          ],
+          "durationMonths": null,
+          "workRights": "Student permit work limits before grant are not covered here. This post-study permit permits unrestricted work after grant (or immediately after timely in-country extended-permit filing where Migri conditions are met).",
+          "sourceUrls": ["https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"]
+        },
+        {
+          "id": "fi-jobsearch-permit",
+          "title": "Apply for the look-for-work/start-business permit",
+          "conditions": [
+            "Apply no later than five years from the date the study or research residence permit expired. A first residence permit application is filed abroad; an extended permit is filed in Finland. The page also states that an extended-permit application can be filed before expiry of the current permit.",
+            "Show sufficient living resources: at least €800 per month. For a full two-year permit this is €19,200 available. Migri says an extended-permit applicant may secure support through work and it checks income/benefit data through the Incomes Register.",
+            "Online fee: €750 first permit / €230 extended permit. Paper fee: €800 first permit / €430 extended permit."
+          ],
+          "durationMonths": 24,
+          "workRights": "Unrestricted work in any field regardless of the field of study. A first-permit applicant may begin work after a positive decision. If an extended permit is submitted before prior status expires, work may begin after finding a job/starting business; a late filing does not confer that interim right.",
+          "sourceUrls": ["https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","https://migri.fi/en/processing-fees-and-payment-methods"]
+        },
+        {
+          "id": "fi-split-validity",
+          "title": "Use the permit continuously or in parts",
+          "conditions": [
+            "Maximum total validity is two years. It can be used in up to three parts; every part must be at least six months and the last part must end within three years after the first part started.",
+            "This is a maximum permission, not an automatic grant for two years; decision, application basis and facts govern the actual permit."
+          ],
+          "durationMonths": 24,
+          "workRights": "Unrestricted while the permit is valid.",
+          "sourceUrls": ["https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"]
+        },
+        {
+          "id": "fi-switch-to-degree-work-permit",
+          "title": "Move to a separate work-based permit if employment/business status is needed",
+          "conditions": [
+            "Migri says the job-search permit includes unrestricted work, so a new permit is not required merely because a job is found; before the look-for-work permit expires, the applicant should apply for the appropriate work-based permit if staying on that basis. Migri identifies the degree-completed-in-Finland route for graduates with a job, trade or business activity.",
+            "The degree-completed-in-Finland permit can be sought regardless of which permit was held during study and even years after graduation; its first-permit application must be submitted abroad, while extended permits are filed in Finland.",
+            "Detailed employer, income, business and permit-validity requirements for the next work permit were not independently audited in this packet."
+          ],
+          "durationMonths": null,
+          "workRights": "The job-search permit already has unrestricted work rights while valid. Subsequent status depends on the new permit grant and its conditions.",
+          "sourceUrls": ["https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","https://migri.fi/en/degree-completed-in-finland1"]
+        },
+        {
+          "id": "fi-permanent-residence",
+          "title": "Permanent residence is a separate application with 2026 pathways",
+          "conditions": [
+            "Since 8 January 2026, permanent residence rules have new application paths. Migri describes a six-year continuous A-permit residence path with two years of Finnish work history and B1 Finnish/Swedish; a four-year A-permit path with annual income over €40,000; a path for specified Finnish higher-education degrees plus developing A2 Finnish/Swedish (or 15 higher-education language credits) and other requirements; and a path involving a foreign higher degree, four years' A-permit residence and two years' Finnish work history.",
+            "For the Finnish-degree path, eligible completed qualifications include Finnish master's degrees, university bachelor's degrees, and licentiate/doctoral degrees; Migri's detailed page further states that the applicant must continue to qualify for an A permit, studies alone cannot be the basis for that A permit, and sufficient means/other requirements apply.",
+            "A person who already received a two-year continuous A permit on the job-seeking/business basis cannot receive permanent residence on the same grounds. Permanent residence is not automatic and this summary is not a computed qualifying clock."
+          ],
+          "durationMonths": null,
+          "workRights": "Separate permanent status; no guaranteed settlement outcome.",
+          "sourceUrls": ["https://migri.fi/en/-/amendments-to-provisions-on-permanent-residence-permits-enter-into-force-on-8-january-2026","https://migri.fi/en/application-for-a-permanent-residence-permit"]
+        }
+      ],
+      "claims": [
+        {"topic":"qualifying prior status and completion","summary":"Prior Finnish study/research permit and completion of Finnish studies/degree/research required; national research-permit holders need Finnish degree completion, whereas EU research permit holders have broader scope.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"five-year filing deadline and maximum duration","summary":"Apply within five years after study/research permit expiry; maximum two years, optionally in at least six-month parts, with last part ending within three years of first part start.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"funds and fees","summary":"At least €800 monthly; two years requires €19,200. Online first/extended fees €750/€230; paper fees €800/€430.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"work and subsequent status","summary":"Unrestricted work regardless of study field; work permit not needed immediately upon job if current permit valid, but apply for suitable work-based status before expiry to remain on that basis.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"},
+        {"topic":"2026 permanent residence changes","summary":"Finland's PR framework changed 8 January 2026 and includes work-history, income, language and Finnish-degree paths; eligibility is separate and depends on permit type and case facts.","sourceUrl":"https://migri.fi/en/-/amendments-to-provisions-on-permanent-residence-permits-enter-into-force-on-8-january-2026","checkedAt":"2026-10-25T14:37:17Z","retrieval":"page"}
+      ],
+      "financialRequirements": [
+        {"amount":800,"currency":"EUR","period":"monthly","description":"Minimum living resources for a look-for-work/start-business permit; not a fee, tuition amount or comprehensive budget.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"},
+        {"amount":19200,"currency":"EUR","period":"balance","description":"Funds required to show resources for the maximum two-year period at €800 per month, as stated by Migri; not an expense estimate.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"},
+        {"amount":750,"currency":"EUR","period":"one-time","description":"Online first-permit application fee.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"},
+        {"amount":230,"currency":"EUR","period":"one-time","description":"Online extended-permit application fee.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"},
+        {"amount":800,"currency":"EUR","period":"one-time","description":"Paper first-permit application fee.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"},
+        {"amount":430,"currency":"EUR","period":"one-time","description":"Paper extended-permit application fee.","sourceUrl":"https://migri.fi/en/application-for-students-and-researchers-residence-permit-to-look-for-work"}
+      ],
+      "unknowns": [
+        "Student admission, tuition, insurance, dependent support and study-permit financial rules were not researched in this packet; no year-one total should be calculated.",
+        "Case-specific qualification depends on exact permit class/history, degree/research type, completion date, certificate timing and where applicant files.",
+        "The separate degree-completed-in-Finland work permit's complete conditions and all variable income requirements need independent review before modelling a transition.",
+        "Permanent residence eligibility must use the post-8-Jan-2026 rules and full A/B permit chronology; do not assume student or job-search time is credited equivalently across paths.",
+        "Citizenship requirements, residence clock, language and processing were not reviewed; no citizenship or guaranteed-settlement claim is supported.",
+        "Business-start pathway details, dependants, appeal outcomes and processing-time estimate were not exhaustively verified."
+      ],
+      "profileFacts": ["country","nationality","studyPermitClassAndValidity","researchPermitClassAndDirective","degreeTypeAndInstitution","degreeCompletionDate","degreeCertificateAvailability","researchCompletionEvidence","employmentAlreadyFound","jobOrBusinessDetails","fundsByMonth","applicationDate","filingLocation","firstOrExtendedApplication","onlineOrPaper","previousPermitTypeAndDates","FinnishOrSwedishLanguageLevel","FinnishWorkHistory","annualIncome","timeOutsideFinlandAfterGraduation","PRApplicationDate"]
+    }
+  ],
+  "notes": [
+    "All facts in this file reflect direct page retrieval from issuing authorities on 2026-10-25; each page can change and should be rechecked at implementation/application time.",
+    "The routes are conditional stage transitions. A study admission or graduation is not itself a post-study permit, qualifying job, permanent residence or citizenship.",
+    "No tuition, dependent total, annual study cost or all-in first-year budget has been inferred."
+  ]
+}

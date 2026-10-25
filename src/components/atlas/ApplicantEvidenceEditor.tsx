@@ -7,6 +7,10 @@ import type { FinancialEvidence } from "@/lib/financial";
 
 type RouteOption = { id: string; label: string; facts: FactKey[] };
 const ROUTES: RouteOption[] = [
+  {id:'de-masters-study',label:'Germany · Master’s study',facts:['studyAdmission','programmeLanguage','securedLivelihood']},
+  {id:'de-graduate-jobsearch',label:'Germany · Graduate job search',facts:['germanDegree','healthCoverage','securedLivelihood','applicationWindow']},
+  {id:'nl-graduate-orientation-year',label:'Netherlands · Graduate orientation year',facts:['qualifyingGraduate','applicationWindow']},
+  {id:'fi-graduate-jobsearch',label:'Finland · Post-study job search',facts:['priorStudyPermit','qualifyingGraduate','applicationWindow','securedLivelihood']},
   { id: "br-vitem-xiv-nomad", label: "Brazil · Digital Nomad", facts: ["foreignRemoteContract"] },
   { id: "us-eb2", label: "United States · EB-2", facts: ["eb2Qualification", "localEmploymentContract", "laborCertification", "niwEndeavor"] },
   { id: "th-ltr-wealthy", label: "Thailand · LTR Wealthy Global Citizen", facts: ["healthCoverage"] },

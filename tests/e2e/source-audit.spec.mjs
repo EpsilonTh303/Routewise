@@ -2,11 +2,14 @@ import {test,expect} from '@playwright/test';
 
 test('catalog source audit exposes partial coverage and closed intake honestly',async({page,request})=>{
   const stats=(await (await request.get('/api/v1/stats')).json()).data;
-  expect(stats.auditedCount).toBe(75);
-  expect(stats.partiallyReviewedCount).toBe(74);
+  expect(stats.auditedCount).toBe(79);
+  expect(stats.partiallyReviewedCount).toBe(78);
   expect(stats.unresolvedAuditCount).toBe(1);
   expect(stats.verifiedCount).toBe(0);
   expect(stats.closedIntakeCount).toBe(1);
+  const followup=(await (await request.get('/api/v1/programs/vu-cbi')).json()).data.program.audit;
+  expect(followup.batchId).toBe('official-source-followup-2026-10-25-v1');
+  expect(followup.claims.length).toBeGreaterThan(0);
   await page.goto('/');
   await page.getByRole('button',{name:'Explore all routes',exact:true}).click();
   await page.getByText('Source review queue',{exact:false}).click();

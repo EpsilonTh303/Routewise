@@ -3,6 +3,13 @@ import { compareFinancial, financialEvidenceSchema, financialRequirementSchema }
 import type { FinancialEvidence, FinancialRequirement } from "./financial";
 
 export const FACT_LABELS = {
+  studyAdmission: "Admission to a qualifying recognised study programme",
+  programmeLanguage: "Required programme language evidence accepted",
+  germanDegree: "Successfully completed qualifying German higher education",
+  qualifyingGraduate: "Route-specific qualifying graduation or research completion",
+  priorStudyPermit: "Required qualifying study/research residence permit history",
+  applicationWindow: "Application meets this route's completion and permit-expiry deadlines",
+  securedLivelihood: "Documented livelihood for the requested permit duration",
   foreignRemoteContract: "Documented foreign employer or client contract",
   localEmploymentContract: "Qualifying local employment contract",
   laborCertification: "Approved labor certification where required",

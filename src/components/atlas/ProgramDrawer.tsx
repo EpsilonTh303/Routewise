@@ -163,7 +163,7 @@ export function ProgramDrawer({ result, profile, onClose }: {
                       {s.icon}
                     </span>
                     <p className="text-[11px] font-bold uppercase tracking-wider text-amber-300/90">
-                      {s.monthsFromNow===null?monthLabel(null):`≈ ${monthLabel(s.monthsFromNow)}`}
+                      {s.monthsFromNow===null?(p.audit?.batchId==='study-pilot-2026-10-25-v1'?'Conditional stage':monthLabel(null)):`≈ ${monthLabel(s.monthsFromNow)}`}
                     </p>
                     <p className="text-sm font-bold">{s.label}</p>
                     <p className="text-xs leading-relaxed text-muted-foreground">{s.detail}</p>

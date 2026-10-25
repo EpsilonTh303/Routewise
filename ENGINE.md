@@ -1,5 +1,9 @@
 # Recommendation engine 3.4.0
 
+## Current catalog extension
+
+The live catalog now has 79 active routes (78 partial audits and one unresolved), including four study/post-study records. Engine scoring policy is unchanged. The pilot adds route-scoped admission/completion/history/window/livelihood facts and six conditional roadmap stages with no predicted dates. Generic profile education never establishes German graduation, an eligible Dutch institution or Finnish permit history. Attached pilot evidence must match the reviewed snapshot for automatic checks and the pilot roadmap; custom source edits disable stale projections. Missing costs keep these routes out of primary strategies. Portugal/Vanuatu evidence is updated through a new immutable follow-up, not a changed original audit. See STUDY_PATHWAYS.md and SOURCE_REVIEW.md.
+
 ## 3.4.0 all-catalog source audit
 
 All 75 active records now have a catalog-wide audit outcome: 74 partial and one unresolved. `program.audit` separates dated claims from intake availability, native financial evidence and missing fields; historical pathway evidence is preserved. No full-route verification is inferred. Canada SUV is closed/paused to new intake and remains searchable but cannot be a primary plan. Unclear availability is also excluded from primary strategies.

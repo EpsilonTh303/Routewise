@@ -41,13 +41,22 @@ async function main() {
     console.log(JSON.stringify({backup:target}));
     return;
   }
-  if(["setup","seed","import","split","split-plan","review","review-plan","audit","audit-plan"].includes(command)) {
+  if(["setup","seed","import","split","split-plan","review","review-plan","audit","audit-plan","study","study-plan","followup","followup-plan"].includes(command)) {
     const {db}=await import("../src/lib/db");
     const {CatalogRepository}=await import("../src/lib/server/catalog");
     const repository=new CatalogRepository(db);
     try {
       await repository.initializeConnection();
-      if(command==="audit" || command==="audit-plan") {
+      if(command==="study" || command==="study-plan") {
+        const {studyPilotBatchId,studyPilotPrograms}=await import('../src/lib/data/study-pilot');
+        const {applyStudyPilot,planStudyPilot}=await import('../src/lib/server/add-study-pilot');
+        const batch={id:studyPilotBatchId,programs:studyPilotPrograms};
+        console.log(JSON.stringify(await(command==='study'?applyStudyPilot(repository,batch):planStudyPilot(repository,batch))));
+      } else if(command==='followup'||command==='followup-plan') {
+        const {SOURCE_FOLLOWUP}=await import('../src/lib/data/source-followup');
+        const {applySourceAudit,planSourceAudit}=await import('../src/lib/server/apply-source-audit');
+        console.log(JSON.stringify(await(command==='followup'?applySourceAudit(repository,SOURCE_FOLLOWUP):planSourceAudit(repository,SOURCE_FOLLOWUP))));
+      } else if(command==="audit" || command==="audit-plan") {
         const {CATALOG_SOURCE_AUDIT}=await import("../src/lib/data/catalog-source-audit");
         const {applySourceAudit,planSourceAudit}=await import("../src/lib/server/apply-source-audit");
         console.log(JSON.stringify(await (command==="audit"?applySourceAudit(repository,CATALOG_SOURCE_AUDIT):planSourceAudit(repository,CATALOG_SOURCE_AUDIT))));
@@ -74,12 +83,17 @@ async function main() {
         const {CATALOG_SOURCE_AUDIT}=await import("../src/lib/data/catalog-source-audit");
         const {applySourceAudit}=await import("../src/lib/server/apply-source-audit");
         const audits=await applySourceAudit(repository,CATALOG_SOURCE_AUDIT);
-        console.log(JSON.stringify({programs:ALL_PROGRAMS.length,...counts,splits,reviews,audits}));
+        const {SOURCE_FOLLOWUP}=await import('../src/lib/data/source-followup');
+        const followup=await applySourceAudit(repository,SOURCE_FOLLOWUP);
+        const {studyPilotBatchId,studyPilotPrograms}=await import('../src/lib/data/study-pilot');
+        const {applyStudyPilot}=await import('../src/lib/server/add-study-pilot');
+        const study=await applyStudyPilot(repository,{id:studyPilotBatchId,programs:studyPilotPrograms});
+        console.log(JSON.stringify({programs:ALL_PROGRAMS.length,...counts,splits,reviews,audits,followup,study}));
       }
     } finally {await db.$disconnect();}
     return;
   }
-  console.log("Database commands: generate | setup (migrate + seed missing records) | deploy | seed | status | import record.json | split-plan | split | review-plan | review | audit-plan | audit | backup [file]");
+  console.log("Database commands: generate | setup (migrate + seed missing records) | deploy | seed | status | import record.json | split-plan | split | review-plan | review | audit-plan | audit | followup-plan | followup | study-plan | study | backup [file]");
   if(command!=="help") process.exitCode=1;
 }
 

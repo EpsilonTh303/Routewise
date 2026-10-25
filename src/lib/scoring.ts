@@ -317,6 +317,19 @@ export interface RoadmapStep {
 }
 
 export function buildRoadmap(p: Program, u: Profile): RoadmapStep[] {
+  const studyIds=['de-masters-study','de-graduate-jobsearch','nl-graduate-orientation-year','fi-graduate-jobsearch'];
+  if(studyIds.includes(p.id)&&assessRouteRequirements(p,u)?.result.id===p.id) {
+    const germany=p.country==='Germany';
+    const student=p.id==='de-masters-study';
+    return [
+      {label:student?'Admission & student permission':'Qualifying completion & permit history',detail:student?'Obtain qualifying German master’s admission, programme language evidence, living funds and the student residence decision. Tuition and actual course duration depend on the selected programme.':'Prove the specific qualifying graduation/research, institution and prior permit history described in this route’s requirements. A generic degree selection is insufficient.',monthsFromNow:null,icon:'🎓'},
+      {label:'Apply for post-study permission',detail:germany?'After successful German completion, apply in time for up to 18 months to seek qualified work. Insurance and livelihood proof apply; it is not renewable.':p.country==='Netherlands'?'Apply within the qualifying three-year window. The orientation year lasts one year and cannot be extended; foreign institution cases have additional ranking/language/evaluation conditions.':'Check the five-year filing window, prior permit class and funds. Permission can last up to two years, subject to the split-period rules and the requested duration.',monthsFromNow:null,icon:'📨'},
+      {label:'Work during the search period',detail:germany?'Any occupation may be worked while seeking qualified employment on the graduate search permit.':p.country==='Netherlands'?'The granted orientation-year permit allows unrestricted work and self-employment; interim application work needs the stated endorsement.':'The granted permit permits unrestricted work. Interim work depends on timely extended application and prior status.',monthsFromNow:null,icon:'🔎'},
+      {label:'Separate employment / business status',detail:germany?'A qualifying offer may support a skilled-worker permit or EU Blue Card application. Check recognition, salary, licensing and the chosen title’s conditions.':p.country==='Netherlands'?'Before expiry, meet and apply for a new status, such as highly skilled migrant with recognised sponsor, contract and applicable salary.':'For continued stay after this permission, meet and apply for the appropriate employment/business status. A job does not require switching while the search permit itself remains valid.',monthsFromNow:null,icon:'💼'},
+      {label:'Conditional permanent residence',detail:germany?'German graduates may qualify under the separate skilled-worker settlement route after the required two years of qualifying status and 24 months pension contributions, with language, livelihood and other conditions. Study/search time is not that employment clock.':'Assess the separate permanent-residence path, qualifying permit history, residence credit, income, language and absence conditions. Do not add course length and search-permit validity to predict PR.',monthsFromNow:null,icon:'🏠'},
+      {label:'Separate citizenship assessment',detail:'Naturalisation has independent requirements and residence-credit rules. This pilot establishes no citizenship date; no stage guarantees the next.',monthsFromNow:null,icon:'🛂'},
+    ];
+  }
   const steps: RoadmapStep[] = [];
   const family =
     u.familyStatus === "single" && u.dependents===0 ? "" : " + dependents' documents";

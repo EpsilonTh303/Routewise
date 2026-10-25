@@ -22,6 +22,9 @@ test('profile is directly editable with a local photo after initial setup',async
   await page.getByRole('button',{name:'Save changes',exact:true}).click();
   await expect(page.getByRole('status')).toContainText('Profile saved');
   await expect(page.getByRole('heading',{level:1})).toHaveText('Ada Test');
+  const avatar=page.getByRole('img',{name:'Profile photo',exact:true}).locator('..');
+  await expect(avatar).toHaveCSS('width','96px');
+  await expect(avatar).toHaveCSS('height','96px');
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('routewise-profile-v1')));
   expect(saved.version).toBe(3);expect(saved.profile.budget).toBe(73000);
   expect(saved.persona.photo).toMatch(/^data:image\/jpeg;base64,/);
@@ -29,6 +32,7 @@ test('profile is directly editable with a local photo after initial setup',async
   expect(posts).toEqual([]);
   if(info.project.name==='mobile') await page.setViewportSize({width:320,height:700});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
   await page.screenshot({path:info.outputPath('profile.png')});
   await page.reload();await page.getByRole('button',{name:'My profile',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('Ada Test');

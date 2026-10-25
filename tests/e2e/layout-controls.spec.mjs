@@ -17,10 +17,11 @@ test('scenario regions use readable touch controls and filters scroll with the p
   const filters=page.locator('.catalog-filters');
   expect(await filters.evaluate(element=>getComputedStyle(element).position)).toBe('static');
   await page.getByRole('button',{name:'Explore all routes',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'The full atlas',exact:true})).toBeVisible();
   const explorerFilters=page.locator('.catalog-filters');
   expect(await explorerFilters.evaluate(element=>getComputedStyle(element).position)).toBe('static');
-  await page.evaluate(()=>scrollTo(0,1200));
-  expect((await explorerFilters.boundingBox()).y).toBeLessThan(0);
+  await page.evaluate(()=>scrollTo({top:1200,behavior:'instant'}));
+  await expect.poll(async()=>(await explorerFilters.boundingBox()).y).toBeLessThan(0);
 });
 
 test('country evidence is last in the drawer and catalog audit follows the route cards',async({page})=>{

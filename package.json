@@ -33,7 +33,11 @@
     "catalog:review": "node --import tsx scripts/database.mts review",
     "catalog:review:plan": "node --import tsx scripts/database.mts review-plan",
     "catalog:audit": "node --import tsx scripts/database.mts audit",
-    "catalog:audit:plan": "node --import tsx scripts/database.mts audit-plan"
+    "catalog:audit:plan": "node --import tsx scripts/database.mts audit-plan",
+    "catalog:followup": "node --import tsx scripts/database.mts followup",
+    "catalog:followup:plan": "node --import tsx scripts/database.mts followup-plan",
+    "catalog:study": "node --import tsx scripts/database.mts study",
+    "catalog:study:plan": "node --import tsx scripts/database.mts study-plan"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

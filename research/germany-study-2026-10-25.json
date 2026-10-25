@@ -1,0 +1,270 @@
+{
+  "routes": [
+    {
+      "id": "de-masters-study",
+      "name": "Germany: third-country national master's study → post-study job search",
+      "summary": "A third-country national admitted to qualifying full-time study at a German state or state-recognised higher education institution may qualify for a study residence permit. After successful completion in Germany, a separate application can grant up to 18 months to seek qualified employment; during that job-search permit any occupation may be worked. This is a conditional sequence, not a promise of admission, permit issuance, employment, or permanent residence.",
+      "entryStage": "Admission to an eligible full-time master's programme, followed by the required visa/residence process. Programme admission requirements, language evidence and tuition are institution/program-specific; §16b sets the residence-law baseline and defers language proof to what was checked at admission or a preparatory measure.",
+      "stages": [
+        {
+          "id": "admission-and-student-permit",
+          "title": "Master's admission and study residence permit (§16b AufenthG)",
+          "conditions": [
+            "Admission by a state, state-recognised university, or comparable higher-education institution for full-time study; statutory language-evidence rule applies only if the programme language knowledge was neither assessed for admission nor intended to be acquired through preparatory measures.",
+            "Obtain the entry visa/residence permission applicable to the applicant's nationality and circumstances; this research does not determine whether a visa-free entry exception applies to a particular person.",
+            "Secure livelihood and health insurance are required in the application process. The official federal funding guidance gives €992 net/month (€11,904/year) for study in 2026; scholarship, blocked account, or formal declaration of commitment are listed proof routes. The figure is a livelihood proof threshold, not a complete cost estimate.",
+            "Complete university-specific admission requirements, including prior degree/subject prerequisites, grades, language tests, application windows, and any credential evaluation. There is no single nationwide master's admission rule or language level established by the cited general pages.",
+            "Have health insurance suitable for enrolment and residence. Applicable statutory/private coverage and price depend on age, status, insurer, and circumstances; no single premium is asserted here."
+          ],
+          "durationMonths": 24,
+          "workRights": "Employment is allowed up to 140 full working days per calendar year (or 280 half-days); student auxiliary employment is not counted. The statute also permits an alternative weekly calculation for part-time work (up to 20 hours/week during lecture periods, and 2.5 workdays/week outside lecture periods), with the more favourable calculation chosen week by week. Check the permit annotation and local authority guidance for the individual case.",
+          "sourceUrls": [
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html",
+            "https://www.make-it-in-germany.com/en/visa-residence/types/studying",
+            "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/Visagrafik_EN/Lebensunterhaltssicherung_Uebersicht_EN.pdf",
+            "https://www.make-it-in-germany.com/en/study-vocational-training/studying-in-germany"
+          ]
+        },
+        {
+          "id": "graduate-jobsearch",
+          "title": "After successful German degree: job-search residence permit (§20(1) no. 1 AufenthG)",
+          "conditions": [
+            "Successfully complete a study programme in Germany under §16b or eligible EU student mobility under §16c; completion evidence is required.",
+            "Apply to the competent foreigners authority for the new residence title before the student permit expires; federal guidance advises arranging this before study completion. Do not assume the student permit automatically extends.",
+            "Secure livelihood and health insurance; the general federal page lists these as requirements. No separate universal graduate job-search monthly amount was identified in the checked sources, so do not reuse the student €992 figure as a verified post-study threshold.",
+            "The permission is for seeking employment that may be undertaken by foreign nationals under the skilled-work provisions. It does not guarantee a job or later work permit."
+          ],
+          "durationMonths": 18,
+          "workRights": "During the job-search residence permit, any occupation may be taken up while seeking qualified employment. This is distinct from the student permit's 140-day limit. The job-search permit is non-renewable under federal guidance; the statute caps it at 18 months and excludes extension beyond that period.",
+          "sourceUrls": [
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__20.html",
+            "https://www.make-it-in-germany.com/en/study-vocational-training/studies-in-germany/prospects-after",
+            "https://www.make-it-in-germany.com/en/staying-in-germany-after-studies"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "topic": "student-permit-eligibility-and-language",
+          "summary": "§16b provides for a residence permit for full-time study at a state/state-recognised university or comparable institution if admitted. Proof of the programme language is required only if not already checked for admission and not to be acquired in preparatory study measures. The general federal study page says applicants generally need recognised prior education, sufficient German, a university place and funding; actual master's admission and language rules vary by programme.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current German statute page (HTML); page identifies current Residence Act text, last amended 22 July 2026. Locator: §16b(1)-(2)."
+        },
+        {
+          "topic": "permit-validity-and-extensions",
+          "summary": "Initial grant and extension are generally two years and should not be less than one year; at least two years for specified mobility arrangements, while a programme shorter than two years gets a permit for its study duration. Extension is possible if the purpose is not yet achieved and can still be achieved in a reasonable period. This is statutory guidance, not a guarantee of a two-year grant in every case.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current statute. Locator: §16b(2)."
+        },
+        {
+          "topic": "student-work-limit",
+          "summary": "§16b(3) permits employment totaling up to 140 working days per year, not counting student auxiliary employment. For part-time employment, the statute permits counting each day up to four hours as half a day or alternatively counting weeks at up to 20 hours during lecture time and 2.5 workdays outside lecture time, applying the more favourable calculation per week.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current statute. Locator: §16b(3), sentences 1-4."
+        },
+        {
+          "topic": "2026-study-livelihood-proof",
+          "summary": "Federal government guidance lists at least €992 net monthly / €11,904 annually for study in 2026, with scholarship offer, blocked account or declaration of commitment as possible proof. It describes these amounts as guidance for livelihood security and says individual assessment remains applicable; it is not tuition or a full relocation budget.",
+          "sourceUrl": "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/Visagrafik_EN/Lebensunterhaltssicherung_Uebersicht_EN.pdf",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved official federal ministry PDF. Locator: table row 'Studying (Section 16b AufenthG)' and disclaimer; document says as of January 2026."
+        },
+        {
+          "topic": "post-study-permit-eligibility-duration-work",
+          "summary": "Following successful completion of study in Germany under §16b or §16c, §20(1) no.1 provides a job-search residence permit, subject to secured livelihood under §20(2), for up to 18 months. Federal guidance says proof of successful completion, health insurance and livelihood are required; any occupation may be worked while seeking skilled employment, and the permit is not renewable. Apply for the appropriate title before the study permit expires.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__20.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current statute HTML; paired details directly retrieved from official federal 'Prospects after graduation' page. Locator: §20(1) no.1 and (2); prospects page sections 'Apply for a new residence permit on time' and 'Studies completed – what now?'."
+        },
+        {
+          "topic": "study-costs-and-tuition",
+          "summary": "The federal study page characterises fees as low at most public universities, typically semester fees, but this is not a universal tuition-free rule. Tuition, semester contributions and other charges depend on institution, state, programme and applicant category. No tuition or living-cost total is supplied here.",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/study-vocational-training/studying-in-germany",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved official federal portal page. Locator: 'What you need to know' and study steps. Does not specify a universal fee schedule."
+        },
+        {
+          "topic": "health-insurance",
+          "summary": "Federal guidance tells students to choose appropriate health insurance for enrolment, and the graduate job-search checklist requires proof of health insurance cover. Coverage type and cost are individual- and status-dependent; no amount was established in the reviewed sources.",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/study-vocational-training/studying-in-germany",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved official federal portal page. Student page's 'Organise your entry' section; graduate details separately retrieved at https://www.make-it-in-germany.com/en/study-vocational-training/studies-in-germany/prospects-after, 'Studies completed – what now?'."
+        }
+      ],
+      "financialRequirements": [
+        {
+          "amount": 992,
+          "currency": "EUR",
+          "period": "monthly",
+          "description": "2026 minimum net monthly funds listed for study livelihood security. Evidence can be scholarship, blocked account, or declaration of commitment. Proof threshold, not tuition or comprehensive budget; individual authority assessment applies.",
+          "sourceUrl": "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/Visagrafik_EN/Lebensunterhaltssicherung_Uebersicht_EN.pdf"
+        },
+        {
+          "amount": 11904,
+          "currency": "EUR",
+          "period": "annual",
+          "description": "Equivalent annual study livelihood proof amount for 2026 in official federal guidance; avoid adding to the monthly figure as a separate charge.",
+          "sourceUrl": "https://www.make-it-in-germany.com/fileadmin/1_Rebrush_2022/a_Fachkraefte/PDF-Dateien/3_Visum_u_Aufenthalt/Visagrafik_EN/Lebensunterhaltssicherung_Uebersicht_EN.pdf"
+        }
+      ],
+      "unknowns": [
+        "Admission odds, required prior degree/credits/grades, exact language certificate and score, application deadlines and programme duration are institution/programme-specific.",
+        "Tuition and semester fee are not standardized in the reviewed source; vary by university, state, programme and applicant category. No estimate supplied.",
+        "Visa/residence application fee, visa appointment wait, decision time and local document checklist not established by this review; vary by application channel and authority.",
+        "Health insurance eligibility and premium depend on age/status/insurer; no cost claim verified.",
+        "The post-study permit's individual financial proof amount and fee were not found in the reviewed official materials. The student €992 monthly amount is not assumed to govern this later title.",
+        "German consular visa procedure and whether the applicant needs a national visa before travel depend on nationality and residence; not profiled here.",
+        "No particular master's programme or university register entry has been checked; school/programme eligibility must be checked for the applicant's actual cohort."
+      ],
+      "profileFacts": [
+        "Designed for a prospective non-EU/EFTA master's student; EU/EFTA nationals have a different free-movement basis and do not need this student residence permit.",
+        "The residence pathway concerns full-time study under §16b; part-time/preparatory variants have separate statutory provisions and are not treated as the default master's route.",
+        "Azerbaijani nationality is not assumed for visa determination; nationality and application location must be supplied and checked against current consular rules."
+      ]
+    },
+    {
+      "id": "de-graduate-jobsearch",
+      "name": "Germany: German higher-education graduate → skilled work / EU Blue Card → settlement permit",
+      "summary": "A graduate of German higher education may seek an appropriate skilled-worker title after finding qualifying employment, including a skilled-worker residence permit under §18b or an EU Blue Card under §18g where its independent conditions are met. After successful German higher education, §18c(1) shortens the skilled-worker settlement route to two years holding an eligible skilled-worker title and 24 months pension contributions, subject to the remaining settlement requirements. Blue Card settlement uses a separate 27-month or 21-month route. Neither route is automatic. Citizenship is separate and is not calculated here.",
+      "entryStage": "Successful completion of a German higher-education programme, then a qualifying job offer/employment and application for an appropriate residence title before the current permission expires. Applicant must independently satisfy skilled-worker or Blue Card conditions.",
+      "stages": [
+        {
+          "id": "skilled-employment",
+          "title": "Skilled employment residence permit (§18b) or EU Blue Card (§18g)",
+          "conditions": [
+            "For §18b, hold an academic qualification and have qualified employment; the statute permits qualified employment without requiring that it match the subject of the degree, although regulated professions still require any necessary professional licence.",
+            "For an EU Blue Card, have a qualifying higher education qualification (a German degree can qualify), a concrete job offer of at least six months appropriate to the qualification, and the applicable 2026 gross annual salary threshold.",
+            "The 2026 Blue Card standard threshold is €50,700; shortage occupations and new entrants whose last degree is less than three years old have a €45,934.20 threshold. For reduced thresholds, Federal Employment Agency approval is required under federal guidance.",
+            "Apply for and receive the new employment residence title; a job offer or study completion does not itself change immigration status. Check whether the current student or job-search permission authorizes interim work and file before expiry."
+          ],
+          "durationMonths": null,
+          "workRights": "Work only within the approved skilled-worker permit conditions. A §18b permit authorizes qualified employment; Blue Card work must meet §18g conditions. Blue Card validity tracks the employment contract plus six months, up to four years, per federal guidance.",
+          "sourceUrls": [
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__18b.html",
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__18g.html",
+            "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+            "https://www.make-it-in-germany.com/en/staying-in-germany-after-studies"
+          ]
+        },
+        {
+          "id": "settlement-after-german-degree",
+          "title": "Settlement permit for German graduates under §18c(1) sentence 2",
+          "conditions": [
+            "Successfully complete a course of study in Germany and hold a skilled-worker residence title under §18a, §18b, §18d or §18g for at least two years.",
+            "Have a job permitted under the skilled-worker/Blue Card provisions and have paid statutory pension contributions (or demonstrated comparable provision) for at least 24 months.",
+            "Meet the remaining settlement conditions incorporated from §9(2), including sufficient German, sufficient living space, secure livelihood, and basic legal/social order and way-of-life knowledge; federal portal describes B1 and the 'Living in Germany' test for this graduate route.",
+            "Apply to the competent foreigners authority and obtain a decision. Two years/24 months are minimum qualifying periods, not guaranteed approval or an end-to-end processing estimate."
+          ],
+          "durationMonths": 24,
+          "workRights": "The underlying skilled employment must remain qualifying and authorized. Settlement permit, once granted, is permanent residence; it is distinct from citizenship and still depends on all legal conditions and a decision.",
+          "sourceUrls": [
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__18c.html",
+            "https://www.make-it-in-germany.com/en/visa-residence/living-permanently/settlement-permit"
+          ]
+        },
+        {
+          "id": "blue-card-settlement-alternative",
+          "title": "EU Blue Card settlement route (§18c(2))",
+          "conditions": [
+            "Hold an EU Blue Card and work in employment qualifying for that card while making the required pension contributions for the relevant period.",
+            "Federal guidance states settlement eligibility after 27 months with A1 German, or 21 months with B1 German, alongside other conditions such as secure livelihood, sufficient living space and basic legal/social knowledge.",
+            "This accelerated Blue Card clock is distinct from the German-degree route under §18c(1); assess which route's complete conditions are met rather than combining clocks."
+          ],
+          "durationMonths": 21,
+          "workRights": "Blue Card qualifying employment is required during the relevant qualifying period. The 21-month figure corresponds to B1; the alternative is 27 months with A1.",
+          "sourceUrls": [
+            "https://www.gesetze-im-internet.de/aufenthg_2004/__18c.html",
+            "https://www.make-it-in-germany.com/en/visa-residence/living-permanently/settlement-permit",
+            "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card"
+          ]
+        }
+      ],
+      "claims": [
+        {
+          "topic": "skilled-worker-academic-title",
+          "summary": "§18b provides a skilled-worker residence permit to an academic skilled worker to perform any qualified employment. Each job/title still requires a competent authority decision; regulated occupations may require a licence.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__18b.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current German statute via official legislation portal; statute compilation states amended through 22 July 2026. Locator: §18b."
+        },
+        {
+          "topic": "blue-card-conditions-and-2026-salary",
+          "summary": "Federal guidance states a concrete job offer of at least six months, qualification-appropriate work, and 2026 gross annual salary of €50,700 generally or €45,934.20 for shortage roles with Federal Employment Agency approval. New entrants whose last degree was obtained less than three years ago can use €45,934.20 across professions, with agency approval. A German degree can qualify as the higher-education credential; other qualification recognition rules depend on the credential.",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved official federal portal page. Locator: conditions and 'EU Blue Card for young professionals'; annual thresholds labelled as of 2026."
+        },
+        {
+          "topic": "settlement-after-german-higher-education",
+          "summary": "§18c(1) sentence 2 reduces the skilled-worker qualifying title period from three years to two years and pension contributions from 36 months to 24 months where the skilled worker successfully completed vocational training or study in Germany. Other §18c(1) conditions continue to apply. Federal portal specifies for German graduates B1 German, basic legal/social knowledge (usually Living in Germany test), sufficient living space, and relevant skilled employment.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__18c.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current German statute; cross-checked with official federal settlement-permit page. Locator: §18c(1) sentences 1-2; federal page section 'Settlement permit after vocational training or academic studies'."
+        },
+        {
+          "topic": "blue-card-settlement",
+          "summary": "§18c(2) uses 27 months of qualifying Blue Card employment and pension contributions, reduced to 21 months with sufficient German; federal guidance expresses the language alternatives as A1 at 27 months and B1 at 21 months. Other §9 conditions apply. This track is separate from the German-study graduate two-year skilled-worker provision.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/__18c.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current statute; cross-checked with official federal settlement page. Locator: §18c(2); federal page 'Settlement permit for EU Blue Card holders'."
+        },
+        {
+          "topic": "student-time-credit-for-settlement",
+          "summary": "The general §9 settlement provisions count time legally resident for study or vocational training only half toward the residence periods required by that provision. The reviewed statute's §18c graduate shortcut instead measures two years holding specified skilled-worker residence titles and 24 months pension contributions after German study; it does not say that the student period replaces those work-title or contribution periods. Do not treat study years as full qualifying work time.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/aufenthg_2004/BJNR195010004.html",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Directly retrieved current statute compilation. Locator: §9(4) no. 3 and §18c(1) sentence 2."
+        },
+        {
+          "topic": "citizenship-separate-clock",
+          "summary": "This research covers residence permits and settlement (permanent residence), not naturalisation. No citizenship eligibility date is inferred from a student permit, graduate permit, Blue Card, skilled-worker permit, or settlement permit. Citizenship has a separate nationality-law application and requirements that require an independent, current review.",
+          "sourceUrl": "https://www.gesetze-im-internet.de/stag/",
+          "checkedAt": "2026-10-25T14:36:34Z",
+          "retrieval": "Official legislation landing page identified, but specific nationality-law provisions were not retrieved/reviewed in this study-work research. Marked as an explicit scope limitation; no citizenship claim made."
+        }
+      ],
+      "financialRequirements": [
+        {
+          "amount": 50700,
+          "currency": "EUR",
+          "period": "annual",
+          "description": "2026 gross annual salary threshold for the standard EU Blue Card category, subject to job, qualification, and other statutory conditions.",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card"
+        },
+        {
+          "amount": 45934.2,
+          "currency": "EUR",
+          "period": "annual",
+          "description": "2026 gross annual threshold for Blue Card shortage occupations (with BA approval) and qualifying new entrants whose degree is less than three years old (with BA approval), according to official federal guidance.",
+          "sourceUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card"
+        }
+      ],
+      "unknowns": [
+        "The graduate must match a real job to a particular permit category; occupation, salary, degree equivalence, licensing, contract and agency approval are applicant/job-specific.",
+        "No general §18b salary minimum for applicants under age 45 was identified in the reviewed material; Federal Employment Agency may assess appropriateness. A first permit for applicants 45+ can trigger separate salary/pension-provision rules not modeled here.",
+        "Settlement application fee, local processing time, documentation and appointment availability vary by foreigners authority and were not established.",
+        "The settlement page summarizes §9 conditions but this review does not exhaust every statutory exception, contribution substitute, household circumstance, absence rule, or individual decision issue.",
+        "No citizenship requirements or naturalisation clock are included; this route must not be displayed as a path to a passport without a separate nationality-law review.",
+        "No job availability, salary attainment, permit switch, or settlement approval is guaranteed by holding a German master's degree."
+      ],
+      "profileFacts": [
+        "A German higher-education qualification is the trigger for the special §18c(1) two-year/24-month skilled-worker settlement condition; merely studying without successful completion does not establish it.",
+        "The graduate job-search stage may precede skilled employment but is not itself the qualifying §18a/§18b/§18d/§18g skilled-worker title needed for the special settlement clock.",
+        "No assumptions are made about the user's degree field, salary, age, German level, employment, pension record, family, or residence dates."
+      ]
+    }
+  ],
+  "remainingChecks": [
+    "Independently retrieve current consular guidance for the applicant's nationality and application country, including national visa requirement, documents, fees, appointment timing and local forms.",
+    "Choose an actual master's programme and verify university state-recognition, admission prerequisites, language evidence, study mode, duration, deadlines and cohort-specific eligibility from that institution.",
+    "For a concrete student, verify current 2026 proof-of-funds guidance at the responsible mission/foreigners authority and whether tuition, dependants or additional costs create a higher individualized amount.",
+    "Verify actual insurance access and price for the student's age and status with an eligible insurer/university; no generic premium is included.",
+    "For a graduate, verify local authority's exact application timing and evidence checklist for §20, as well as tailored livelihood evidence; the reviewed sources do not establish a universal amount for that stage.",
+    "For any job offer, independently verify occupation classification, degree recognition, salary calculation basis, current threshold, BA approval requirement, and any regulated-profession licence before modeling §18b or §18g eligibility.",
+    "Before implementing a projected settlement date, inspect the exact current §9(2) cross-referenced requirements and applicant-specific pension/social-insurance records, employment/title history and language/test evidence.",
+    "If citizenship is to be represented, perform a separate current official-law review of nationality requirements and residence-credit rules; this dataset intentionally makes no naturalisation estimate."
+  ]
+}

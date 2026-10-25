@@ -1,6 +1,14 @@
 # Official-source review — 25 October 2026
 
-## Catalog-wide audit, engine 3.4.0
+## Current follow-up and study pilot
+
+The live catalog now has 79 active records: 78 partial audits, one unresolved Korea retrieval, zero fully verified records. `official-source-followup-2026-10-25-v1` updates Portugal and Vanuatu through guarded existing-record patches, preserving the dated v2 claims. Portugal's broad own-income service is open; its EUR 920 gross wage reference is not an exact D7 net-income floor. Vanuatu's published USD/VUV fees have no effective date or conclusive DSP mapping, so DSP availability remains unclear and no all-in cost is inferred.
+
+`study-pilot-2026-10-25-v1` appends four records through `add-study-pilot.ts`, with exact manifest/ID receipts, same-transaction collision checks, dated sources and initial revisions. No migration is required. Existing IDs cannot be overwritten; same-manifest reapplication preserves later edits. Fresh setup applies both batches; normal startup does not mutate anything. Back up first, inspect `catalog:followup:plan` and `catalog:study:plan`, then explicitly apply their matching commands.
+
+Germany/NL/FI selected study/post-study claims have native financial evidence and conditional employment/settlement transitions. Unsupported tuition, family costs, all-in spending and individual residence clocks remain unknown. See STUDY_PATHWAYS.md and the new research ledgers for source-specific retrieval limitations. Korea, Montenegro, Panama, DV and Vanuatu applicability remain open research items; UAE duration conflict also remains unresolved. Do not remove review states without evidence.
+
+## Original catalog-wide audit, engine 3.4.0
 
 The newer immutable `official-catalog-audit-2026-10-25-v2` covers all 75 active records with 88 cited claim summaries: 74 partial audits and one unresolved Korea F-2-7 retrieval. Forty-two claims remain official-index/limited evidence; no record is wholly verified. Primary review and corrected research interpretations are in `research/PRIMARY_REVIEW.md`. The older pathway review described below is retained unchanged as historical evidence.
 
