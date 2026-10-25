@@ -5,6 +5,41 @@ import {assessRouteRequirements} from '../src/lib/route-requirements.ts';
 import {matchPrograms,buildStrategy,buildRoadmap} from '../src/lib/scoring.ts';
 import {readFileSync} from 'node:fs';
 const profile=JSON.parse(readFileSync(new URL('../examples/ai/match.json',import.meta.url),'utf8')).profile;
+
+function reverseObjectKeys(value){
+  if(Array.isArray(value)) return value.map(reverseObjectKeys);
+  if(value!==null&&typeof value==='object') return Object.fromEntries(Object.entries(value).reverse().map(([key,item])=>[key,reverseObjectKeys(item)]));
+  return value;
+}
+
+test('JSON object key order preserves study assessments, scores and roadmaps',()=>{
+  for(const original of studyPilotPrograms){
+    const reordered=JSON.parse(JSON.stringify(reverseObjectKeys(original)));
+    assert.notEqual(JSON.stringify(reordered.audit),JSON.stringify(original.audit));
+    for(const factValue of [undefined,true,false]){
+      const initial=assessRouteRequirements(original,profile);
+      assert.ok(initial);
+      const facts=Object.fromEntries(initial.result.children.map(child=>[child.id,factValue]));
+      const applicant={...profile,evidence:{routes:{[original.id]:{facts}}}};
+      assert.deepEqual(assessRouteRequirements(reordered,applicant),assessRouteRequirements(original,applicant));
+      assert.deepEqual(matchPrograms([reordered],applicant),matchPrograms([original],applicant));
+      assert.deepEqual(buildRoadmap(reordered,applicant),buildRoadmap(original,applicant));
+    }
+  }
+});
+
+test('array order and requirement content still protect against stale study rules',()=>{
+  for(const original of studyPilotPrograms){
+    for(const edit of [
+      program=>program.audit.claims.reverse(),
+      program=>program.requirements.reverse(),
+      program=>{program.requirements[0]='Changed requirement';},
+    ]){
+      const changed=structuredClone(original);edit(changed);
+      assert.equal(assessRouteRequirements(changed,profile),undefined);
+    }
+  }
+});
 test('study journeys retain conditional stages without fabricated calendar milestones',()=>{
   for(const program of studyPilotPrograms){
     const steps=buildRoadmap(program,profile);

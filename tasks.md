@@ -4,6 +4,8 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Fix study rule matching when JSON object keys are reordered; reuse canonical comparison, preserve array/content guards, and add assessment/scoring/roadmap regression coverage. Checks: 92 unit tests, 27 isolated integration tests, typecheck and lint passed (2026-10-26).
+
 - [x] Check/commit latest local work and publish sanitized history to EpsilonTh303/Routewise. Owner approved public visibility; Pages enabled with Actions source. See PUBLISHING.md for safe future publication and check GitHub Actions for deployment status.
 - [x] Add tested Pages static mode with public catalog only, repository base path, local profile/scenario behavior and automatic deployment workflow; preserve the normal Node/REST/MCP edition.
 

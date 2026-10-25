@@ -4,13 +4,9 @@ import { evaluateRequirement, requirementSchema } from "./requirements";
 import type { FinancialRequirement } from "./financial";
 import { PATHWAY_REVIEWS } from "./data/reviewed-pathways";
 import {studyRouteRequirement} from './study-requirements';
+import {canonicalJson} from './canonical-json';
 
 export const REQUIREMENT_VERSION="requirements-2026-10-25-v1";
-function canonical(value:unknown):string {
-  if(Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
-  if(value!==null&&typeof value==="object") return `{${Object.entries(value).sort(([a],[b])=>a<b?-1:a>b?1:0).map(([key,item])=>`${JSON.stringify(key)}:${canonical(item)}`).join(",")}}`;
-  return JSON.stringify(value);
-}
 /** Read only the dated claims actually attached to the current catalog record.
  * A custom edit that removes review evidence also removes this automatic assessment.
  */
@@ -21,7 +17,7 @@ export function routeRequirement(program:Program,profile:Profile):Requirement|nu
   if(!review) return null;
   if(program.audit&&program.audit.supportsRequirementVersion!==REQUIREMENT_VERSION) return null;
   const expected=PATHWAY_REVIEWS.find(item=>item.id===program.id)?.review;
-  if(!expected || canonical(review)!==canonical(expected)) return null;
+  if(!expected || canonicalJson(review)!==canonicalJson(expected)) return null;
   const claim=review.claims[0];
   const source:RuleSource={url:claim.sourceUrl,reviewedAt:claim.checkedAt,effectiveAt:null,retrieval:claim.retrieval};
   const fact=(id:FactKey,label:string):Requirement=>({id,label,source,kind:"fact",fact:id});

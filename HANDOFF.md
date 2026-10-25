@@ -1,5 +1,9 @@
 # RouteWise clean-session handoff
 
+## JSON key-order fix — 2026-10-26
+
+Extracted the existing recursive canonical JSON comparison into src/lib/canonical-json.ts and reused it for the study evidence/requirements guard. Nested object key order no longer disables assessments or conditional roadmaps; array order and actual content changes still invalidate stale projections. Catalog manifests and rule semantics are unchanged. Regression coverage compares all four pilot routes across missing/positive/negative facts, scoring and roadmaps, plus array/content edits. Validation: 92 unit tests, 27 isolated integration tests, typecheck, lint and diff whitespace check passed. No live data changes or deployment; primary commits the scoped fix.
+
 Updated 2026-10-25 after the all-catalog source audit. Read AGENTS.md, tasks.md, SOURCE_REVIEW.md, research/PRIMARY_REVIEW.md and STUDY_PATHWAYS.md.
 
 ## Current state

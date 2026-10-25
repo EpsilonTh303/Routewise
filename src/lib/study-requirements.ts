@@ -1,12 +1,13 @@
 import type {Program} from './types';
 import type {FactKey,Requirement,RuleSource} from './requirements';
 import {studyPilotPrograms} from './data/study-pilot';
+import {canonicalJson} from './canonical-json';
 
 /** Project only the immutable, attached pilot evidence; generic education never proves graduation. */
 export function studyRouteRequirement(program:Program):Requirement|null {
   const original=studyPilotPrograms.find(item=>item.id===program.id);
-  if(!original || JSON.stringify(program.audit)!==JSON.stringify(original.audit) ||
-    JSON.stringify(program.requirements)!==JSON.stringify(original.requirements)) return null;
+  if(!original || canonicalJson(program.audit)!==canonicalJson(original.audit) ||
+    canonicalJson(program.requirements)!==canonicalJson(original.requirements)) return null;
   const claims=program.audit!.claims;
   const source=(index=0):RuleSource=>({url:claims[index].sourceUrl,reviewedAt:claims[index].checkedAt,effectiveAt:null,retrieval:claims[index].retrieval});
   const fact=(key:FactKey,label:string,index=0):Requirement=>({id:key,kind:'fact',fact:key,label,source:source(index)});
