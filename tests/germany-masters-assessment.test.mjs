@@ -19,7 +19,7 @@ test('masters entry uses route-scoped evidence with all 27 met/unmet/missing com
     assert.equal(assessment.scope,'partial');
     assert.equal(assessment.result.status,values.includes(false)?'unmet':'unknown');
     assert.deepEqual(assessment.result.children.map(check=>[check.id,check.status]),[
-      ...keys.map((key,index)=>[key,values[index]===undefined?'unknown':values[index]?'met':'unmet']),
+      ...keys.map((key,index)=>[key,values[index]===undefined||key==='securedLivelihood'&&values[index]===true?'unknown':values[index]?'met':'unmet']),
       ['study-costs','unknown'],
     ]);
     for(const check of assessment.result.children){

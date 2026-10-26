@@ -172,6 +172,30 @@ test("masters stage evidence is assessed through the existing HTTP matching boun
   assert.deepEqual([await database.savedProfile.count(),await database.strategyRun.count()],counts);
 });
 
+test("masters EUR budgets compare the seeded source amount over HTTP without approving financing",async()=>{
+  const programId="de-masters-study";
+  const record=await repository.get(programId);
+  const threshold=record.program.audit!.financialRequirements.find(item=>item.currency==="EUR"&&item.period==="balance")!;
+  const counts=[await database.savedProfile.count(),await database.strategyRun.count()];
+  for(const amount of [undefined,threshold.amount-1,threshold.amount,threshold.amount+1]){
+    const financial=amount===undefined?[]:[{kind:"balance",amount,currency:"EUR"}];
+    const input={profile:{...profile,goal:"study",evidence:{routes:{[programId]:{
+      facts:{studyAdmission:true,programmeLanguage:true,securedLivelihood:true},financial,
+    }}}},includeIneligible:true,limit:20};
+    const response=await handleApi(new Request("http://test/api/v1/match",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(input)}),["match"],service);
+    assert.equal(response.status,200);
+    const data=(await response.json()).data;
+    const result=data.results.find((result:{program:{id:string}})=>result.program.id===programId);
+    const livelihood=result.explanation.requirements.result.children.find((check:{id:string})=>check.id==="securedLivelihood");
+    const budget=livelihood.children.find((check:{id:string})=>check.id==="study-living-funds-budget");
+    assert.equal(budget.status,amount===undefined?"unknown":amount<threshold.amount?"unmet":"met");
+    assert.equal(livelihood.status,budget.status==="unmet"?"unmet":"unknown");
+    assert.equal(livelihood.children.find((check:{id:string})=>check.id==="study-financing-verification").status,"unknown");
+    assert.deepEqual(data.plans,[]);
+  }
+  assert.deepEqual([await database.savedProfile.count(),await database.strategyRun.count()],counts);
+});
+
 test("saved profiles protect against lost updates and strategy snapshots remain immutable",async()=>{
   const saved=await service.saveProfile({id:"test-person",name:"Test person",profile});
   await assert.rejects(()=>service.saveProfile({id:saved.id,name:saved.name,profile}),/expectedVersion/);
