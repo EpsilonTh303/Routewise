@@ -36,6 +36,13 @@ test('Pages computes the Germany reference journey locally with unknown costs',a
   await plan.getByText('Personal year-one expense estimate · EUR',{exact:true}).click();
   await expect(plan.getByText('Not available',{exact:true})).toBeVisible();
   await expect(plan.getByText(/funds-proof; not an expense/)).toBeVisible();
+  await plan.getByText('Programme-specific academic requirements',{exact:true}).click();
+  await plan.getByLabel('Academic programme').selectOption('bonn-computer-science-msc');
+  await plan.getByLabel('Academic intake').selectOption('summer-2027');
+  await plan.getByLabel('Mathematics ECTS reported').fill('18');
+  const academic=plan.getByRole('region',{name:'Academic comparison'});
+  await expect(academic.getByText(/Unknown · institution review remains required/i)).toBeVisible();
+  await expect(academic.getByText(/reaches the 18 ECTS minimum numerically/i).first()).toBeVisible();
   expect(api).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

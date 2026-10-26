@@ -5,6 +5,7 @@ import type { Program, Profile } from "@/lib/types";
 import { buildGermanyStudyPlan, germanyStudyPlanRequestSchema, type GermanyStudyPlanInput } from "@/lib/germany-study-plan";
 import { germanyStageEvidenceFacts } from "@/lib/data/germany-stage-review";
 import { RequirementChecklist } from "./RequirementChecklist";
+import { GermanyAcademicCheck } from "./GermanyAcademicCheck";
 
 const CATEGORIES = [
   { key: "tuition", label: "Tuition", period: "Annual" },
@@ -85,6 +86,8 @@ export function GermanyStudyPlan({ profile, programs, asOf = today() }: { profil
       </div>
       <span className="rounded-full border border-amber-300/25 px-3 py-1 text-xs font-semibold text-amber-100">Partial source coverage</span>
     </div>
+
+    <GermanyAcademicCheck asOf={plan.asOf} />
 
     <ol className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       {allStages.map((stage, index) => <li key={stage.id} className="min-w-0 rounded-2xl border border-white/10 bg-black/15 p-3 sm:p-4">

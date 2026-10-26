@@ -1,5 +1,19 @@
 # RouteWise clean-session handoff
 
+## Named-programme academic prerequisite pilot — 2026-10-26
+
+Built on 38ad588 using three scoped Luna agents: official programme research/manifest, model/evaluator, and web regressions. Primary independently retrieved Bonn's official programme and application pages, reviewed/integrated the code, ran checks and owns the local commit. The narrow pilot is University of Bonn Computer Science MSc / summer 2027. Read research/germany-academic-admission-2026-10-26.md and STUDY_PATHWAYS.md. The linked German regulations text was access denied and is explicitly unreviewed; the frozen sidecar is partial evidence, not an applied catalog batch or full admissions audit.
+
+The pure academic-admission.ts evaluator uses a strict standalone request and separate programme-specific evidence. It compares reported ECTS against the four published minima and lists degree, thesis, accepted C1 proof and competitive-selection checks. Missing evidence, positive reports and free-text references never become met. Below-minimum numbers and explicit negatives are reported gaps, not rejection decisions. Admission remains not-assessed, and visaEligibilityAssessed is false. The source review is dated 26 October; the end-of-2026 cutoff is product freshness policy, not an official rule expiry. Foreign-credit conversion, module allocation, degree equivalence, expected-completion/provisional documents, language exceptions, applicant group, deadlines and committee ranking/offer remain unassessed.
+
+The session-only GermanyAcademicCheck component receives no Profile and sits separately inside the existing Germany plan. It never infers evidence from generic education/English or studyAdmission/programmeLanguage, saves academic inputs, changes scores/budgets, or changes the existing Germany-plan request/output. Shared evaluate_academic_admission is read-only through REST/CLI/MCP; Web and static Pages use the same pure function. No profile/database schema, dependencies, existing sources or applied catalog manifests changed.
+
+Validation: 141 unit tests, 33 isolated real DB/HTTP/CLI/MCP integration tests, lint and Node production build/typecheck pass. Full production browser suite: 46 passed, four intentional desktop skips of phone-only cases, zero failures. Static Pages build and all four desktop/mobile Pages cases pass, including backend-free academic comparison. Inspected desktop/mobile academic screenshots. Source/test identifier corrections were made before the final passing runs. No live data writes, deployment or push.
+
+Restored the preserved Node build and hidden LAN launcher after static checks. Port 3001 returns HTTP 200, 79 active programs, engine 3.5.0; a minimal academic request returns unknown, ten checks and visaEligibilityAssessed=false. Fresh process details are in tmp/lan-server.json. Firewall unchanged. Unrelated preexisting working-tree changes remain untouched.
+
+Next selected priority: source-backed application-period/applicant-group and document-completeness checks, especially degree/provisional/expected-completion evidence. Do not infer the university's EEA group from citizenship alone. This larger extension has not been started; report the completed pilot before proceeding.
+
 ## Germany reference planner — 2026-10-26
 
 Three scoped Luna agents supplied official research/partial work-settlement metadata, the pure planner, and GUI/browser tests. Primary reviewed sources and code, integrated a read-only shared `get_germany_study_plan` tool into service/REST/CLI/MCP, and owns the local commit. Read MVP_PLAN.md and research/germany-mvp-review-2026-10-26.md. No deployment, push, live catalog application, migration, or private-data write occurred. Preexisting unrelated working-tree modifications remain untouched.

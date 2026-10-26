@@ -88,3 +88,43 @@ test('HTTP preserves reported gaps and a sourced expense scenario separately fro
   assert.equal(await database.savedProfile.count(),0);
   assert.equal(await database.strategyRun.count(),0);
 });
+
+test('named academic admission is identical over HTTP, CLI and real MCP and stays separate from visa checks',async()=>{
+  const academic={programmeId:'bonn-computer-science-msc',intake:'summer-2027',asOf:'2026-10-26',
+    evidence:{mathEctsReported:18,theoryEctsReported:14,programmingEctsReported:18,thesisEctsReported:12,
+      relevantBachelor:'yes',degreeEquivalence:'yes',thesisScientificQuality:'yes',englishC1:'yes',acceptedEnglishProof:'yes'}};
+  const visaBefore=await service.germanyStudyPlan(input);
+  const expected=await service.academicAdmission(academic);
+  assert.equal(expected.visaEligibilityAssessed,false);
+  assert.equal(expected.admissionDecision,'not-assessed');
+  assert.ok(expected.checks.length>0);
+  assert.ok(expected.checks.every(check=>check.status==='unknown'));
+  const path=['tools','evaluate_academic_admission'];
+  const request=(value:unknown)=>new Request('http://localhost/api/v1/tools/evaluate_academic_admission',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value),
+  });
+  const response=await handleApi(request(academic),path,service);
+  assert.equal(response.status,200);
+  assert.deepEqual((await response.json()).data,expected);
+  const discovery=await handleApi(new Request('http://localhost/api/v1/tools'),['tools'],service);
+  const tool=(await discovery.json()).data.tools.find((item:{name:string})=>item.name==='evaluate_academic_admission');
+  assert.equal(tool.annotations.readOnlyHint,true);
+  assert.equal(tool.annotations.destructiveHint,false);
+  const cli=await run(['scripts/cli.mjs','evaluate_academic_admission','--json',JSON.stringify(academic)]);
+  assert.deepEqual(JSON.parse(cli.stdout).data,expected);
+  const client=new Client({name:'academic-integration',version:'1.0.0'});
+  try {
+    await client.connect(new StdioClientTransport({command:process.execPath,args:[resolve(projectRoot,'scripts/mcp.mjs')],cwd:directory,env:env as Record<string,string>,stderr:'pipe'}));
+    const result=await client.callTool({name:'evaluate_academic_admission',arguments:academic});
+    assert.notEqual(result.isError,true);
+    assert.deepEqual(result.structuredContent,expected);
+  } finally {await client.close();}
+  for(const invalid of [{...academic,profile},{...academic,evidence:{...academic.evidence,verified:true}},
+    {...academic,evidence:{mathEctsReported:-1}},{...academic,asOf:'2026-02-30'}]) {
+    const rejected=await handleApi(request(invalid),path,service);
+    assert.equal(rejected.status,400);
+  }
+  assert.deepEqual(await service.germanyStudyPlan(input),visaBefore);
+  assert.equal(await database.savedProfile.count(),0);
+  assert.equal(await database.strategyRun.count(),0);
+});

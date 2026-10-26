@@ -4,6 +4,9 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Add a separate source-backed Bonn Computer Science MSc / summer 2027 academic-prerequisite pilot, session-only web/Pages inputs and a standalone REST/CLI/MCP checker. Generic Profile/visa facts never satisfy academic checks; sufficient reported credits and positive answers remain unverified/unknown (2026-10-26).
+- [ ] Next academic priority: applicant-group/intake deadlines and degree/provisional/expected-completion document completeness, using fresh official evidence. Do not infer EEA applicant group from citizenship alone or turn prerequisites into an admission offer. Report the completed pilot before starting this larger extension.
+
 - [x] Compose the Germany four-stage reference planner in web/Pages and a shared read-only REST/CLI/MCP tool. Preserve route-scoped evidence, immutable catalog snapshots, manual review, separate sourced EUR expense quotes, unknown totals and financing/salary exclusions (2026-10-26). See MVP_PLAN.md and the latest HANDOFF entry for validation and limits.
 - [ ] Complete case-specific Germany admission checks for a named programme/cohort and academic prerequisites; integrate actual institutional/local fee evidence and full insurance-period coverage. Current assertions and quote worksheet do not validate documents.
 - [ ] Extend the reference planner with family costs, detailed residence/contribution history and separately evaluated Blue Card/settlement alternatives. Preserve unknowns; current graduate-settlement checklist is partial and never predicts a PR date.

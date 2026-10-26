@@ -28,4 +28,6 @@ Shared-workspace agents do not stage or commit. File ownership is exclusive. Pro
 
 ## Remaining substantive work
 
+The first named-programme academic step is now a separate partial Bonn Computer Science MSc / summer 2027 checker. Published thresholds can reveal reported gaps, but positive self-reports remain unknown. It does not change visa eligibility. Further programmes, institution decisions, actual transcript/content and certificate verification, deadline/group evaluation and full academic admission coverage remain outstanding.
+
 The reference experience is a partial evidence planner, not complete legal eligibility. Named programme/cohort validation, source/document authenticity, precise local charges, insurance coverage through a full future year, family/dependant budgets, detailed status/contribution date arithmetic, and a separately evaluated Blue Card/settlement alternative need further work. Existing unresolved non-Germany source issues remain in tasks.md.

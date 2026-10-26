@@ -2,6 +2,14 @@
 
 ## Purpose
 
+### Named-programme academic pilot (26 October 2026)
+
+`academic-admission.ts` and the frozen `germany-academic-programmes.ts` sidecar add one separate partial academic checklist: University of Bonn Computer Science MSc, summer 2027. Official programme/application pages support 18/14/18/12 ECTS minima for mathematics, theory, programming and scientific thesis respectively. The detailed category exclusions remain visible. No foreign-credit conversion, automatic transcript categorization, language-certificate equivalence or selection scoring is performed; the inaccessible linked regulations text is disclosed. The review's end-of-2026 date support is a conservative product freshness policy, not an official rule validity period.
+
+All positive applicant answers, sufficient reported ECTS and free-text evidence references remain `unknown`. A below-minimum amount or explicit negative answer produces a clearly labeled reported gap, not a university rejection. Committee review and admission decision remain unassessed. Generic Profile education/language and route-scoped `studyAdmission`/`programmeLanguage` facts are not inputs. The checker never modifies student-visa conditions, scoring, catalog records, budget or profile persistence.
+
+Web and Pages use the same pure checker within a separate session-only panel. The read-only `evaluate_academic_admission` tool exposes it through REST/CLI/MCP with a strict standalone request; the existing Germany-plan request/output is unchanged. Source details and limits are in [research/germany-academic-admission-2026-10-26.md](research/germany-academic-admission-2026-10-26.md). Other programmes/intakes and detailed application completeness/deadlines remain outside this pilot.
+
 ### Germany reference planner (26 October 2026)
 
 The additive `germany-study-plan.ts` composer now consumes the four-stage model without changing it, scoring, Profile, or the applied pilot. Existing guarded study/graduate assessments are composed with explicit manual authority review. Separate optional work/graduate-settlement facts come from the dated partial sidecar `germany-stage-review.ts`; their sources and provenance are distinct from the original catalog claims. Reported facts never remove mandatory manual review. An offer selects a planning branch only. No residence calendar or automatic transition is calculated.
