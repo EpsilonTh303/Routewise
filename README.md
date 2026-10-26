@@ -8,6 +8,8 @@ The current suggestion engine is version **3.5.0**. It prioritizes modeled readi
 
 ## Start locally
 
+On Windows, double-click `start.bat` after the initial dependency/database setup below. It starts the current development source at **http://localhost:3001** and keeps its console open. It does not seed or migrate the database. Node 22.18+ is required. `npm run dev`, `npm start` and `npm run start:lan` also default to **3001**; an explicit `PORT` can override the default for hosting/tests. A busy port is an error, never an automatic switch to 3002. `start.bat` explicitly selects 3001.
+
 For a study profile, **My strategy** now includes a Germany study-to-settlement reference planner. It shows four separate conditional application stages, existing route evidence and missing checks, plus optional session-only work/settlement self-checks. These are partial reported-evidence assessments, not decisions on admission or residence. The additional official-source review is dated 26 October 2026; other years require a new review.
 
 Its EUR expense worksheet accepts sourced applicant quotes for tuition, housing/utilities, living expenses, insurance, annual semester fees, relocation and combined entry/residence application fees. Missing quotes leave the total unknown. A total requires a single applicant, all categories, confirmed twelve-month monthly quote coverage and an explicit projection assumption. Financing proof and gross salary thresholds are displayed separately and never added to spending. Quotes and later-stage answers reset when leaving/reloading this view; they do not modify the saved profile or matching scores. See [MVP_PLAN.md](MVP_PLAN.md) for scope and remaining gaps.
@@ -50,7 +52,7 @@ npm start
 
 Apply `npm run db:deploy` to an existing deployment before starting it. A first deployment also needs the catalog imported with `npm run db:seed`. Build/start do not migrate, reset, or seed implicitly. The build generates the Prisma client and enforces TypeScript; its configured Google Fonts and first-time Prisma engine setup need network access. `PORT` and `HOSTNAME` configure the web server.
 
-To serve a completed build to a phone on the same Wi-Fi, run `npm run start:lan`. It chooses an unused TCP port between 3001 and 3099 and binds to all IPv4 interfaces. Use the URL for the computer's Wi-Fi adapter; virtual-machine adapter addresses are also printed when present. Runtime PID/port details are in ignored `tmp/lan-server.json`. Keep the computer awake while using it. Stop this LAN server before rebuilding on Windows, because the running Prisma engine can lock standalone output files.
+To serve a completed build to a phone on the same Wi-Fi, run `npm run start:lan`. It uses port 3001 by default and binds to all IPv4 interfaces. Use the URL for the computer's Wi-Fi adapter; virtual-machine adapter addresses are also printed when present. Runtime PID/port details are in ignored `tmp/lan-server.json`. Keep the computer awake while using it. Stop this LAN server before rebuilding on Windows, because the running Prisma engine can lock standalone output files.
 
 Mobile layouts support narrow screens and landscape, horizontal category scrolling, touch-sized controls, 16px form inputs, dynamic viewport drawer height, safe-area insets and reduced-motion preferences. Phone-layout regression tests cover 320, 375 and 390px widths plus 844x390 landscape. The app never changes the firewall automatically; a matching existing inbound Node/TCP rule or a deliberately scoped port allowance is needed for LAN access.
 
@@ -181,7 +183,7 @@ Integration tests use temporary SQLite files with real migrations, online backup
 
 Set `ROUTEWISE_E2E_PORT` to an unused port if 3100 is occupied; the browser suite never reuses an unrelated server. For example in PowerShell: `$env:ROUTEWISE_E2E_PORT='3117'; npm.cmd run test:e2e`.
 
-Caddy forwards only to localhost:3000. The optional Linux/Bash packaging helpers use migrations and catalog setup for a fresh artifact. PACKAGE_PREVIEW_DB=1 explicitly includes a full online backup of the local database, including saved profiles and runs; default packaging does not copy private data. Set ROUTEWISE_DATABASE_URL to persistent storage for real deployments and establish a backup/recovery policy. Full Linux deployment has not been verified on this Windows host.
+Caddy forwards only to localhost:3001. The optional Linux/Bash packaging helpers use migrations and catalog setup for a fresh artifact. PACKAGE_PREVIEW_DB=1 explicitly includes a full online backup of the local database, including saved profiles and runs; default packaging does not copy private data. Set ROUTEWISE_DATABASE_URL to persistent storage for real deployments and establish a backup/recovery policy. Full Linux deployment has not been verified on this Windows host.
 
 The tracked legacy environment file/database and Git history from the archive were preserved. New databases, backups, private profiles and generated machine-specific MCP configuration are ignored. Source verification for the 62 imported records remains outstanding, and passport ease/access still uses Azerbaijani calibration for other selectable citizenships.
 

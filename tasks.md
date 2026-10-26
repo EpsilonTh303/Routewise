@@ -4,6 +4,9 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Add Windows start.bat, standardize local default port 3001 and prepare Vercel root-static hosting with four desktop/mobile regressions (2026-10-26).
+- [ ] Publish sanitized application history, deploy/verify Vercel, then report hosting status. The latest owner request explicitly authorizes push/deployment; previous stage stop instructions no longer apply.
+
 - [x] Add a separate source-backed Bonn Computer Science MSc / summer 2027 academic-prerequisite pilot, session-only web/Pages inputs and a standalone REST/CLI/MCP checker. Generic Profile/visa facts never satisfy academic checks; sufficient reported credits and positive answers remain unverified/unknown (2026-10-26).
 - [x] Add Bonn summer 2027 date-window and reported applicant-group screening plus source-backed final/provisional/expected-completion document inventory. Keep official group, applicability, authenticity and completeness unknown; preserve boundary-day and indexed-source limitations. Separate selection grounds, conditional/recommended documents and date-versus-group results (2026-10-26).
 - [ ] Remaining application limits: direct deadline-page retrieval and exact cutoff semantics; family/equivalent-group legal details; individual original-document authenticity/acceptance and full final-exam/date history. These are not verified by presence declarations. Stop after reporting this delivery; do not start another extension automatically.

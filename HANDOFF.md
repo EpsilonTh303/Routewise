@@ -1,5 +1,11 @@
 # RouteWise clean-session handoff
 
+## Windows launcher and Vercel publication — 2026-10-26
+
+The latest owner request authorizes pushing reviewed application changes and deploying Vercel, superseding the previous stage's stop/no-push instruction. `start.bat` starts development on port 3001 after checking Node/dependencies; it never installs, seeds or migrates automatically. Dev, production, LAN and static preview default to 3001. LAN refuses a busy chosen port instead of scanning other ports. Explicit PORT overrides remain possible outside the Windows convenience launcher. Caddy uses the fixed localhost:3001 upstream, retaining the reviewed removal of query-controlled proxy targets.
+
+Vercel uses the existing reviewed-catalog static exporter at the origin root, preserving browser functionality and keeping local Node API/CLI/MCP interfaces intact. No persistent SQLite server runs on Vercel. Publication must use the sanitized clone described in PUBLISHING.md; never push original main. Deployment and final verification status will be recorded after publication. Current checks: 153 unit, 34 isolated integration and four desktop/mobile root-static browser tests passed, along with lint and the normal Node production build/typecheck. Next dev generated the standard Next agent-rules block in AGENTS.md.
+
 ## Bonn summer 2027 application screening — 2026-10-26
 
 Continued from d5a6b88 after reading this handoff and MVP_PLAN.md. Three scoped Luna agents supplied official research/new frozen procedure metadata, the pure evaluator/unit tests, and the separate web panel/browser cases. Primary reviewed sources and semantics, fixed date-versus-group separation, integrated the read-only shared tool, validated and owns the local commit. Existing academic-prerequisite, Profile, visa, scoring, budget, catalog and persistence contracts are unchanged. No dependency/schema migration, live data write, push or deployment occurred.

@@ -1,0 +1,12 @@
+.git
+.env*
+.zscripts
+.next
+.playwright
+node_modules
+db
+backups
+tmp
+out
+test-results
+playwright-report

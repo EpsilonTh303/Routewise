@@ -1,4 +1,6 @@
-# GitHub Pages publication
+# Web publication
+
+The owner requested GitHub publication and Vercel deployment on 2026-10-26. `vercel.json` selects the static web edition (`framework: null`, `npm run build:vercel`, output `out`). This reuses the reviewed Pages exporter with an empty base path. `npm run test:vercel` tests this root-address edition; `ROUTEWISE_STATIC_TEST_URL` can target its deployed URL. No live database or environment values are uploaded. SQLite REST/API, CLI and MCP still require the normal Node installation; Vercel hosts the browser edition only. Vercel manages its public HTTPS listener; local launchers default to port 3001.
 
 The web interface has a static mode for `https://epsilonth303.github.io/Routewise/`. It includes the reviewed 79-program catalog, browser-side matching/scenarios and local profile/photo editing. Pages cannot run the SQLite/REST/MCP server; those interfaces remain available in the normal Node deployment.
 

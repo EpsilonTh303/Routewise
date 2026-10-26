@@ -44,3 +44,13 @@ Pathway recipes live in `src/lib/data/pathway-splits.ts`; split receipts preserv
 Official review batches live in `src/lib/data/reviewed-pathways.ts`; read SOURCE_REVIEW.md. Evidence is claim-specific, native-currency and explicitly partial. Preserve retrieval limitations and do not label a whole route verified from a partial check. Applied batch IDs are immutable: later evidence needs a new guarded batch, not silent mutation/reapplication.
 
 Catalog-wide source audits live in `src/lib/data/catalog-source-audit.ts`, with independent immutable `CatalogAudit` receipts and a nullable `CatalogProgram.audit` JSON field. Read `research/PRIMARY_REVIEW.md` before changing source interpretation. The applied `official-catalog-audit-2026-10-25-v2` is immutable; new evidence needs a new batch. Preserve historical `pathway.review`, dated evidence, lineage and saved results. Unknown intake/conditions must not become primary plans. Study additions live in `study-pilot.ts`, applied by the append-only guarded `add-study-pilot.ts` batch; later source evidence lives in `source-followup.ts`. Read `STUDY_PATHWAYS.md` for the pilot scope and limitations. Never infer qualifying graduation from generic profile education or promise automatic study-to-PR transitions.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

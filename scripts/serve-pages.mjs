@@ -2,9 +2,10 @@ import {createServer} from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {dirname,extname,join,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {serverPort} from './server-port.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'../out');
 const base=process.env.NEXT_PUBLIC_BASE_PATH??'/Routewise';
-const port=Number(process.env.PORT??3120);
+const port=serverPort(process.env.PORT);
 const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.woff2':'font/woff2'};
 createServer(async(req,res)=>{
   try {
