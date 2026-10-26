@@ -5,7 +5,7 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 ## Latest requested delivery
 
 - [x] Add Windows start.bat, standardize local default port 3001 and prepare Vercel root-static hosting with four desktop/mobile regressions (2026-10-26).
-- [ ] Publish sanitized application history, deploy/verify Vercel, then report hosting status. The latest owner request explicitly authorizes push/deployment; previous stage stop instructions no longer apply.
+- [x] Publish sanitized application history, deploy/verify Vercel at https://routewise-zeta-pearl.vercel.app/; all four live desktop/mobile browser checks passed. Owner's live review precedes making the repo private and removing Pages. Previous stage stop instructions were superseded by the explicit push/deployment request.
 
 - [x] Add a separate source-backed Bonn Computer Science MSc / summer 2027 academic-prerequisite pilot, session-only web/Pages inputs and a standalone REST/CLI/MCP checker. Generic Profile/visa facts never satisfy academic checks; sufficient reported credits and positive answers remain unverified/unknown (2026-10-26).
 - [x] Add Bonn summer 2027 date-window and reported applicant-group screening plus source-backed final/provisional/expected-completion document inventory. Keep official group, applicability, authenticity and completeness unknown; preserve boundary-day and indexed-source limitations. Separate selection grounds, conditional/recommended documents and date-versus-group results (2026-10-26).

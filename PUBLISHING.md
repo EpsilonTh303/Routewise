@@ -1,5 +1,7 @@
 # Web publication
 
+Live Vercel web edition: https://routewise-zeta-pearl.vercel.app/ (project `epsilonth303s-projects/routewise`). Initial production is Ready from sanitized commit `0adef0747f84169e928be7970b0bba394c2ef5e5` (local source `9ef875a`). Four desktop/mobile browser tests passed against the live production URL. Repository privacy and Pages removal await the owner's review of the live experience.
+
 The owner requested GitHub publication and Vercel deployment on 2026-10-26. `vercel.json` selects the static web edition (`framework: null`, `npm run build:vercel`, output `out`). This reuses the reviewed Pages exporter with an empty base path. `npm run test:vercel` tests this root-address edition; `ROUTEWISE_STATIC_TEST_URL` can target its deployed URL. No live database or environment values are uploaded. SQLite REST/API, CLI and MCP still require the normal Node installation; Vercel hosts the browser edition only. Vercel manages its public HTTPS listener; local launchers default to port 3001.
 
 The web interface has a static mode for `https://epsilonth303.github.io/Routewise/`. It includes the reviewed 79-program catalog, browser-side matching/scenarios and local profile/photo editing. Pages cannot run the SQLite/REST/MCP server; those interfaces remain available in the normal Node deployment.
