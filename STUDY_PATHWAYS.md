@@ -2,6 +2,14 @@
 
 ## Purpose
 
+### Germany reference planner (26 October 2026)
+
+The additive `germany-study-plan.ts` composer now consumes the four-stage model without changing it, scoring, Profile, or the applied pilot. Existing guarded study/graduate assessments are composed with explicit manual authority review. Separate optional work/graduate-settlement facts come from the dated partial sidecar `germany-stage-review.ts`; their sources and provenance are distinct from the original catalog claims. Reported facts never remove mandatory manual review. An offer selects a planning branch only. No residence calendar or automatic transition is calculated.
+
+The Results view for study profiles renders this plan and a separate session-only EUR quote worksheet. Each quote has a description, HTTPS source and review date. Unknown amounts remain unknown, explicit zero needs a quote, and a single-applicant scenario total needs all seven categories plus an explicit twelve-month projection and monthly quote coverage. This is an applicant expense scenario, not a verified all-in budget. Proof, salary and conditional TK reference rows remain separate; TK is never automatically inserted or annualized. Other years and changed source snapshots return unavailable assessments rather than carrying 2026 legal amounts forward.
+
+REST, CLI and MCP expose the same stateless composer through `get_germany_study_plan`. No migration, seed, live catalog application, profile persistence or publication is part of this addition. Read [MVP_PLAN.md](MVP_PLAN.md) and [research/germany-mvp-review-2026-10-26.md](research/germany-mvp-review-2026-10-26.md) for remaining programme, family, local-charge and document-verification gaps.
+
 ### Descriptive stage model v1 (2026-10-26)
 
 `src/lib/journey.ts` defines a separate JSON-serializable `Journey` contract and Zod validator. `src/lib/data/germany-study-journey.ts` provides the German four-stage example: master's → graduate job search → work permit → permanent residence. Only the master's entry checklist is connected through `studyRouteRequirement` to existing profile assessment; the other three stages and all transitions remain descriptive. Existing `Program`/profile schemas, applied batch manifests and catalog records are unchanged. The GUI, budget system, catalog setup and persistence are unchanged.

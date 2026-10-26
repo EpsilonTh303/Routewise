@@ -4,6 +4,10 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Compose the Germany four-stage reference planner in web/Pages and a shared read-only REST/CLI/MCP tool. Preserve route-scoped evidence, immutable catalog snapshots, manual review, separate sourced EUR expense quotes, unknown totals and financing/salary exclusions (2026-10-26). See MVP_PLAN.md and the latest HANDOFF entry for validation and limits.
+- [ ] Complete case-specific Germany admission checks for a named programme/cohort and academic prerequisites; integrate actual institutional/local fee evidence and full insurance-period coverage. Current assertions and quote worksheet do not validate documents.
+- [ ] Extend the reference planner with family costs, detailed residence/contribution history and separately evaluated Blue Card/settlement alternatives. Preserve unknowns; current graduate-settlement checklist is partial and never predicts a PR date.
+
 - [x] Reverify official 2026 TK rates and add separate conditional monthly health/care expense records, with age/care-band/insurance/date guards. Leave existing finance records, profile/engine/UI and totals unchanged; add applicability and preservation regressions (2026-10-26).
 
 - [x] Add versioned classification metadata for existing German master's finance rows: financing proof versus work-stage salary thresholds, unknown covered duration, exclusion from expense totals, and double-counting regressions. Preserve original amounts/source snapshots, API, GUI and persistence (2026-10-26).

@@ -24,3 +24,18 @@ test('Pages subpath works without a backend and preserves local profile editing'
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect((await request.get('api/v1/stats')).status()).toBe(404);
 });
+
+test('Pages computes the Germany reference journey locally with unknown costs',async({page})=>{
+  const api=[];
+  page.on('request',r=>{if(new URL(r.url()).pathname.includes('/api/')) api.push(r.url());});
+  await page.addInitScript(p=>localStorage.setItem('routewise-profile-v1',JSON.stringify({...p,goal:'study'})),profile);
+  await page.goto('./');
+  await page.getByRole('button',{name:'My strategy',exact:true}).click();
+  const plan=page.getByRole('region',{name:'Germany study plan'});
+  await expect(plan.locator(':scope > ol > li')).toHaveCount(4);
+  await plan.getByText('Personal year-one expense estimate · EUR',{exact:true}).click();
+  await expect(plan.getByText('Not available',{exact:true})).toBeVisible();
+  await expect(plan.getByText(/funds-proof; not an expense/)).toBeVisible();
+  expect(api).toEqual([]);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

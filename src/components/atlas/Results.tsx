@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Pencil, Trophy, Filter, Search, ChevronDown } from "lucide-react";
 import type { MatchResult, Profile, Category, Region } from "@/lib/types";
+import type { Program } from "@/lib/types";
 import { CATEGORY_META, REGION_META } from "@/lib/types";
 import { buildStrategy, passportInfo, compareOptionalNumber } from "@/lib/scoring";
 import { formatMoney, formatDecision, formatCitizenship } from "@/lib/format";
@@ -13,6 +14,7 @@ import { EligibilityBadge } from "./EligibilityBadge";
 import { Input } from "@/components/ui/input";
 import { ScenarioComparison } from "./ScenarioComparison";
 import type {Persona} from "@/lib/persona";
+import { GermanyStudyPlan } from "./GermanyStudyPlan";
 
 const CATEGORY_KEYS = Object.keys(CATEGORY_META) as Category[];
 const REGION_KEYS = Object.keys(REGION_META) as Region[];
@@ -140,6 +142,8 @@ export function Results({ profile, results, onEdit, persona, onViewProfile }: {
           ))}
         </div>
       </section>
+
+      {profile.goal === "study" && results.some(result => result.program.id === "de-masters-study") && <GermanyStudyPlan profile={profile} programs={results.map(result => result.program as Program)} />}
 
       <ScenarioComparison profile={profile} programs={results.map(result=>result.program)} />
 

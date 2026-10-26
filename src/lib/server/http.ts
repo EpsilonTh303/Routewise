@@ -3,7 +3,7 @@ import { createTools } from "./tools";
 import { RouteWiseService } from "./service";
 import { publicError, ServiceError } from "./errors";
 
-const PUBLIC_TOOLS = new Set(["get_catalog_stats","get_source_review_queue","get_profile_schema","list_programs","get_program","get_program_history","get_program_revision","match_profile","compare_programs","compare_scenarios","get_roadmap"]);
+const PUBLIC_TOOLS = new Set(["get_germany_study_plan","get_catalog_stats","get_source_review_queue","get_profile_schema","list_programs","get_program","get_program_history","get_program_revision","match_profile","compare_programs","compare_scenarios","get_roadmap"]);
 const response = (value:unknown,status=200) => Response.json(value,{status,headers:{"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"}});
 
 async function body(request:Request) {

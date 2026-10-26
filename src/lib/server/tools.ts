@@ -2,6 +2,7 @@ import { z } from "zod";
 import { idSchema, matchSchema, profileSchema, searchSchema } from "../validation";
 import { RouteWiseService, CALIBRATION } from "./service";
 import { scenarioRequestSchema } from "../scenarios";
+import { germanyStudyPlanRequestSchema } from "../germany-study-plan";
 
 function tool<S extends z.ZodType>(name:string,description:string,schema:S,run:(input:z.output<S>)=>Promise<unknown>,options:{write?:boolean;destructive?:boolean;idempotent?:boolean}={}) {
   return {name,description,schema,annotations:{readOnlyHint:!options.write,destructiveHint:options.destructive??false,idempotentHint:options.idempotent??!options.write,openWorldHint:false},call:(input:unknown)=>run(schema.parse(input))};
@@ -9,6 +10,7 @@ function tool<S extends z.ZodType>(name:string,description:string,schema:S,run:(
 
 export function createTools(service:RouteWiseService) {
   return [
+    tool("get_germany_study_plan","Evaluate the partial German master's to settlement journey and a separate EUR expense scenario. Unknown evidence remains unknown; quotes are applicant supplied, financing proof and salaries are excluded from expenses. Does not save inputs.",germanyStudyPlanRequestSchema,input=>service.germanyStudyPlan(input)),
     tool("get_catalog_stats","Get live database counts, catalog version, supported countries and calibration limits.",z.object({}).strict(),()=>service.stats()),
     tool("get_source_review_queue","Read a bounded source review queue as of an explicit date. Flags partial, old, index-only and potentially conflicting evidence; never changes verification or catalog records.",z.object({asOf:z.iso.date(),maxAgeDays:z.number().int().min(1).max(3650).default(90),limit:z.number().int().min(1).max(100).default(20)}).strict(),input=>service.reviewQueue(input)),
     tool("get_profile_schema","Get the complete JSON Schema for profiles before asking for missing fields. Do not invent a user's finances or circumstances.",z.object({}).strict(),async()=>({schema:z.toJSONSchema(profileSchema),calibration:CALIBRATION})),

@@ -8,12 +8,19 @@ import { compareScenarios, scenarioRequestSchema } from "../scenarios";
 import { REQUIREMENT_VERSION } from "../route-requirements";
 import { buildSourceReviewQueue } from "../source-freshness";
 import { sourceReview } from "../source-review";
+import { buildGermanyStudyPlan, germanyStudyPlanRequestSchema } from "../germany-study-plan";
 
 export const ENGINE_VERSION = "3.5.0";
 export const CALIBRATION = {citizenship:"AZ",verifiedRules:false,notice:"Scores are heuristic profile-fit estimates, not approval probabilities. Passport ease/access is calibrated for Azerbaijan. Consult each program's source review status."};
 
 export class RouteWiseService {
   constructor(public catalog: CatalogRepository) {}
+
+  async germanyStudyPlan(input:unknown) {
+    const request=germanyStudyPlanRequestSchema.parse(input);
+    const {programs,version}=await this.catalog.snapshot();
+    return {catalogVersion:version,engineVersion:ENGINE_VERSION,...buildGermanyStudyPlan(programs,request)};
+  }
 
   async reviewQueue(input:{asOf:string;maxAgeDays?:number;limit?:number}) {
     const {programs,version}=await this.catalog.snapshot();

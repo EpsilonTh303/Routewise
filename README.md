@@ -8,6 +8,12 @@ The current suggestion engine is version **3.5.0**. It prioritizes modeled readi
 
 ## Start locally
 
+For a study profile, **My strategy** now includes a Germany study-to-settlement reference planner. It shows four separate conditional application stages, existing route evidence and missing checks, plus optional session-only work/settlement self-checks. These are partial reported-evidence assessments, not decisions on admission or residence. The additional official-source review is dated 26 October 2026; other years require a new review.
+
+Its EUR expense worksheet accepts sourced applicant quotes for tuition, housing/utilities, living expenses, insurance, annual semester fees, relocation and combined entry/residence application fees. Missing quotes leave the total unknown. A total requires a single applicant, all categories, confirmed twelve-month monthly quote coverage and an explicit projection assumption. Financing proof and gross salary thresholds are displayed separately and never added to spending. Quotes and later-stage answers reset when leaving/reloading this view; they do not modify the saved profile or matching scores. See [MVP_PLAN.md](MVP_PLAN.md) for scope and remaining gaps.
+
+The same pure planner is available through the read-only `get_germany_study_plan` tool in CLI/MCP and `POST /api/v1/tools/get_germany_study_plan`. Input is `{profile, asOf: "2026-10-26"}` with optional `budget`, `stageEvidence` and `insuranceContext`; discover its strict full schema through `/api/v1/tools` or `node scripts/cli.mjs tools`. Requests are not persisted. Static Pages uses the same computation locally.
+
 The immutable original 75-route v2 audit is retained. A separate follow-up adds Portugal own-income service/current wage evidence and Vanuatu published fees, with remaining applicability limits. An append-only pilot adds German master's study, German graduate search, Dutch orientation year and Finnish post-study search. Unsupported all-in costs and calendar predictions remain null. See [SOURCE_REVIEW.md](SOURCE_REVIEW.md) and [STUDY_PATHWAYS.md](STUDY_PATHWAYS.md).
 
 After initial setup, use **Profile** to view your overview or edit settings directly. Name, headline, location, biography and a cropped photo are saved explicitly on this browser/device; identity/photo are separate from assessment requests. Cancel discards drafts, and a storage error preserves the previously saved profile.
