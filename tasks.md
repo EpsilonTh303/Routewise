@@ -4,6 +4,8 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Reverify official 2026 TK rates and add separate conditional monthly health/care expense records, with age/care-band/insurance/date guards. Leave existing finance records, profile/engine/UI and totals unchanged; add applicability and preservation regressions (2026-10-26).
+
 - [x] Add versioned classification metadata for existing German master's finance rows: financing proof versus work-stage salary thresholds, unknown covered duration, exclusion from expense totals, and double-counting regressions. Preserve original amounts/source snapshots, API, GUI and persistence (2026-10-26).
 
 - [x] Connect master's living-funds check to the existing sourced EUR balance comparison, keep official financing review separate, treat missing/unreliable inputs as unknown, and cover boundaries, What-if and HTTP. No new amounts, FX, other-stage or GUI changes (2026-10-26).
