@@ -2,6 +2,7 @@ import type {Program} from './types';
 import type {Requirement,RuleSource} from './requirements';
 import {canonicalJson} from './canonical-json';
 import {financialRequirementSchema} from './financial';
+import {classifyGermanyStudyFinances} from './study-financial-classification';
 
 /** Budget screening only. A balance is neither blocked-account proof nor visa approval. */
 export function mastersLivelihoodRequirement(program:Program,original:Program,source:RuleSource):Requirement {
@@ -11,7 +12,9 @@ export function mastersLivelihoodRequirement(program:Program,original:Program,so
     item.currency==='EUR'&&item.period==='balance'&&item.sourceUrl===source.url);
   const expected=candidates(original.audit?.financialRequirements??[]);
   const attached=candidates(program.audit?.financialRequirements??[]);
-  const trusted=expected.length===1&&attached.length===1&&canonicalJson(expected[0])===canonicalJson(attached[0])&&attached[0].amount>0;
+  const proofRows=classifyGermanyStudyFinances(program).filter(row=>
+    row.classification?.purpose==='financing-proof'&&row.classification.stage==='masters'&&!row.classification.includeInExpenseTotal);
+  const trusted=proofRows.length===1&&expected.length===1&&attached.length===1&&canonicalJson(expected[0])===canonicalJson(attached[0])&&attached[0].amount>0;
   const parsed=trusted?financialRequirementSchema.safeParse({kind:'balance',amount:attached[0].amount,currency:attached[0].currency}):null;
   const budget:Requirement=parsed?.success
     ?{id,label,kind:'financial',source,requirement:parsed.data}

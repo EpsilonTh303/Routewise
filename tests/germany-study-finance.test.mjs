@@ -54,6 +54,7 @@ test('missing, altered, unsourced or ambiguous financial amounts are unknown rat
     audit=>{audit.financialRequirements[0].amount=threshold.amount-1;},
     audit=>{audit.financialRequirements[0].sourceUrl='https://example.org/unreviewed';},
     audit=>{audit.financialRequirements.push(structuredClone(audit.financialRequirements[0]));},
+    audit=>{audit.financialRequirements.push({...audit.financialRequirements[0],amount:threshold.amount+1});},
     audit=>{audit.financialRequirements[0].currency='USD';},
   ]){
     const candidate=structuredClone(program);edit(candidate.audit);

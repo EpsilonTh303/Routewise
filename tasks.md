@@ -4,6 +4,8 @@ Updated 2026-10-25 for engine 3.5.0. Read AGENTS.md, HANDOFF.md, SOURCE_REVIEW.m
 
 ## Latest requested delivery
 
+- [x] Add versioned classification metadata for existing German master's finance rows: financing proof versus work-stage salary thresholds, unknown covered duration, exclusion from expense totals, and double-counting regressions. Preserve original amounts/source snapshots, API, GUI and persistence (2026-10-26).
+
 - [x] Connect master's living-funds check to the existing sourced EUR balance comparison, keep official financing review separate, treat missing/unreliable inputs as unknown, and cover boundaries, What-if and HTTP. No new amounts, FX, other-stage or GUI changes (2026-10-26).
 
 - [x] Connect only German master's stage conditions/evidence to existing profile assessment, preserve manual/unknown safeguards and existing rule output, and test all 27 fact combinations plus real HTTP integration. Other stages, transitions, GUI and budget remain unchanged (2026-10-26).
