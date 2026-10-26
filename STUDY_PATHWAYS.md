@@ -2,6 +2,16 @@
 
 ## Purpose
 
+### Bonn application procedures (26 October 2026)
+
+The separate `bonn-application.ts` evaluator and frozen `bonn-application-review.ts` sidecar screen the summer 2027 CS application periods, reported deadline-group bases and document inventory. They do not modify the academic-prerequisite evaluator, Profile, visa checks or applied catalog batches. The existing academic panel hosts a separate session-only application disclosure; a standalone read-only `evaluate_bonn_application` tool supplies the identical computation to REST/CLI/MCP. Static Pages runs it locally.
+
+Source-backed date ranges are 1 October–1 November 2026 and 15 December 2026–15 January 2027; the second is stated as EEA-student-only. The deadline page timed out on direct retrieval; official indexed content supports the dated partial record. Exact closing times, timezone and endpoint inclusion remain unknown, so boundary dates are never treated as a confirmed timely filing. Date placement and reported-group mismatch are separate. An `applicationDate` is a calendar-date scenario distinct from the `asOf` source-review date; neither causes a source refresh.
+
+Reported EEA citizenship or qualifying EEA degree completion by 31 March 2027 can identify a candidate basis only. Family or other selection grounds alone stay unresolved; omitted alternatives do not become false. Selection classification is distinct from second-window access, and official assignment always remains unknown. Certificate, provisional and expected-completion branches preserve issuer/content checks and certificates for other completed degrees. Required/conditional documents are distinct from recommended/optional items; future conditional-admission proof is not a current submission gap. Conditional facts describe applicant-reported context, not an official exemption.
+
+All document authenticity, sufficiency, acceptance and official applicability remain unknown even when presence is reported. No complete/eligible/admitted result is produced. The exact expected final-exam date, group evidence authenticity, language/document exceptions and competent-university decisions remain manual. Read [research/bonn-application-2026-10-26.md](research/bonn-application-2026-10-26.md) for evidence and retrieval limitations.
+
 ### Named-programme academic pilot (26 October 2026)
 
 `academic-admission.ts` and the frozen `germany-academic-programmes.ts` sidecar add one separate partial academic checklist: University of Bonn Computer Science MSc, summer 2027. Official programme/application pages support 18/14/18/12 ECTS minima for mathematics, theory, programming and scientific thesis respectively. The detailed category exclusions remain visible. No foreign-credit conversion, automatic transcript categorization, language-certificate equivalence or selection scoring is performed; the inaccessible linked regulations text is disclosed. The review's end-of-2026 date support is a conservative product freshness policy, not an official rule validity period.

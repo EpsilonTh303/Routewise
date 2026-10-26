@@ -4,6 +4,7 @@ import { RouteWiseService, CALIBRATION } from "./service";
 import { scenarioRequestSchema } from "../scenarios";
 import { germanyStudyPlanRequestSchema } from "../germany-study-plan";
 import { academicAdmissionRequestSchema } from "../academic-admission";
+import { bonnApplicationRequestSchema } from "../bonn-application";
 
 function tool<S extends z.ZodType>(name:string,description:string,schema:S,run:(input:z.output<S>)=>Promise<unknown>,options:{write?:boolean;destructive?:boolean;idempotent?:boolean}={}) {
   return {name,description,schema,annotations:{readOnlyHint:!options.write,destructiveHint:options.destructive??false,idempotentHint:options.idempotent??!options.write,openWorldHint:false},call:(input:unknown)=>run(schema.parse(input))};
@@ -11,6 +12,7 @@ function tool<S extends z.ZodType>(name:string,description:string,schema:S,run:(
 
 export function createTools(service:RouteWiseService) {
   return [
+    tool("evaluate_bonn_application","Screen published application dates, reported applicant-group bases and document inventory for bonn-computer-science-msc / summer-2027. Declarations do not verify documents, assign an official group, establish a complete application or decide admission/visa eligibility. Never saves inputs.",bonnApplicationRequestSchema,input=>service.bonnApplication(input)),
     tool("evaluate_academic_admission","Compare reported academic evidence with partial official prerequisites. Pilot: programmeId bonn-computer-science-msc, intake summer-2027. Unverified positive evidence remains unknown; does not decide admission or visa eligibility and never saves inputs.",academicAdmissionRequestSchema,input=>service.academicAdmission(input)),
     tool("get_germany_study_plan","Evaluate the partial German master's to settlement journey and a separate EUR expense scenario. Unknown evidence remains unknown; quotes are applicant supplied, financing proof and salaries are excluded from expenses. Does not save inputs.",germanyStudyPlanRequestSchema,input=>service.germanyStudyPlan(input)),
     tool("get_catalog_stats","Get live database counts, catalog version, supported countries and calibration limits.",z.object({}).strict(),()=>service.stats()),

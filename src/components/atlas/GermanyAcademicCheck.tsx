@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { academicAdmissionRequestSchema, evaluateAcademicAdmission } from "@/lib/academic-admission";
 import { germanyAcademicProgrammes } from "@/lib/data/germany-academic-programmes";
+import { BonnApplicationCheck } from "./BonnApplicationCheck";
 
 const QUALITATIVE = [
   { key: "relevantBachelor", label: "Relevant bachelor's degree" },
@@ -111,6 +112,7 @@ export function GermanyAcademicCheck({ asOf }: { asOf: string }) {
       {selectedProgramme && <p className="rounded-lg bg-white/[0.03] p-2.5 text-[11px] leading-relaxed text-muted-foreground">Course categories must not double-count credits. Internship/practicum, thesis and graduation-project credits are excluded from the other prerequisite categories; thesis credits belong only in the separate thesis requirement. Foreign-credit conversion and course categorization remain for university review.</p>}
       {effectiveSources.length > 0 && <details className="border-t border-white/8 pt-2"><summary className="cursor-pointer text-xs font-semibold text-cyan-200">Official programme sources ({effectiveSources.length})</summary><ul className="mt-2 space-y-2">{effectiveSources.map(source => <li key={source.id} className="text-[11px]"><p>{source.summary}</p><a href={source.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block break-all text-cyan-200 underline">{source.topic} · reviewed {source.checkedAt.slice(0, 10)} · {source.contentRetrieved ? "page content retrieved" : "index retrieved; linked regulation text not reviewed"}</a><p className="mt-0.5 text-[10px] text-muted-foreground">{source.retrievalNote}</p></li>)}</ul></details>}
       {selectedProgramme?.limitations && <ul className="list-inside list-disc space-y-1 text-[10px] leading-relaxed text-muted-foreground">{selectedProgramme.limitations.map(item => <li key={item}>{item}</li>)}</ul>}
+      <BonnApplicationCheck asOf={asOf} />
     </div>
   </details>;
 }

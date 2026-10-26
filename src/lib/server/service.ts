@@ -10,12 +10,17 @@ import { buildSourceReviewQueue } from "../source-freshness";
 import { sourceReview } from "../source-review";
 import { buildGermanyStudyPlan, germanyStudyPlanRequestSchema } from "../germany-study-plan";
 import { evaluateAcademicAdmission } from "../academic-admission";
+import { evaluateBonnApplication } from "../bonn-application";
 
 export const ENGINE_VERSION = "3.5.0";
 export const CALIBRATION = {citizenship:"AZ",verifiedRules:false,notice:"Scores are heuristic profile-fit estimates, not approval probabilities. Passport ease/access is calibrated for Azerbaijan. Consult each program's source review status."};
 
 export class RouteWiseService {
   constructor(public catalog: CatalogRepository) {}
+
+  async bonnApplication(input:unknown) {
+    return evaluateBonnApplication(input);
+  }
 
   async academicAdmission(input:unknown) {
     return evaluateAcademicAdmission(input);

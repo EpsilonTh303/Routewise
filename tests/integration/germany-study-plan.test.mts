@@ -128,3 +128,47 @@ test('named academic admission is identical over HTTP, CLI and real MCP and stay
   assert.equal(await database.savedProfile.count(),0);
   assert.equal(await database.strategyRun.count(),0);
 });
+
+test('Bonn filing and document screening agrees across HTTP, CLI and MCP without changing academic or visa results',async()=>{
+  const academic={programmeId:'bonn-computer-science-msc',intake:'summer-2027',asOf:'2026-10-26'};
+  const application={...academic,applicationDate:'2026-12-20',
+    groupFactors:{eeaCitizen:'no',eeaUniversityDegreeBy2027March31:'yes'},
+    degreeDocumentBranch:'final-pending',degreeDocumentFacts:{provisionalIssuedByExamOffice:'no'},
+    documents:{'provisional-degree-certificate':'present',cv:'absent'}};
+  const before={academic:await service.academicAdmission(academic),visa:await service.germanyStudyPlan(input)};
+  const expected=await service.bonnApplication(application);
+  assert.equal(expected.availability,'available');
+  assert.equal(expected.group.candidateEeaGroup,'eea-reported');
+  assert.equal(expected.group.officialGroup,'unknown');
+  assert.equal(expected.applicationCompleteness,'not-assessed');
+  assert.equal(expected.applicationDecision,'not-assessed');
+  assert.equal(expected.visaEligibilityAssessed,false);
+  const path=['tools','evaluate_bonn_application'];
+  const request=(value:unknown)=>new Request('http://localhost/api/v1/tools/evaluate_bonn_application',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value),
+  });
+  const response=await handleApi(request(application),path,service);
+  assert.equal(response.status,200);
+  assert.equal(response.headers.get('Cache-Control'),'no-store');
+  assert.deepEqual((await response.json()).data,expected);
+  const discovery=await handleApi(new Request('http://localhost/api/v1/tools'),['tools'],service);
+  const tool=(await discovery.json()).data.tools.find((item:{name:string})=>item.name==='evaluate_bonn_application');
+  assert.equal(tool.annotations.readOnlyHint,true);
+  assert.equal(tool.annotations.destructiveHint,false);
+  assert.deepEqual(JSON.parse((await run(['scripts/cli.mjs','evaluate_bonn_application','--json',JSON.stringify(application)])).stdout).data,expected);
+  const client=new Client({name:'bonn-application-integration',version:'1.0.0'});
+  try {
+    await client.connect(new StdioClientTransport({command:process.execPath,args:[resolve(projectRoot,'scripts/mcp.mjs')],cwd:directory,env:env as Record<string,string>,stderr:'pipe'}));
+    const result=await client.callTool({name:'evaluate_bonn_application',arguments:application});
+    assert.notEqual(result.isError,true);
+    assert.deepEqual(result.structuredContent,expected);
+  } finally {await client.close();}
+  for(const invalid of [{...application,profile},{...application,documents:{verified:true}},
+    {...application,applicationDate:'2027-02-30'},{...application,groupFactors:{eeaCitizen:true}}]) {
+    assert.equal((await handleApi(request(invalid),path,service)).status,400);
+  }
+  assert.deepEqual(await service.academicAdmission(academic),before.academic);
+  assert.deepEqual(await service.germanyStudyPlan(input),before.visa);
+  assert.equal(await database.savedProfile.count(),0);
+  assert.equal(await database.strategyRun.count(),0);
+});

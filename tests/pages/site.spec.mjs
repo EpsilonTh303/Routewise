@@ -43,6 +43,15 @@ test('Pages computes the Germany reference journey locally with unknown costs',a
   const academic=plan.getByRole('region',{name:'Academic comparison'});
   await expect(academic.getByText(/Unknown · institution review remains required/i)).toBeVisible();
   await expect(academic.getByText(/reaches the 18 ECTS minimum numerically/i).first()).toBeVisible();
+  const academicPanel=plan.locator(':scope > details').filter({hasText:/Programme-specific academic requirements/});
+  const application=academicPanel.locator(':scope > div > details').filter({hasText:/Summer 2027 application window and document inventory/});
+  await application.locator(':scope > summary').click();
+  await application.getByLabel('Reported application date').fill('2027-01-15');
+  await expect(application.getByText(/Boundary date · exact cut-off time and inclusion unknown/i)).toBeVisible();
+  await application.getByLabel('Reported application date').fill('2026-12-20');
+  await application.getByLabel(/Applicant reports a Bachelor’s or Master’s degree at an EEA university/).selectOption('yes');
+  await expect(application.getByText(/Candidate group: EEA reported/i)).toBeVisible();
+  await expect(application.getByRole('region',{name:'Application checklist result'})).toContainText('Application completeness: not assessed');
   expect(api).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
