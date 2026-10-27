@@ -1,5 +1,7 @@
 # RouteWise
 
+**Live web app:** https://routewise-zeta-pearl.vercel.app/
+
 GitHub Pages deployment and safe publication instructions: [PUBLISHING.md](PUBLISHING.md). The static site runs the same browser matching, scenarios and local profile editor from a reviewed public catalog snapshot.
 
 A database-backed immigration-program explorer with a web GUI, JSON API, command-line tools, and a local MCP server. All interfaces use the same live SQLite catalog and scoring functions. The live catalog has 79 active routes across 51 countries, including four study/post-study pilot records; all have source-audit outcomes (78 partial, one unresolved). Complete-record verification remains pending; scores describe heuristic profile fit, not approval probability.
